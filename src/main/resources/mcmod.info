@@ -1,0 +1,19 @@
+[
+	{
+		"modid": "circadian",
+		"name": "Circadian",
+		"description": "Bringing Night & Day to Minecraft.",
+		"version": "${version}",
+		"credits": "Noobanidus, code and assets derived from Thaumcraft (MIT License), Thermal Expansion, Thermal Foundation, CofH Core (CoFH License)",
+		"logoFile": "assets/circadian/textures/logo.png",
+		"mcversion": "${mc_version}",
+		"url": "http://github.com/noobanidus/circadian",
+		"updateUrl": "",
+		"authorList": [ "Noobanidus" ],
+		"parent": "",
+		"screenshots": [],
+		"dependencies": [
+			"forge,codechickenlib,cofhcore,thermalfoundation,thaumcraft"
+		]
+	}
+]
