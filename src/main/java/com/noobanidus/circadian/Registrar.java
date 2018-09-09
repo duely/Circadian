@@ -34,6 +34,7 @@ public class Registrar {
     @SubscribeEvent
     public static void registerBlocks(Register<Block> event) {
         Blocks.initBlocks();
+        Blocks.registerBlocks(event.getRegistry());
     }
 
     @SideOnly(Side.CLIENT)
