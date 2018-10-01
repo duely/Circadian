@@ -74,6 +74,11 @@ dependencies {
     deobfCompile "cofh:ThermalExpansion:1.12.2-5.5.0.29:universal"
     deobfCompile "cofh:CoFHCore:1.12.2-4.5.3.20:universal"
     deobfCompile "cofh:ThermalFoundation:1.12.2-2.5.0.19:universal"
+    deobfCompile "com.wayoftime.bloodmagic:BloodMagic:1.12.2-2.3.1-99"
+    deobfCompile "vazkii.botania:Botania:r1.10-355.4"
+
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.1'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.1'
 }
 
 processResources {
