@@ -1,1 +1,16 @@
 tile.compressed_vis_battery.name=Compressed Vis Battery
+item.brass_axe.name=Brass Axe
+item.brass_shovel.name=Brass Shovel
+item.brass_pickaxe.name=Brass Pickaxe
+item.brass_hoe.name=Brass Hoe
+item.brass_hammer.name=Brass Hammer
+item.brass_sword.name=Brass Sword
+item.fertilizer.name=Fertilizer
+item.Fertilizer.name=Fertilizer
+enchantment.circadian.manabound=Manabound
+item.compressed_stone_sword.name=Compressed Sword
+item.compressed_stone_shovel.name=Compressed Shovel
+item.compressed_stone_pick.name=Compressed Pickaxe
+item.compressed_stone_axe.name=Compressed Axe
+item.compressed_stone_hoe.name=Compressed Hoe
+item.compressed_stone_hammer.name=Compressed Hammer
