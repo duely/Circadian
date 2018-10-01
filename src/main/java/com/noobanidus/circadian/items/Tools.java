@@ -1,4 +1,4 @@
-package circadian.items;
+package com.noobanidus.circadian.items;
 
 import net.minecraft.item.*;
 import net.minecraft.item.Item.ToolMaterial;
@@ -13,96 +13,134 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import cofh.core.item.tool.*;
 
-import circadian.Circadian;
+import com.noobanidus.circadian.Circadian;
 
 public class Tools {
     public static final Tools INSTANCE = new Tools();
 
     public static final ToolMaterial TOOL_MATERIAL_BRASS = EnumHelper.addToolMaterial("TC:ALCHEMICAL_BRASS", 2, 325, 6.0F, 2.0F, 10);
 
-    public ItemSwordCore itemSword;
-    public ItemShovelCore itemShovel;
-    public ItemPickaxeCore itemPickaxe;
-    public ItemAxeCore itemAxe;
-    public ItemHoeCore itemHoe;
-    public ItemHammerCore itemHammer;
+    private static final ToolMaterial TOOL_MATERIAL_COMPRESSED_COBBLESTONE = EnumHelper.addToolMaterial("EX:COMPRESSED_COBBLESTONE", 1, 1179, 4.0f, 1.0f, 5);
 
-    public ItemStack toolSword;
-    public ItemStack toolShovel;
-    public ItemStack toolPickaxe;
-    public ItemStack toolAxe;
-    public ItemStack toolHoe;
-    public ItemStack toolHammer;
+    public ItemSwordCore itemBrassSword;
+    public ItemShovelCore itemBrassShovel;
+    public ItemPickaxeCore itemBrassPickaxe;
+    public ItemAxeCore itemBrassAxe;
+    public ItemHoeCore itemBrassHoe;
+    public ItemHammerCore itemBrassHammer;
+
+    public ItemStack toolBrassSword;
+    public ItemStack toolBrassShovel;
+    public ItemStack toolBrassPickaxe;
+    public ItemStack toolBrassAxe;
+    public ItemStack toolBrassHoe;
+    public ItemStack toolBrassHammer;
+
+    public ItemSwordCore itemCCSword;
+    public ItemShovelCore itemCCShovel;
+    public ItemPickaxeCore itemCCPickaxe;
+    public ItemAxeCore itemCCAxe;
+    public ItemHoeCore itemCCHoe;
+    public ItemHammerCore itemCCHammer;
+
+    public ItemStack toolCCSword;
+    public ItemStack toolCCShovel;
+    public ItemStack toolCCPickaxe;
+    public ItemStack toolCCAxe;
+    public ItemStack toolCCHoe;
+    public ItemStack toolCCHammer;
+
+    private boolean enabledBrass;
+    private boolean enabledCompressed;
 
     private Tools () {
     }
 
     public void preInit () {
-        Circadian.LOG.info("Circadian: Creating brass tools.");
-        itemSword = new ItemSwordCore(TOOL_MATERIAL_BRASS);
-        itemShovel = new ItemShovelCore(TOOL_MATERIAL_BRASS);
-        itemPickaxe = new ItemPickaxeCore(TOOL_MATERIAL_BRASS);
-        itemAxe = new ItemAxeCore(TOOL_MATERIAL_BRASS);
-        itemHoe = new ItemHoeCore(TOOL_MATERIAL_BRASS);
-        itemHammer = new ItemHammerCore(TOOL_MATERIAL_BRASS);
+        enabledBrass = (boolean) Circadian.CONFIG.get("Tools.Brass", "Enable", false, "Enable tools made of alchemical brass.");
 
-        itemSword.setRepairIngot("ingotBrass").setUnlocalizedName("Brass Sword");
-        itemSword.setRegistryName("circadian", "brass_sword");
-        
-        Circadian.LOG.info("Circadian: Registering brass sword.");
-        ForgeRegistries.ITEMS.register(itemSword);
+        enabledCompressed = (boolean) Circadian.CONFIG.get("Tools.Compressed", "Enable", true, "Enable tools made of compressed cobblestone.");
 
-        itemShovel.setRepairIngot("ingotBrass").setUnlocalizedName("Brass Shovel");
-        itemShovel.setRegistryName("circadian", "brass_shovel");
+        if (enabledBrass) {
+            itemBrassSword = new ItemSwordCore(TOOL_MATERIAL_BRASS);
+            itemBrassShovel = new ItemShovelCore(TOOL_MATERIAL_BRASS);
+            itemBrassPickaxe = new ItemPickaxeCore(TOOL_MATERIAL_BRASS);
+            itemBrassAxe = new ItemAxeCore(TOOL_MATERIAL_BRASS);
+            itemBrassHoe = new ItemHoeCore(TOOL_MATERIAL_BRASS);
+            itemBrassHammer = new ItemHammerCore(TOOL_MATERIAL_BRASS);
 
-        Circadian.LOG.info("Circadian: Registering brass shovel.");
-        ForgeRegistries.ITEMS.register(itemShovel);
+            itemBrassSword.setRepairIngot("ingotBrass").setUnlocalizedName("brass_sword").setRegistryName("circadian", "brass_sword");
+            itemBrassShovel.setRepairIngot("ingotBrass").setUnlocalizedName("brass_shovel").setRegistryName("circadian", "brass_shover");
+            itemBrassPickaxe.setRepairIngot("ingotBrass").setUnlocalizedName("brass_pickaxe").setRegistryName("circadian", "brass_pickaxe");
+            itemBrassAxe.setRepairIngot("ingotBrass").setUnlocalizedName("brass_axe").setRegistryName("circadian", "brass_axe");
+            itemBrassHoe.setRepairIngot("ingotBrass").setUnlocalizedName("brass_hoe").setRegistryName("circadian", "brass_hoe");
+            itemBrassHammer.setRepairIngot("ingotBrass").setUnlocalizedName("brass_hammer").setRegistryName("circadian", "brass_hammer");
 
-        itemPickaxe.setRepairIngot("ingotBrass").setUnlocalizedName("Brass Pickaxe");
-        itemPickaxe.setRegistryName("circadian", "brass_pickaxe");
+            ForgeRegistries.ITEMS.register(itemBrassSword);
+            ForgeRegistries.ITEMS.register(itemBrassShovel);
+            ForgeRegistries.ITEMS.register(itemBrassPickaxe);
+            ForgeRegistries.ITEMS.register(itemBrassAxe);
+            ForgeRegistries.ITEMS.register(itemBrassHoe);
+            ForgeRegistries.ITEMS.register(itemBrassHammer);
 
-        Circadian.LOG.info("Circadian: Registering brass pickaxe.");
-        ForgeRegistries.ITEMS.register(itemPickaxe);
+            toolBrassSword = new ItemStack(itemBrassSword);
+            toolBrassShovel = new ItemStack(itemBrassShovel);
+            toolBrassPickaxe = new ItemStack(itemBrassPickaxe);
+            toolBrassAxe = new ItemStack(itemBrassAxe);
+            toolBrassHoe = new ItemStack(itemBrassHoe);
+            toolBrassHammer = new ItemStack(itemBrassHammer);
+        }
 
-        itemAxe.setRepairIngot("ingotBrass").setUnlocalizedName("Brass Axe");
-        itemAxe.setRegistryName("circadian", "brass_axe");
+        if (enabledCompressed) {
+            itemCCSword = new ItemSwordCore(TOOL_MATERIAL_BRASS);
+            itemCCShovel = new ItemShovelCore(TOOL_MATERIAL_BRASS);
+            itemCCPickaxe = new ItemPickaxeCore(TOOL_MATERIAL_BRASS);
+            itemCCAxe = new ItemAxeCore(TOOL_MATERIAL_BRASS);
+            itemCCHoe = new ItemHoeCore(TOOL_MATERIAL_BRASS);
+            itemCCHammer = new ItemHammerCore(TOOL_MATERIAL_BRASS);
 
-        Circadian.LOG.info("Circadian: Registering brass axe.");
-        ForgeRegistries.ITEMS.register(itemAxe);
+            itemCCSword.setRepairIngot("").setUnlocalizedName("compressed_stone_sword").setRegistryName("circadian", "compressed_stone_sword");
+            itemCCShovel.setRepairIngot("").setUnlocalizedName("compressed_stone_shovel").setRegistryName("circadian", "compressed_stone_shovel");
+            itemCCPickaxe.setRepairIngot("").setUnlocalizedName("compressed_stone_pick").setRegistryName("circadian", "compressed_stone_pick");
+            itemCCAxe.setRepairIngot("").setUnlocalizedName("compressed_stone_axe").setRegistryName("circadian", "compressed_stone_axe");
+            itemCCHoe.setRepairIngot("").setUnlocalizedName("compressed_stone_hoe").setRegistryName("circadian", "compressed_stone_hoe");
+            itemCCHammer.setRepairIngot("").setUnlocalizedName("compressed_stone_hammer").setRegistryName("circadian", "compressed_stone_hammer");
 
-        itemHoe.setRepairIngot("ingotBrass").setUnlocalizedName("Brass Hoe");
-        itemHoe.setRegistryName("circadian", "brass_hoe");
+            ForgeRegistries.ITEMS.register(itemCCSword);
+            ForgeRegistries.ITEMS.register(itemCCShovel);
+            ForgeRegistries.ITEMS.register(itemCCPickaxe);
+            ForgeRegistries.ITEMS.register(itemCCAxe);
+            ForgeRegistries.ITEMS.register(itemCCHoe);
+            ForgeRegistries.ITEMS.register(itemCCHammer);
 
-        Circadian.LOG.info("Circadian: Registering brass hoe.");
-        ForgeRegistries.ITEMS.register(itemHoe);
+            toolCCSword = new ItemStack(itemCCSword);
+            toolCCShovel = new ItemStack(itemCCShovel);
+            toolCCPickaxe = new ItemStack(itemCCPickaxe);
+            toolCCAxe = new ItemStack(itemCCAxe);
+            toolCCHoe = new ItemStack(itemCCHoe);
+            toolCCHammer = new ItemStack(itemCCHammer);
+        }
 
-        itemHammer.setRepairIngot("ingotBrass").setUnlocalizedName("Brass Hammer");
-        itemHammer.setRegistryName("circadian", "brass_hammer");
-
-        Circadian.LOG.info("Circadian: Registering brass hammer.");
-        ForgeRegistries.ITEMS.register(itemHammer);
-
-        toolSword = new ItemStack(itemSword);
-        toolShovel = new ItemStack(itemShovel);
-        toolPickaxe = new ItemStack(itemPickaxe);
-        toolAxe = new ItemStack(itemAxe);
-        toolHoe = new ItemStack(itemHoe);
-        toolHammer = new ItemStack(itemHammer);
     }
 
     @SideOnly(Side.CLIENT)
     public void registerModels () {
-        Circadian.LOG.info("Circadian: Registering sword model.");
-        ModelLoader.setCustomModelResourceLocation(itemSword, 0, new ModelResourceLocation(new ResourceLocation("circadian", "brass_sword"), "inventory"));
-        Circadian.LOG.info("Circadian: Registering shovel model.");
-        ModelLoader.setCustomModelResourceLocation(itemShovel, 0, new ModelResourceLocation(new ResourceLocation("circadian", "brass_shovel"), "inventory"));
-        Circadian.LOG.info("Circadian: Registering pickaxe model.");
-        ModelLoader.setCustomModelResourceLocation(itemPickaxe, 0, new ModelResourceLocation(new ResourceLocation("circadian", "brass_pickaxe"), "inventory"));
-        Circadian.LOG.info("Circadian: Registering axe model.");
-        ModelLoader.setCustomModelResourceLocation(itemAxe, 0, new ModelResourceLocation(new ResourceLocation("circadian", "brass_axe"), "inventory"));
-        Circadian.LOG.info("Circadian: Registering hoe model.");
-        ModelLoader.setCustomModelResourceLocation(itemHoe, 0, new ModelResourceLocation(new ResourceLocation("circadian", "brass_hoe"), "inventory"));
-        Circadian.LOG.info("Circadian: Registering hammer model.");
-        ModelLoader.setCustomModelResourceLocation(itemHammer, 0, new ModelResourceLocation(new ResourceLocation("circadian", "brass_hammer"), "inventory"));
+        if (enabledBrass) {
+            ModelLoader.setCustomModelResourceLocation(itemBrassSword, 0, new ModelResourceLocation(new ResourceLocation("circadian", "brass_sword"), "inventory"));
+            ModelLoader.setCustomModelResourceLocation(itemBrassShovel, 0, new ModelResourceLocation(new ResourceLocation("circadian", "brass_shovel"), "inventory"));
+            ModelLoader.setCustomModelResourceLocation(itemBrassPickaxe, 0, new ModelResourceLocation(new ResourceLocation("circadian", "brass_pickaxe"), "inventory"));
+            ModelLoader.setCustomModelResourceLocation(itemBrassAxe, 0, new ModelResourceLocation(new ResourceLocation("circadian", "brass_axe"), "inventory"));
+            ModelLoader.setCustomModelResourceLocation(itemBrassHoe, 0, new ModelResourceLocation(new ResourceLocation("circadian", "brass_hoe"), "inventory"));
+            ModelLoader.setCustomModelResourceLocation(itemBrassHammer, 0, new ModelResourceLocation(new ResourceLocation("circadian", "brass_hammer"), "inventory"));
+        }
+
+        if (enabledCompressed) {
+            ModelLoader.setCustomModelResourceLocation(itemCCSword, 0, new ModelResourceLocation(new ResourceLocation("circadian", "compressed_stone_sword"), "inventory"));
+            ModelLoader.setCustomModelResourceLocation(itemCCShovel, 0, new ModelResourceLocation(new ResourceLocation("circadian", "compressed_stone_shovel"), "inventory"));
+            ModelLoader.setCustomModelResourceLocation(itemCCPickaxe, 0, new ModelResourceLocation(new ResourceLocation("circadian", "compressed_stone_pick"), "inventory"));
+            ModelLoader.setCustomModelResourceLocation(itemCCAxe, 0, new ModelResourceLocation(new ResourceLocation("circadian", "compressed_stone_axe"), "inventory"));
+            ModelLoader.setCustomModelResourceLocation(itemCCHoe, 0, new ModelResourceLocation(new ResourceLocation("circadian", "compressed_stone_hoe"), "inventory"));
+            ModelLoader.setCustomModelResourceLocation(itemCCHammer, 0, new ModelResourceLocation(new ResourceLocation("circadian", "compressed_stone_hammer"), "inventory"));
+        }
     }
 }
