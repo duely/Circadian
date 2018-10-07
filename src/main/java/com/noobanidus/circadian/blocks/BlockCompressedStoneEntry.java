@@ -4,6 +4,7 @@ import com.rwtema.extrautils2.backend.entries.BlockEntry;
 import com.rwtema.extrautils2.blocks.BlockCompressed;
 import com.rwtema.extrautils2.crafting.CraftingHelper;
 import com.rwtema.extrautils2.utils.helpers.StringHelper;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -12,6 +13,10 @@ public class BlockCompressedStoneEntry extends BlockEntry<BlockCompressed> {
     private final IBlockState blockState;
     private final String texture;
     private final int max;
+
+    public BlockCompressedStoneEntry(Block block, String texture, int max) {
+        this(block.getDefaultState(), texture, max);
+    }
 
     public BlockCompressedStoneEntry(IBlockState blockState, String texture, int max) {
         super("Compressed" + StringHelper.capFirst(texture, true), new Class[0]);

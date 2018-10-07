@@ -1,6 +1,8 @@
 package com.noobanidus.circadian.blocks;
 
 import java.util.Random;
+
+import com.noobanidus.circadian.Circadian;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -19,7 +21,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import thaumcraft.api.aura.AuraHelper;
 import thaumcraft.common.config.ConfigItems;
 import thaumcraft.common.world.aura.AuraHandler;
-import circadian.Circadian;
+import com.noobanidus.circadian.Circadian;
 
 public class CompressedBlockVisBattery extends Block
 {

@@ -20,7 +20,7 @@ public class Tools {
 
     public static final ToolMaterial TOOL_MATERIAL_BRASS = EnumHelper.addToolMaterial("TC:ALCHEMICAL_BRASS", 2, 325, 6.0F, 2.0F, 10);
 
-    private static final ToolMaterial TOOL_MATERIAL_COMPRESSED_COBBLESTONE = EnumHelper.addToolMaterial("EX:COMPRESSED_COBBLESTONE", 1, 1179, 4.0f, 1.0f, 5);
+    private static final ToolMaterial TOOL_MATERIAL_COMPRESSED_COBBLESTONE = EnumHelper.addToolMaterial("EX:COMPRESSED_COBBLESTONE", 1, 1179, 3.5f, 1.0f, 5);
 
     public ItemSwordCore itemBrassSword;
     public ItemShovelCore itemBrassShovel;
@@ -92,12 +92,12 @@ public class Tools {
         }
 
         if (enabledCompressed) {
-            itemCCSword = new ItemSwordCore(TOOL_MATERIAL_BRASS);
-            itemCCShovel = new ItemShovelCore(TOOL_MATERIAL_BRASS);
-            itemCCPickaxe = new ItemPickaxeCore(TOOL_MATERIAL_BRASS);
-            itemCCAxe = new ItemAxeCore(TOOL_MATERIAL_BRASS);
-            itemCCHoe = new ItemHoeCore(TOOL_MATERIAL_BRASS);
-            itemCCHammer = new ItemHammerCore(TOOL_MATERIAL_BRASS);
+            itemCCSword = new ItemSwordCore(TOOL_MATERIAL_COMPRESSED_COBBLESTONE);
+            itemCCShovel = new ItemShovelCore(TOOL_MATERIAL_COMPRESSED_COBBLESTONE);
+            itemCCPickaxe = new ItemPickaxeCore(TOOL_MATERIAL_COMPRESSED_COBBLESTONE);
+            itemCCAxe = new ItemAxeCore(TOOL_MATERIAL_COMPRESSED_COBBLESTONE);
+            itemCCHoe = new ItemHoeCore(TOOL_MATERIAL_COMPRESSED_COBBLESTONE);
+            itemCCHammer = new ItemHammerCore(TOOL_MATERIAL_COMPRESSED_COBBLESTONE);
 
             itemCCSword.setRepairIngot("").setUnlocalizedName("compressed_stone_sword").setRegistryName("circadian", "compressed_stone_sword");
             itemCCShovel.setRepairIngot("").setUnlocalizedName("compressed_stone_shovel").setRegistryName("circadian", "compressed_stone_shovel");

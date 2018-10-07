@@ -22,17 +22,17 @@ public class BlockConfig {
     public static CompressedBlockVisBattery compressed;
     public static ItemBlock ib_compressed;
 
-    public static BlockCompressedStoneEntry[] compressedBlocks = new BlockCompressedStoneEntry[] { new BlockCompressedStoneEntry(((BlockStone) Blocks.STONE).getStateFromMeta(0), "stone", 2), new BlockCompressedStoneEntry(((BlockStone) Blocks.STONE).getStateFromMeta(1), "stone_granite", 2), new BlockCompressedStoneEntry(((BlockStone) Blocks.STONE).getStateFromMeta(3), "stone_diorite", 2), new BlockCompressedStoneEntry(((BlockStone) Blocks.STONE).getStateFromMeta(5), "stone_andesite", 2) };
+    public static BlockCompressedStoneEntry[] compressedBlocks = new BlockCompressedStoneEntry[] { new BlockCompressedStoneEntry(((BlockStone) Blocks.STONE).getStateFromMeta(0), "stone", 2), new BlockCompressedStoneEntry(((BlockStone) Blocks.STONE).getStateFromMeta(1), "stone_granite", 2), new BlockCompressedStoneEntry(((BlockStone) Blocks.STONE).getStateFromMeta(3), "stone_diorite", 2), new BlockCompressedStoneEntry(((BlockStone) Blocks.STONE).getStateFromMeta(5), "stone_andesite", 2), new BlockCompressedStoneEntry(Blocks.SANDSTONE, "sandstone_normal", 2), new BlockCompressedStoneEntry(Blocks.RED_SANDSTONE, "red_sandstone_normal", 2)};
 
     public static void preInitBlocks () {
-        for (BlockCompressedStoneEntry entry : compressedBlocks) {
+        /*for (BlockCompressedStoneEntry entry : compressedBlocks) {
             entry.preInitLoad();
             entry.preInitRegister();
             entry.registerOres();
             CraftingHelper.recipeCallback.set(entry.recipes);
             entry.addRecipes();
             CraftingHelper.recipeCallback.set(null);
-        }
+        }*/
     }
 
     public static void initBlocks () {
