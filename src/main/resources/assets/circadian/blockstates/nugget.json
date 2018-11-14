@@ -1,0 +1,34 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "builtin/generated",
+		"textures": {
+			"layer0": "blocks/dirt"
+		},
+		"transform": "forge:default-item"
+	},
+	"variants": {
+		"type": {
+            "nuggetaquamarine": {
+				"textures": {
+					"layer0": "circadian:items/nugget_aquamarine"
+				}
+			},
+            "nuggetstarmetal": {
+				"textures": {
+					"layer0": "circadian:items/nugget_starmetal"
+				}
+			},
+            "nuggetironwood": {
+				"textures": {
+					"layer0": "circadian:items/nugget_ironwood"
+				}
+			},
+            "nuggetknightmetal": {
+				"textures": {
+					"layer0": "circadian:items/nugget_knightmetal"
+				}
+			}
+		}
+	}
+}
