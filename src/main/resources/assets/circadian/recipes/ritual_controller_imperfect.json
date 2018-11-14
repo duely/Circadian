@@ -1,0 +1,26 @@
+{
+  "result": {
+    "item": "bloodmagic:ritual_controller",
+    "data": 1
+  },
+  "pattern": [
+    "aba",
+    "bcb",
+    "aba"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "a": {
+      "item": "bloodmagic:slate",
+      "data": 0
+    },
+    "b": {
+      "type": "forge:ore_dict",
+      "ore": "magicStone"
+    },
+    "c": {
+      "type": "bloodmagic:orb",
+      "orb": "bloodmagic:weak"
+    }
+  }
+}
