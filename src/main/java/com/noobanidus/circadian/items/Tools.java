@@ -16,11 +16,10 @@ import cofh.core.item.tool.*;
 import com.noobanidus.circadian.Circadian;
 
 public class Tools {
-    public static final Tools INSTANCE = new Tools();
-
     public static final ToolMaterial TOOL_MATERIAL_BRASS = EnumHelper.addToolMaterial("TC:ALCHEMICAL_BRASS", 2, 325, 6.0F, 2.0F, 10);
 
-    private static final ToolMaterial TOOL_MATERIAL_COMPRESSED_COBBLESTONE = EnumHelper.addToolMaterial("EX:COMPRESSED_COBBLESTONE", 1, 1179, 3.5f, 1.0f, 5);
+    private static final ToolMaterial TOOL_MATERIAL_COMPRESSED_COBBLESTONE = EnumHelper.addToolMaterial("EX:COMPRESSED_COBBLESTONE", 1, 750, 3.5f, 1.0f, 5);
+    private static final ToolMaterial TOOL_MATERIAL_DOUBLE_COMPRESSED_COBBLESTONE = EnumHelper.addToolMaterial("EX:DOUBLE_COMPRESSED_COBBLESTONE", 1, 1500, 3.5f, 1.0f, 5);
 
     public ItemSwordCore itemBrassSword;
     public ItemShovelCore itemBrassShovel;
@@ -42,6 +41,7 @@ public class Tools {
     public ItemAxeCore itemCCAxe;
     public ItemHoeCore itemCCHoe;
     public ItemHammerCore itemCCHammer;
+    public ItemExcavatorCore itemCCExcavator;
 
     public ItemStack toolCCSword;
     public ItemStack toolCCShovel;
@@ -49,17 +49,37 @@ public class Tools {
     public ItemStack toolCCAxe;
     public ItemStack toolCCHoe;
     public ItemStack toolCCHammer;
+    public ItemStack toolCCExcavator;
+
+    public ItemSwordCore itemDCCSword;
+    public ItemShovelCore itemDCCShovel;
+    public ItemPickaxeCore itemDCCPickaxe;
+    public ItemAxeCore itemDCCAxe;
+    public ItemHoeCore itemDCCHoe;
+    public ItemHammerCore itemDCCHammer;
+    public ItemExcavatorCore itemDCCExcavator;
+
+    public ItemStack toolDCCSword;
+    public ItemStack toolDCCShovel;
+    public ItemStack toolDCCPickaxe;
+    public ItemStack toolDCCAxe;
+    public ItemStack toolDCCHoe;
+    public ItemStack toolDCCHammer;
+    public ItemStack toolDCCExcavator;
 
     private boolean enabledBrass;
     private boolean enabledCompressed;
+    private boolean enabledDoubleCompressed;
 
-    private Tools () {
+    public Tools () {
     }
 
-    public void preInit () {
+    public void init () {
         enabledBrass = (boolean) Circadian.CONFIG.get("Tools.Brass", "Enable", false, "Enable tools made of alchemical brass.");
 
-        enabledCompressed = (boolean) Circadian.CONFIG.get("Tools.Compressed", "Enable", true, "Enable tools made of compressed cobblestone.");
+        enabledCompressed = (boolean) Circadian.CONFIG.get("Tools.Compressed", "Enable", true, "Enable tools made of compressed cobblestone and stone.");
+
+        enabledDoubleCompressed = (boolean) Circadian.CONFIG.get("Tools.DoubleCompressed", "Enable", true, "Enable tools made out of double-compressed cobblestone and stone.");
 
         if (enabledBrass) {
             itemBrassSword = new ItemSwordCore(TOOL_MATERIAL_BRASS);
@@ -89,6 +109,13 @@ public class Tools {
             toolBrassAxe = new ItemStack(itemBrassAxe);
             toolBrassHoe = new ItemStack(itemBrassHoe);
             toolBrassHammer = new ItemStack(itemBrassHammer);
+
+            itemBrassSword.setCreativeTab(Circadian.TAB);
+            itemBrassShovel.setCreativeTab(Circadian.TAB);
+            itemBrassPickaxe.setCreativeTab(Circadian.TAB);
+            itemBrassAxe.setCreativeTab(Circadian.TAB);
+            itemBrassHoe.setCreativeTab(Circadian.TAB);
+            itemBrassHammer.setCreativeTab(Circadian.TAB);
         }
 
         if (enabledCompressed) {
@@ -98,6 +125,7 @@ public class Tools {
             itemCCAxe = new ItemAxeCore(TOOL_MATERIAL_COMPRESSED_COBBLESTONE);
             itemCCHoe = new ItemHoeCore(TOOL_MATERIAL_COMPRESSED_COBBLESTONE);
             itemCCHammer = new ItemHammerCore(TOOL_MATERIAL_COMPRESSED_COBBLESTONE);
+            itemCCExcavator = new ItemExcavatorCore(TOOL_MATERIAL_COMPRESSED_COBBLESTONE);
 
             itemCCSword.setRepairIngot("").setUnlocalizedName("compressed_stone_sword").setRegistryName("circadian", "compressed_stone_sword");
             itemCCShovel.setRepairIngot("").setUnlocalizedName("compressed_stone_shovel").setRegistryName("circadian", "compressed_stone_shovel");
@@ -105,6 +133,7 @@ public class Tools {
             itemCCAxe.setRepairIngot("").setUnlocalizedName("compressed_stone_axe").setRegistryName("circadian", "compressed_stone_axe");
             itemCCHoe.setRepairIngot("").setUnlocalizedName("compressed_stone_hoe").setRegistryName("circadian", "compressed_stone_hoe");
             itemCCHammer.setRepairIngot("").setUnlocalizedName("compressed_stone_hammer").setRegistryName("circadian", "compressed_stone_hammer");
+            itemCCExcavator.setRepairIngot("").setUnlocalizedName("compressed_stone_excavator").setRegistryName("circadian", "compressed_stone_excavator");
 
             ForgeRegistries.ITEMS.register(itemCCSword);
             ForgeRegistries.ITEMS.register(itemCCShovel);
@@ -112,6 +141,7 @@ public class Tools {
             ForgeRegistries.ITEMS.register(itemCCAxe);
             ForgeRegistries.ITEMS.register(itemCCHoe);
             ForgeRegistries.ITEMS.register(itemCCHammer);
+            ForgeRegistries.ITEMS.register(itemCCExcavator);
 
             toolCCSword = new ItemStack(itemCCSword);
             toolCCShovel = new ItemStack(itemCCShovel);
@@ -119,6 +149,57 @@ public class Tools {
             toolCCAxe = new ItemStack(itemCCAxe);
             toolCCHoe = new ItemStack(itemCCHoe);
             toolCCHammer = new ItemStack(itemCCHammer);
+            toolCCExcavator = new ItemStack(itemCCExcavator);
+
+            itemCCSword.setCreativeTab(Circadian.TAB);
+            itemCCShovel.setCreativeTab(Circadian.TAB);
+            itemCCPickaxe.setCreativeTab(Circadian.TAB);
+            itemCCAxe.setCreativeTab(Circadian.TAB);
+            itemCCHoe.setCreativeTab(Circadian.TAB);
+            itemCCHammer.setCreativeTab(Circadian.TAB);
+            itemCCExcavator.setCreativeTab(Circadian.TAB);
+        }
+
+        if (enabledDoubleCompressed) {
+            itemDCCSword = new ItemSwordCore(TOOL_MATERIAL_DOUBLE_COMPRESSED_COBBLESTONE);
+            itemDCCShovel = new ItemShovelCore(TOOL_MATERIAL_DOUBLE_COMPRESSED_COBBLESTONE);
+            itemDCCPickaxe = new ItemPickaxeCore(TOOL_MATERIAL_DOUBLE_COMPRESSED_COBBLESTONE);
+            itemDCCAxe = new ItemAxeCore(TOOL_MATERIAL_DOUBLE_COMPRESSED_COBBLESTONE);
+            itemDCCHoe = new ItemHoeCore(TOOL_MATERIAL_DOUBLE_COMPRESSED_COBBLESTONE);
+            itemDCCHammer = new ItemHammerCore(TOOL_MATERIAL_DOUBLE_COMPRESSED_COBBLESTONE);
+            itemDCCExcavator = new ItemExcavatorCore(TOOL_MATERIAL_DOUBLE_COMPRESSED_COBBLESTONE);
+
+            itemDCCSword.setRepairIngot("").setUnlocalizedName("double_compressed_stone_sword").setRegistryName("circadian", "double_compressed_stone_sword");
+            itemDCCShovel.setRepairIngot("").setUnlocalizedName("double_compressed_stone_shovel").setRegistryName("circadian", "double_compressed_stone_shovel");
+            itemDCCPickaxe.setRepairIngot("").setUnlocalizedName("double_compressed_stone_pick").setRegistryName("circadian", "double_compressed_stone_pick");
+            itemDCCAxe.setRepairIngot("").setUnlocalizedName("double_compressed_stone_axe").setRegistryName("circadian", "double_compressed_stone_axe");
+            itemDCCHoe.setRepairIngot("").setUnlocalizedName("double_compressed_stone_hoe").setRegistryName("circadian", "double_compressed_stone_hoe");
+            itemDCCHammer.setRepairIngot("").setUnlocalizedName("double_compressed_stone_hammer").setRegistryName("circadian", "double_compressed_stone_hammer");
+            itemDCCExcavator.setRepairIngot("").setUnlocalizedName("double_compressed_stone_excavator").setRegistryName("circadian", "double_compressed_stone_excavator");
+
+            ForgeRegistries.ITEMS.register(itemDCCSword);
+            ForgeRegistries.ITEMS.register(itemDCCShovel);
+            ForgeRegistries.ITEMS.register(itemDCCPickaxe);
+            ForgeRegistries.ITEMS.register(itemDCCAxe);
+            ForgeRegistries.ITEMS.register(itemDCCHoe);
+            ForgeRegistries.ITEMS.register(itemDCCHammer);
+            ForgeRegistries.ITEMS.register(itemDCCExcavator);
+
+            toolDCCSword = new ItemStack(itemDCCSword);
+            toolDCCShovel = new ItemStack(itemDCCShovel);
+            toolDCCPickaxe = new ItemStack(itemDCCPickaxe);
+            toolDCCAxe = new ItemStack(itemDCCAxe);
+            toolDCCHoe = new ItemStack(itemDCCHoe);
+            toolDCCHammer = new ItemStack(itemDCCHammer);
+            toolDCCExcavator = new ItemStack(itemDCCExcavator);
+
+            itemDCCSword.setCreativeTab(Circadian.TAB);
+            itemDCCShovel.setCreativeTab(Circadian.TAB);
+            itemDCCPickaxe.setCreativeTab(Circadian.TAB);
+            itemDCCAxe.setCreativeTab(Circadian.TAB);
+            itemDCCHoe.setCreativeTab(Circadian.TAB);
+            itemDCCHammer.setCreativeTab(Circadian.TAB);
+            itemDCCExcavator.setCreativeTab(Circadian.TAB);
         }
 
     }
@@ -141,6 +222,17 @@ public class Tools {
             ModelLoader.setCustomModelResourceLocation(itemCCAxe, 0, new ModelResourceLocation(new ResourceLocation("circadian", "compressed_stone_axe"), "inventory"));
             ModelLoader.setCustomModelResourceLocation(itemCCHoe, 0, new ModelResourceLocation(new ResourceLocation("circadian", "compressed_stone_hoe"), "inventory"));
             ModelLoader.setCustomModelResourceLocation(itemCCHammer, 0, new ModelResourceLocation(new ResourceLocation("circadian", "compressed_stone_hammer"), "inventory"));
+            ModelLoader.setCustomModelResourceLocation(itemCCExcavator, 0, new ModelResourceLocation(new ResourceLocation("circadian", "compressed_stone_excavator"), "inventory"));
+        }
+
+         if (enabledDoubleCompressed) {
+            ModelLoader.setCustomModelResourceLocation(itemDCCSword, 0, new ModelResourceLocation(new ResourceLocation("circadian", "double_compressed_stone_sword"), "inventory"));
+            ModelLoader.setCustomModelResourceLocation(itemDCCShovel, 0, new ModelResourceLocation(new ResourceLocation("circadian", "double_compressed_stone_shovel"), "inventory"));
+            ModelLoader.setCustomModelResourceLocation(itemDCCPickaxe, 0, new ModelResourceLocation(new ResourceLocation("circadian", "double_compressed_stone_pick"), "inventory"));
+            ModelLoader.setCustomModelResourceLocation(itemDCCAxe, 0, new ModelResourceLocation(new ResourceLocation("circadian", "double_compressed_stone_axe"), "inventory"));
+            ModelLoader.setCustomModelResourceLocation(itemDCCHoe, 0, new ModelResourceLocation(new ResourceLocation("circadian", "double_compressed_stone_hoe"), "inventory"));
+            ModelLoader.setCustomModelResourceLocation(itemDCCHammer, 0, new ModelResourceLocation(new ResourceLocation("circadian", "double_compressed_stone_hammer"), "inventory"));
+            ModelLoader.setCustomModelResourceLocation(itemDCCExcavator, 0, new ModelResourceLocation(new ResourceLocation("circadian", "double_compressed_stone_excavator"), "inventory"));
         }
     }
 }

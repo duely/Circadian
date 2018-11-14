@@ -2,6 +2,7 @@ package com.noobanidus.circadian.compat.oreberries.blocks;
 
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
+import com.infinityraider.infinitylib.utility.WorldHelper;
 import com.noobanidus.circadian.Circadian;
 import josephcsible.oreberries.BlockOreberryBush;
 import josephcsible.oreberries.config.GeneralConfig;
@@ -34,6 +35,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
@@ -42,6 +44,9 @@ import twilightforest.item.TFItems;
 import java.util.Random;
 
 public class BlockBerry extends Block implements IPlantable, IGrowable {
+
+    public static boolean enabled = Circadian.CONFIG.get("Items.TwilightBushes", "Enable", true, "Enable Twilight Forest bushes.");
+
     public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 3); // small, medium, large, large with berries
     public String name;
     protected static final AxisAlignedBB[] OREBERRY_BUSH_AABB = new AxisAlignedBB[] {
@@ -147,7 +152,12 @@ public class BlockBerry extends Block implements IPlantable, IGrowable {
                 return true;
 
             world.setBlockState(pos, state.withProperty(AGE, 2));
-            ItemHandlerHelper.giveItemToPlayer(player, getBerriesStack(world.rand));
+            if (player instanceof FakePlayer) {
+                WorldHelper.spawnItemInWorld(world, pos, getBerriesStack(world.rand));
+            } else {
+                ItemHandlerHelper.giveItemToPlayer(player, getBerriesStack(world.rand));
+            }
+
         }
 
         return false;

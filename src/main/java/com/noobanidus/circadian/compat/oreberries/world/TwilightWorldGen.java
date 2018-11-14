@@ -1,6 +1,6 @@
 package com.noobanidus.circadian.compat.oreberries.world;
 
-import com.noobanidus.circadian.config.BlockConfig;
+import com.noobanidus.circadian.config.Registrar;
 import josephcsible.oreberries.worldgen.OreberriesWorldGen;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
@@ -25,12 +25,12 @@ public class TwilightWorldGen extends OreberriesWorldGen {
 
     public TwilightWorldGen () {
 
-        knightmetal_gen = new TwilightBushGen(BlockConfig.knightmetal_berry);
+        knightmetal_gen = new TwilightBushGen(Registrar.knightmetal_berry);
 
 
         bushes.add(knightmetal_gen);
-        bushes.add(new TwilightBushGen(BlockConfig.naga_berry));
-        bushes.add(new TwilightBushGen(BlockConfig.liveroot_berry));
+        bushes.add(new TwilightBushGen(Registrar.naga_berry));
+        bushes.add(new TwilightBushGen(Registrar.liveroot_berry));
     }
 
     @Override

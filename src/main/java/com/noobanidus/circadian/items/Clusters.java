@@ -11,6 +11,8 @@ import java.util.Map;
 
 public class Clusters extends ItemMulti {
 
+    public static boolean enabled = Circadian.CONFIG.get("Items.Clusters", "Enable", true, "Enable extra clusters.");
+
     public Clusters () {
         super("circadian");
 
@@ -29,8 +31,6 @@ public class Clusters extends ItemMulti {
         clusterPlatinum = addOreDictItem(5, "clusterPlatinum");
         clusterRedstone = addOreDictItem(6, "clusterRedstone");
         clusterStarmetal = addOreDictItem(7, "clusterStarmetal");
-
-
 
         return true;
     }

@@ -26,7 +26,7 @@ public class TOPProvider {
 
         registered = true;
 
-        FMLInterModComms.sendFunctionMessage("theoneprobe", "getTheOneProbe", "com.noobanidus.circadian.top.TOPProvider$GetTheOneProbe");
+        FMLInterModComms.sendFunctionMessage("theoneprobe", "getTheOneProbe", "com.noobanidus.circadian.compat.top.TOPProvider$GetTheOneProbe");
     }
 
     public static class GetTheOneProbe implements com.google.common.base.Function<ITheOneProbe, Void> {

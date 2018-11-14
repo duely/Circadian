@@ -15,6 +15,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockStarmetal extends Block {
+
+	public static boolean enabled = Circadian.CONFIG.get("Items.BlockStarmetal", "Enable", true, "Enable the starmetal block.");
+
 	public BlockStarmetal() {
 
 		super(Material.IRON);

@@ -16,13 +16,9 @@ public class Fertilizer extends Item {
 	public Fertilizer() {
         enabled = Circadian.CONFIG.get("Items.Fertilizer", "Enable", true, "Enable fertilizer (bone-meal alternative).");
 
-		setCreativeTab(CreativeTabs.MATERIALS);
+		setCreativeTab(Circadian.TAB);
 		setRegistryName(new ResourceLocation("circadian", "fertilizer"));
 		setUnlocalizedName("Fertilizer");
-	}
-
-	public Fertilizer(CreativeTabs creativeTab) {
-		setCreativeTab(creativeTab);
 	}
 
     @Override

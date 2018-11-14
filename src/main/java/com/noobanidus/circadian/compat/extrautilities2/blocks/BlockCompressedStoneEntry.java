@@ -1,5 +1,6 @@
 package com.noobanidus.circadian.compat.extrautilities2.blocks;
 
+import com.noobanidus.circadian.Circadian;
 import com.rwtema.extrautils2.backend.entries.BlockEntry;
 import com.rwtema.extrautils2.blocks.BlockCompressed;
 import com.rwtema.extrautils2.crafting.CraftingHelper;
@@ -13,6 +14,8 @@ public class BlockCompressedStoneEntry extends BlockEntry<BlockCompressed> {
     private final IBlockState blockState;
     private final String texture;
     private final int max;
+
+    public static boolean enabled = Circadian.CONFIG.get("Items.CompressedStones", "Enable", true, "Enable additional compressed stone types.");
 
     public BlockCompressedStoneEntry(Block block, String texture, int max) {
         this(block.getDefaultState(), texture, max);

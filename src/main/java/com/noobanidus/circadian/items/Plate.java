@@ -1,12 +1,18 @@
 package com.noobanidus.circadian.items;
 
 import cofh.core.item.ItemMulti;
-import cofh.core.util.core.IInitializer;
 import com.noobanidus.circadian.Circadian;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-public class Plate extends ItemMulti implements IInitializer {
+import java.util.Map;
+
+public class Plate extends ItemMulti {
+
+    public static boolean enabled = Circadian.CONFIG.get("Items.Plates", "Enable", true, "Enable additional plates.");
+
     public Plate () {
         super("circadian");
 
@@ -14,11 +20,8 @@ public class Plate extends ItemMulti implements IInitializer {
         setCreativeTab(Circadian.TAB);
     }
 
-    @Override
-    public boolean preInit() {
+    public boolean init() {
         ForgeRegistries.ITEMS.register(this.setRegistryName("circadian", "plate"));
-
-        // deal with the models somehow???
 
         plateManasteel = addOreDictItem(0, "plateManasteel");
         plateElementium = addOreDictItem(1, "plateElementium");
@@ -32,9 +35,10 @@ public class Plate extends ItemMulti implements IInitializer {
         return true;
     }
 
-    @Override
-    public boolean initialize() {
-        return true;
+    public void registerModels () {
+        for (Map.Entry<Integer, ItemEntry> entry : itemMap.entrySet()) {
+            ModelLoader.setCustomModelResourceLocation(this, entry.getKey(), new ModelResourceLocation("circadian:plate", "type=" + entry.getValue().name));
+        }
     }
 
     // Botania
