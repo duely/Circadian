@@ -10,7 +10,7 @@
   "type": "forge:ore_shaped",
   "key": {
     "a": {
-      "item": "#BLOCKGLASS"
+      "item": "botania:managlass"
     },
     "b": {
       "item": "minecraft:lava_bucket"

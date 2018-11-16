@@ -6,12 +6,15 @@ import com.noobanidus.circadian.compat.botania.brew.Brews;
 import com.noobanidus.circadian.compat.cofh.thermalexpansion.satchels.Satchels;
 import com.noobanidus.circadian.compat.oreberries.handlers.BerryHandler;
 import com.noobanidus.circadian.compat.thaumcraft.handlers.ClusterHandler;
+import com.noobanidus.circadian.compat.twilightforest.Mobs;
 import com.noobanidus.circadian.config.Registrar;
 import com.noobanidus.circadian.compat.top.TOPProvider;
 import com.noobanidus.circadian.compat.oreberries.world.TwilightWorldGen;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.common.event.*;
 
@@ -67,6 +70,7 @@ public class Circadian {
     
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent e) {
+        Mobs.registerSpawns();
         Brews.registerBrews();
     }
     

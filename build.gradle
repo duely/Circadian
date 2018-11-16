@@ -9,7 +9,7 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "0.0.1"
+version = "1.0.5"
 group = "com.noobanidus.circadian"
 archivesBaseName = "circadian"
 
@@ -67,6 +67,8 @@ repositories {
 }
 
 dependencies {
+    deobfCompile "com.blamejared:MTLib:3.0.4.7"
+    deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.8.5"
     deobfCompile "cofh:ThermalExpansion:1.12.2-5.5.2.39:universal"
     deobfCompile "cofh:CoFHCore:1.12.2-4.6.1.22:universal"
     deobfCompile "cofh:ThermalFoundation:1.12.2-2.6.1.22:universal"

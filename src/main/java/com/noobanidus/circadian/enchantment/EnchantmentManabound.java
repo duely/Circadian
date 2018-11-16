@@ -15,13 +15,11 @@ import net.minecraft.item.ItemStack;
 import com.noobanidus.circadian.Circadian;
 
 public class EnchantmentManabound extends Enchantment {
-    public boolean enabled;
+    public static boolean enabled = enabled = Circadian.CONFIG.get("Enchantments.Manabound", "Enable", true, "Enable manabound enchantment.");
 
 	public EnchantmentManabound(String id) {
 		super(Rarity.VERY_RARE, EnumEnchantmentType.BREAKABLE, new EntityEquipmentSlot[] { EntityEquipmentSlot.MAINHAND, EntityEquipmentSlot.OFFHAND, EntityEquipmentSlot.FEET, EntityEquipmentSlot.LEGS, EntityEquipmentSlot.CHEST, EntityEquipmentSlot.HEAD });
 		setRegistryName(id);
-
-        enabled = Circadian.CONFIG.get("Enchantments.Manabound", "Enable", true, "Enable manabound enchantment.");
 	}
 
 	@Override

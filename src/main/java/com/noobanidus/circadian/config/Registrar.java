@@ -13,7 +13,6 @@ import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.*;
 import net.minecraft.block.Block;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -28,15 +27,6 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import com.noobanidus.circadian.compat.thaumcraft.blocks.BlockCompressedVisBattery;
 
 import net.minecraft.init.Blocks;
-import net.minecraftforge.oredict.OreDictionary;
-import thaumcraft.api.blocks.BlocksTC;
-import vazkii.botania.api.state.enums.LivingRockVariant;
-import vazkii.botania.common.block.BlockLivingrock;
-import vazkii.botania.common.block.ModBlocks;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @Mod.EventBusSubscriber
 public class Registrar {
@@ -183,17 +173,6 @@ public class Registrar {
         event.getRegistry().register(silveredApple);
         event.getRegistry().register(silveredMelon);
         event.getRegistry().register(silveredCarrot);
-
-        List<ItemStack> magicStone = new ArrayList<>();
-        for (int i = 0; i < LivingRockVariant.values().length; i++) {
-            magicStone.add(new ItemStack(ModBlocks.livingrock, 1, i));
-        }
-        magicStone.add(new ItemStack(BlocksTC.stoneArcane, 1, 0));
-        magicStone.add(new ItemStack(BlocksTC.stoneArcaneBrick, 1, 0));
-
-        for (ItemStack item : magicStone) {
-            OreDictionary.registerOre("magicStone", item);
-        }
     }
 
     @SideOnly(Side.CLIENT)
@@ -255,10 +234,10 @@ public class Registrar {
     }
 
     @SubscribeEvent
-	public void registerEnchantments(RegistryEvent.Register<Enchantment> event) {
-        if (((EnchantmentManabound) manabound).enabled) {
+	public static void registerEnchantments(RegistryEvent.Register<Enchantment> event) {
+        if (EnchantmentManabound.enabled) {
     		event.getRegistry().register(manabound);
-            Circadian.LOG.info(String.format("Circadian: Manabound enchantment registered."));
+            Circadian.LOG.info(String.format("[Circadian] Manabound enchantment registered."));
         }
 	}
 
