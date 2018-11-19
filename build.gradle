@@ -78,11 +78,21 @@ repositories {
 dependencies {
     deobfCompile "com.blamejared:MTLib:3.0.4.7"
     deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.8.5"
-    deobfCompile "cofh:ThermalExpansion:1.12.2-5.5.2.39:universal"
-    deobfCompile "cofh:CoFHCore:1.12.2-4.6.1.22:universal"
-    deobfCompile "cofh:ThermalFoundation:1.12.2-2.6.1.22:universal"
-    deobfCompile "com.wayoftime.bloodmagic:BloodMagic:1.12.2-2.3.1-99"
     deobfCompile "vazkii.botania:Botania:r1.10-355.4"
+    deobfCompile "mezz.jei:jei_1.12.2:4.13.1.220"
+    deobfCompile("cofh:ThermalExpansion:1.12.2-5.5.2.39:universal") {
+        exclude group: 'mezz.jei'
+    }
+    deobfCompile("cofh:CoFHCore:1.12.2-4.6.1.22:universal") {
+        exclude group: 'mezz.jei'
+    }
+    deobfCompile("cofh:ThermalFoundation:1.12.2-2.6.1.22:universal") {
+        exclude group: 'mezz.jei'
+    }
+    deobfCompile("cofh:ThermalCultivation:1.12.2-0.3.1.8:universal") {
+        exclude group: 'mezz.jei'
+    }
+    deobfCompile "com.wayoftime.bloodmagic:BloodMagic:1.12.2-2.3.1-99"
     deobfCompile "mcjty.theoneprobe:TheOneProbe-1.12:1.12-1.4.23-16"
 
     compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.1'
