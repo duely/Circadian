@@ -3,41 +3,34 @@ package com.noobanidus.circadian;
 import cofh.core.util.ConfigHandler;
 import com.noobanidus.circadian.compat.agricraft.handlers.CropHandler;
 import com.noobanidus.circadian.compat.botania.brew.Brews;
-import com.noobanidus.circadian.compat.cofh.thermalexpansion.satchels.Satchels;
 import com.noobanidus.circadian.compat.oreberries.handlers.BerryHandler;
 import com.noobanidus.circadian.compat.thaumcraft.handlers.ClusterHandler;
 import com.noobanidus.circadian.compat.twilightforest.Mobs;
 import com.noobanidus.circadian.config.Registrar;
 import com.noobanidus.circadian.compat.top.TOPProvider;
 import com.noobanidus.circadian.compat.oreberries.world.TwilightWorldGen;
+import com.noobanidus.circadian.events.CircadianEvents;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.common.event.*;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.OreDictionary;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import thaumcraft.api.blocks.BlocksTC;
-import vazkii.botania.api.state.enums.LivingRockVariant;
-import vazkii.botania.common.block.ModBlocks;
 
 @Mod.EventBusSubscriber
 @Mod(modid = Circadian.MODID, name = Circadian.MODNAME, version = Circadian.VERSION, dependencies = Circadian.DEPENDS)
 public class Circadian {
     public static final String MODID = "circadian";
     public static final String MODNAME = "Circadian";
-    public static final String VERSION = "0.0.1";
+    public static final String VERSION = "1.0.0";
     public static final String DEPENDS = "required-after:twilightforest;required-after:thaumcraft;required-after:thermalfoundation;required-after:theoneprobe;required-after:astralsorcery;required-after:agricraft;required-after:oreberries;required-after:bloodmagic;before:jei";
 
     public final static Logger LOG = LogManager.getLogger(MODID);
