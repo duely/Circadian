@@ -6,11 +6,19 @@ import com.rwtema.extrautils2.blocks.BlockEnderLilly;
 import mcjty.theoneprobe.api.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 import thaumcraft.common.blocks.devices.BlockVisBattery;
 
 import josephcsible.oreberries.BlockOreberryBush;
+import vazkii.botania.api.brew.Brew;
+import vazkii.botania.common.block.BlockIncensePlate;
+import vazkii.botania.common.block.tile.TileIncensePlate;
+import vazkii.botania.common.item.ModItems;
+import vazkii.botania.common.item.brew.ItemIncenseStick;
 
 import javax.annotation.Nullable;
 
@@ -29,6 +37,7 @@ public class TOPProvider {
         FMLInterModComms.sendFunctionMessage("theoneprobe", "getTheOneProbe", "com.noobanidus.circadian.compat.top.TOPProvider$GetTheOneProbe");
     }
 
+    @SuppressWarnings("unused")
     public static class GetTheOneProbe implements com.google.common.base.Function<ITheOneProbe, Void> {
         public static ITheOneProbe probe;
 
@@ -59,7 +68,25 @@ public class TOPProvider {
                     } else if (blockState.getBlock() instanceof BlockBerry) {
                          int growthState = blockState.getValue(BlockBerry.AGE);
                         probeInfo.text((growthState == 3) ? OK + "Ready to Harvest" : "");
+                    } else if (blockState.getBlock() instanceof BlockIncensePlate) {
+                        TileIncensePlate plate = (TileIncensePlate) world.getTileEntity(data.getPos());
+
+                        int timeLeft = plate.timeLeft / 60 / 20;
+                        ItemStack stack = plate.getItemHandler().getStackInSlot(0);
+                        Brew brew = ((ItemIncenseStick) ModItems.incenseStick).getBrew(stack);
+                        if (stack == null || stack.isEmpty()) {
+                            probeInfo.text(WARNING + "No brew.");
+                        } else {
+                            String brew_name = I18n.translateToLocal(brew.getUnlocalizedName());
+                            probeInfo.text(OK + String.format("Brew: %s", brew_name));
+                            if (timeLeft == 0) {
+                                probeInfo.text(WARNING + "Unlit.");
+                            } else {
+                                probeInfo.text(OK + String.format("%d minutes remaining.", timeLeft));
+                            }
+                        }
                     }
+
                 }
             });
             return null;
