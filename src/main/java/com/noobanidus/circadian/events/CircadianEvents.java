@@ -19,18 +19,13 @@ import java.util.Arrays;
 
 import com.noobanidus.circadian.Circadian;
 
-@Mod.EventBusSubscriber
 public class CircadianEvents {
 
-    private static int manaCost = -1;
+    private static int manaCost = Circadian.CONFIG.get("Enchantments.Manabound", "Cost", 370, "Cost to repair a point of damage.");
 
     @SubscribeEvent
     public static void onLivingTick (LivingEvent.LivingUpdateEvent event) {
         if (event.getEntity() instanceof EntityPlayer && ((EnchantmentManabound) Registrar.manabound).enabled) {
-
-            if (manaCost == -1) { 
-                manaCost = Circadian.CONFIG.get("Enchantments.Manabound", "Cost", 370, "Cost to repair a point of damage.");
-            }
 
             EntityPlayer player = (EntityPlayer) event.getEntity();
 
@@ -47,7 +42,7 @@ public class CircadianEvents {
     }
 
     @SubscribeEvent
-    public void onTrampleEvent (BlockEvent.FarmlandTrampleEvent event) {
+    public static void onTrampleEvent (BlockEvent.FarmlandTrampleEvent event) {
         if (Circadian.CONFIG.get("Farmland", "Trample", true, "Disable trampling of farmland.")) {
             event.setCanceled(true);
         }

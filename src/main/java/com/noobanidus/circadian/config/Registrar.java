@@ -1,18 +1,22 @@
 package com.noobanidus.circadian.config;
 
+import cofh.core.util.helpers.ItemHelper;
 import com.noobanidus.circadian.Circadian;
 import com.noobanidus.circadian.compat.chisel.blocks.BlockRedScribbles;
 import com.noobanidus.circadian.compat.oreberries.blocks.BlockBerry;
 import com.noobanidus.circadian.compat.extrautilities2.blocks.BlockCompressedStoneEntry;
 import com.noobanidus.circadian.compat.astralsorcery.blocks.BlockStarmetal;
 import com.noobanidus.circadian.enchantment.EnchantmentManabound;
+import com.noobanidus.circadian.icons.Icons;
 import com.noobanidus.circadian.items.*;
 import net.minecraft.block.BlockStone;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.init.Items;
 import net.minecraft.item.*;
 import net.minecraft.block.Block;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -46,9 +50,15 @@ public class Registrar {
     public static Item fertilizer;
     public static Item fertilizerBag;
     public static Plate plates;
+    public static MobIngredients mobIngredients;
     public static Clusters clusters;
     public static Nuggets nuggets;
     public static Tools tools;
+
+    public static Satchels satchels;
+    public static WateringCan wateringCan;
+
+    public static Icons icons;
 
     public static BlockRedScribbles scribbles;
     public static ItemBlock ib_scribbles;
@@ -73,11 +83,17 @@ public class Registrar {
 
         fertilizer = new Fertilizer();
         fertilizerBag = new FertilizerBag();
+        mobIngredients = new MobIngredients();
         plates = new Plate();
         tools = new Tools();
         clusters = new Clusters();
         nuggets = new Nuggets();
         scribbles = new BlockRedScribbles();
+
+        wateringCan = new WateringCan();
+        satchels = new Satchels();
+
+        icons = new Icons();
 
         ib_scribbles = new ItemMultiTexture(scribbles, scribbles, new ItemMultiTexture.Mapper() {
             @Override
@@ -112,8 +128,24 @@ public class Registrar {
             clusters.init();
         }
 
+        if (MobIngredients.enabled) {
+            mobIngredients.init();
+        }
+
         if (Nuggets.enabled) {
             nuggets.init();
+        }
+
+        if (Icons.enabled) {
+            icons.init();
+        }
+
+        if (WateringCan.enabled) {
+            wateringCan.init();
+        }
+
+        if (Satchels.enabled) {
+            satchels.init();
         }
 
         goldenPotato = (new ItemFood(2, 0.6f, false)).setUnlocalizedName("golden_potato").setRegistryName("circadian", "golden_potato").setCreativeTab(Circadian.TAB);
@@ -186,6 +218,19 @@ public class Registrar {
             starmetal.registerModels();
         }
 
+        if (Icons.enabled) {
+            icons.registerModels();
+        }
+
+        if (WateringCan.enabled) {
+            wateringCan.registerModels();
+        }
+
+        if (Satchels.enabled) {
+            satchels.registerModels();
+        }
+
+
         if (scribbles.enabled) {
             for (int i = 0; i < 16; i++) {
                 ModelLoader.setCustomModelResourceLocation(ib_scribbles, i, new ModelResourceLocation(new ResourceLocation("circadian", String.format("redscribbles", i)), String.format("variant=%d", i)));
@@ -215,6 +260,10 @@ public class Registrar {
             plates.registerModels();
         }
 
+        if (MobIngredients.enabled) {
+            mobIngredients.registerModels();
+        }
+
         tools.registerModels();
 
         if (Clusters.enabled) {
@@ -240,6 +289,13 @@ public class Registrar {
             Circadian.LOG.info(String.format("[Circadian] Manabound enchantment registered."));
         }
 	}
+
+	@SubscribeEvent
+    public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
+        if (Satchels.enabled) {
+            satchels.registerRecipes();
+        }
+    }
 
     @SideOnly(Side.CLIENT)
     protected static class StateMapper extends StateMapperBase {

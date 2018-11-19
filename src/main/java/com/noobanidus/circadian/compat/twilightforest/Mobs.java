@@ -1,6 +1,7 @@
 package com.noobanidus.circadian.compat.twilightforest;
 
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import twilightforest.entity.passive.EntityTFPenguin;
