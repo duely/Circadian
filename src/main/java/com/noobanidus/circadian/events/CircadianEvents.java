@@ -6,6 +6,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -19,7 +20,7 @@ import java.util.Arrays;
 import com.noobanidus.circadian.Circadian;
 
 @Mod.EventBusSubscriber
-public class PlayerEvents {
+public class CircadianEvents {
 
     private static int manaCost = -1;
 
@@ -42,6 +43,13 @@ public class PlayerEvents {
                     }
                 }
             }
+        }
+    }
+
+    @SubscribeEvent
+    public void onTrampleEvent (BlockEvent.FarmlandTrampleEvent event) {
+        if (Circadian.CONFIG.get("Farmland", "Trample", true, "Disable trampling of farmland.")) {
+            event.setCanceled(true);
         }
     }
 }
