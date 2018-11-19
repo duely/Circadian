@@ -46,6 +46,7 @@ public class Circadian {
         CONFIG.setConfiguration(new Configuration(new File(event.getModConfigurationDirectory(), "circadian.cfg"), true));
         TAB = new CreativeTabCircadian(CreativeTabs.getNextID(), MODID);
         Registrar.preInit();
+        MinecraftForge.EVENT_BUS.register(CircadianEvents.class);
     }
     
     @Mod.EventHandler
@@ -58,13 +59,12 @@ public class Circadian {
         ClusterHandler.init();
         CropHandler.init();
         BerryHandler.init();
-        Satchels.registerRecipes();
+        Brews.registerBrews();
     }
     
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent e) {
         Mobs.registerSpawns();
-        Brews.registerBrews();
     }
     
     @Mod.EventHandler
