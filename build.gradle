@@ -30,6 +30,15 @@ runClient {
     args '--username', 'nooblybear'
 }
 
+task deobfJar (type: Jar) {
+    from sourceSets.main.output
+    classifier = "deobf"
+}
+
+artifacts {
+    archives deobfJar
+}
+
 repositories {
     maven {
         url "http://dvs1.progwml6.com/files/maven"
