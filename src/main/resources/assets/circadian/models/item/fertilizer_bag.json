@@ -1,6 +1,6 @@
 {
-    "parent": "item/handheld",
-    "textures": {
-        "layer0": "circadian:items/fertilizer_bag"
-    }
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "circadian:items/fertilizer_bag"
+  }
 }

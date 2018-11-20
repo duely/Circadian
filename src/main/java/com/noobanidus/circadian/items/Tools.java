@@ -1,40 +1,37 @@
 package com.noobanidus.circadian.items;
 
-import net.minecraft.item.*;
-import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.util.ResourceLocation;
-
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.client.model.ModelLoader;
+import cofh.core.item.tool.*;
+import com.noobanidus.circadian.Circadian;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import cofh.core.item.tool.*;
-
-import com.noobanidus.circadian.Circadian;
-
+@SuppressWarnings("WeakerAccess")
 public class Tools {
     public static final ToolMaterial TOOL_MATERIAL_BRASS = EnumHelper.addToolMaterial("TC:ALCHEMICAL_BRASS", 2, 325, 6.0F, 2.0F, 10);
-
     private static final ToolMaterial TOOL_MATERIAL_COMPRESSED_COBBLESTONE = EnumHelper.addToolMaterial("EX:COMPRESSED_COBBLESTONE", 1, 750, 3.5f, 1.0f, 5);
     private static final ToolMaterial TOOL_MATERIAL_DOUBLE_COMPRESSED_COBBLESTONE = EnumHelper.addToolMaterial("EX:DOUBLE_COMPRESSED_COBBLESTONE", 1, 1500, 3.5f, 1.0f, 5);
-
+    public static boolean enabledBrass = Circadian.CONFIG.get("Tools.Brass", "Enable", false, "Enable tools made of alchemical brass.");
+    public static boolean enabledCompressed = Circadian.CONFIG.get("Tools.Compressed", "Enable", true, "Enable tools made of compressed cobblestone and stone.");
+    public static boolean enabledDoubleCompressed = Circadian.CONFIG.get("Tools.DoubleCompressed", "Enable", true, "Enable tools made out of double-compressed cobblestone and stone.");
     public ItemSwordCore itemBrassSword;
     public ItemShovelCore itemBrassShovel;
     public ItemPickaxeCore itemBrassPickaxe;
     public ItemAxeCore itemBrassAxe;
     public ItemHoeCore itemBrassHoe;
     public ItemHammerCore itemBrassHammer;
-
     public ItemStack toolBrassSword;
     public ItemStack toolBrassShovel;
     public ItemStack toolBrassPickaxe;
     public ItemStack toolBrassAxe;
     public ItemStack toolBrassHoe;
     public ItemStack toolBrassHammer;
-
     public ItemSwordCore itemCCSword;
     public ItemShovelCore itemCCShovel;
     public ItemPickaxeCore itemCCPickaxe;
@@ -42,7 +39,6 @@ public class Tools {
     public ItemHoeCore itemCCHoe;
     public ItemHammerCore itemCCHammer;
     public ItemExcavatorCore itemCCExcavator;
-
     public ItemStack toolCCSword;
     public ItemStack toolCCShovel;
     public ItemStack toolCCPickaxe;
@@ -50,7 +46,6 @@ public class Tools {
     public ItemStack toolCCHoe;
     public ItemStack toolCCHammer;
     public ItemStack toolCCExcavator;
-
     public ItemSwordCore itemDCCSword;
     public ItemShovelCore itemDCCShovel;
     public ItemPickaxeCore itemDCCPickaxe;
@@ -58,7 +53,6 @@ public class Tools {
     public ItemHoeCore itemDCCHoe;
     public ItemHammerCore itemDCCHammer;
     public ItemExcavatorCore itemDCCExcavator;
-
     public ItemStack toolDCCSword;
     public ItemStack toolDCCShovel;
     public ItemStack toolDCCPickaxe;
@@ -67,20 +61,11 @@ public class Tools {
     public ItemStack toolDCCHammer;
     public ItemStack toolDCCExcavator;
 
-    private boolean enabledBrass;
-    private boolean enabledCompressed;
-    private boolean enabledDoubleCompressed;
-
-    public Tools () {
+    public Tools() {
     }
 
-    public void init () {
-        enabledBrass = (boolean) Circadian.CONFIG.get("Tools.Brass", "Enable", false, "Enable tools made of alchemical brass.");
-
-        enabledCompressed = (boolean) Circadian.CONFIG.get("Tools.Compressed", "Enable", true, "Enable tools made of compressed cobblestone and stone.");
-
-        enabledDoubleCompressed = (boolean) Circadian.CONFIG.get("Tools.DoubleCompressed", "Enable", true, "Enable tools made out of double-compressed cobblestone and stone.");
-
+    @SuppressWarnings("ConstantConditions")
+    public void init() {
         if (enabledBrass) {
             itemBrassSword = new ItemSwordCore(TOOL_MATERIAL_BRASS);
             itemBrassShovel = new ItemShovelCore(TOOL_MATERIAL_BRASS);
@@ -205,7 +190,7 @@ public class Tools {
     }
 
     @SideOnly(Side.CLIENT)
-    public void registerModels () {
+    public void registerModels() {
         if (enabledBrass) {
             ModelLoader.setCustomModelResourceLocation(itemBrassSword, 0, new ModelResourceLocation(new ResourceLocation("circadian", "brass_sword"), "inventory"));
             ModelLoader.setCustomModelResourceLocation(itemBrassShovel, 0, new ModelResourceLocation(new ResourceLocation("circadian", "brass_shovel"), "inventory"));
@@ -225,7 +210,7 @@ public class Tools {
             ModelLoader.setCustomModelResourceLocation(itemCCExcavator, 0, new ModelResourceLocation(new ResourceLocation("circadian", "compressed_stone_excavator"), "inventory"));
         }
 
-         if (enabledDoubleCompressed) {
+        if (enabledDoubleCompressed) {
             ModelLoader.setCustomModelResourceLocation(itemDCCSword, 0, new ModelResourceLocation(new ResourceLocation("circadian", "double_compressed_stone_sword"), "inventory"));
             ModelLoader.setCustomModelResourceLocation(itemDCCShovel, 0, new ModelResourceLocation(new ResourceLocation("circadian", "double_compressed_stone_shovel"), "inventory"));
             ModelLoader.setCustomModelResourceLocation(itemDCCPickaxe, 0, new ModelResourceLocation(new ResourceLocation("circadian", "double_compressed_stone_pick"), "inventory"));

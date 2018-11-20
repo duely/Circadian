@@ -1,14 +1,9 @@
 package com.noobanidus.circadian.compat.agricraft.handlers;
 
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.event.FMLInterModComms;
-
-import com.infinityraider.agricraft.init.AgriBlocks;
-import com.infinityraider.agricraft.reference.Constants;
-import thaumcraft.common.lib.utils.CropUtils;
-
 public class CropHandler {
-    public static void init () {
+    public static void init() {
+        // TODO: I don't even think this is needed any more?
+
         // EXTREME HACKERY
         // CropUtils.clickableCrops.add("tile.agricraft:crop7");
         // addClickableCrop(new ItemStack(AgriBlocks.getInstance().CROP, 1, Constants.MATURE), Constants.MATURE);

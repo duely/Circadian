@@ -9,11 +9,13 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import java.util.Map;
 
+@SuppressWarnings("WeakerAccess")
 public class MobIngredients extends ItemMulti {
 
     public static boolean enabled = Circadian.CONFIG.get("Items.MobDrops", "Enable", true, "Enable additional mob drops.");
+    public static ItemStack PenguinFeather;
 
-    public MobIngredients () {
+    public MobIngredients() {
         super("circadian");
 
         setUnlocalizedName("mob_ingredient");
@@ -28,11 +30,9 @@ public class MobIngredients extends ItemMulti {
         return true;
     }
 
-    public void registerModels () {
+    public void registerModels() {
         for (Map.Entry<Integer, ItemEntry> entry : itemMap.entrySet()) {
             ModelLoader.setCustomModelResourceLocation(this, entry.getKey(), new ModelResourceLocation("circadian:mob_ingredients", "type=" + entry.getValue().name));
         }
     }
-
-    public static ItemStack PenguinFeather;
 }

@@ -1,44 +1,44 @@
 {
-	"forge_marker": 1,
-	"defaults": {
-		"model": "builtin/generated",
-		"textures": {
-			"layer0": "blocks/dirt"
-		},
-		"transform": "forge:default-item"
-	},
-	"variants": {
-		"type": {
-			"platemanasteel": {
-				"textures": {
-					"layer0": "circadian:items/plate_manasteel"
-				}
-			},
-			"plateelementium": {
-				"textures": {
-					"layer0": "circadian:items/plate_elementium"
-				}
-			},
-			"plateterrasteel": {
-				"textures": {
-					"layer0": "circadian:items/plate_terrasteel"
-				}
-			},
-			"platestarmetal": {
-				"textures": {
-					"layer0": "circadian:items/plate_starmetal"
-				}
-			},
-			"plateknightmetal": {
-				"textures": {
-					"layer0": "circadian:items/plate_knightmetal"
-				}
-			},
-			"plateironwood": {
-				"textures": {
-					"layer0": "circadian:items/plate_ironwood"
-				}
-			}
-		}
-	}
+  "forge_marker": 1,
+  "defaults": {
+    "model": "builtin/generated",
+    "textures": {
+      "layer0": "blocks/dirt"
+    },
+    "transform": "forge:default-item"
+  },
+  "variants": {
+    "type": {
+      "platemanasteel": {
+        "textures": {
+          "layer0": "circadian:items/plate_manasteel"
+        }
+      },
+      "plateelementium": {
+        "textures": {
+          "layer0": "circadian:items/plate_elementium"
+        }
+      },
+      "plateterrasteel": {
+        "textures": {
+          "layer0": "circadian:items/plate_terrasteel"
+        }
+      },
+      "platestarmetal": {
+        "textures": {
+          "layer0": "circadian:items/plate_starmetal"
+        }
+      },
+      "plateknightmetal": {
+        "textures": {
+          "layer0": "circadian:items/plate_knightmetal"
+        }
+      },
+      "plateironwood": {
+        "textures": {
+          "layer0": "circadian:items/plate_ironwood"
+        }
+      }
+    }
+  }
 }

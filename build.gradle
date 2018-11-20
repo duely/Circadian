@@ -17,6 +17,7 @@ sourceCompatibility = targetCompatibility = "1.8"
 
 compileJava {
     sourceCompatibility = targetCompatibility = "1.8"
+    options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
 }
 
 minecraft {
@@ -78,7 +79,7 @@ repositories {
 dependencies {
     deobfCompile "com.blamejared:MTLib:3.0.4.7"
     deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.8.5"
-    deobfCompile "vazkii.botania:Botania:r1.10-355.4"
+    deobfCompile "vazkii.botania:Botania:r1.10-357.7"
     deobfCompile "mezz.jei:jei_1.12.2:4.13.1.220"
     deobfCompile("cofh:ThermalExpansion:1.12.2-5.5.2.39:universal") {
         exclude group: 'mezz.jei'

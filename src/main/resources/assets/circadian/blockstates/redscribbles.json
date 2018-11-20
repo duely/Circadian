@@ -1,27 +1,128 @@
 {
-    "forge_marker": 1,
-    "defaults":
-    {
-        "transform": "forge:default-block",
-        "model": "cube_column", "textures": {"side":"circadian:blocks/scribbles_top", "end":"circadian:blocks/scribbles_top"}
-    },
-    "variants": {
-        "inventory": [{}],
-        "variant=0":  {"model": "cube_column", "textures": {"side":"circadian:blocks/scribbles_0", "end":"circadian:blocks/scribbles_top"}},
-        "variant=1":  {"model": "cube_column", "textures": {"side":"circadian:blocks/scribbles_1", "end":"circadian:blocks/scribbles_top"}},
-        "variant=2":  {"model": "cube_column", "textures": {"side":"circadian:blocks/scribbles_2", "end":"circadian:blocks/scribbles_top"}},
-        "variant=3":  {"model": "cube_column", "textures": {"side":"circadian:blocks/scribbles_3", "end":"circadian:blocks/scribbles_top"}},
-        "variant=4":  {"model": "cube_column", "textures": {"side":"circadian:blocks/scribbles_4", "end":"circadian:blocks/scribbles_top"}},
-        "variant=5":  {"model": "cube_column", "textures": {"side":"circadian:blocks/scribbles_5", "end":"circadian:blocks/scribbles_top"}},
-        "variant=6":  {"model": "cube_column", "textures": {"side":"circadian:blocks/scribbles_6", "end":"circadian:blocks/scribbles_top"}},
-        "variant=7":  {"model": "cube_column", "textures": {"side":"circadian:blocks/scribbles_7", "end":"circadian:blocks/scribbles_top"}},
-        "variant=8":  {"model": "cube_column", "textures": {"side":"circadian:blocks/scribbles_8", "end":"circadian:blocks/scribbles_top"}},
-        "variant=9":  {"model": "cube_column", "textures": {"side":"circadian:blocks/scribbles_9", "end":"circadian:blocks/scribbles_top"}},
-        "variant=10":  {"model": "cube_column", "textures": {"side":"circadian:blocks/scribbles_10", "end":"circadian:blocks/scribbles_top"}},
-        "variant=11":  {"model": "cube_column", "textures": {"side":"circadian:blocks/scribbles_11", "end":"circadian:blocks/scribbles_top"}},
-        "variant=12":  {"model": "cube_column", "textures": {"side":"circadian:blocks/scribbles_12", "end":"circadian:blocks/scribbles_top"}},
-        "variant=13":  {"model": "cube_column", "textures": {"side":"circadian:blocks/scribbles_13", "end":"circadian:blocks/scribbles_top"}},
-        "variant=14":  {"model": "cube_column", "textures": {"side":"circadian:blocks/scribbles_14", "end":"circadian:blocks/scribbles_top"}},
-        "variant=15":  {"model": "cube_column", "textures": {"side":"circadian:blocks/scribbles_15", "end":"circadian:blocks/scribbles_top"}}
+  "forge_marker": 1,
+  "defaults": {
+    "transform": "forge:default-block",
+    "model": "cube_column",
+    "textures": {
+      "side": "circadian:blocks/scribbles_top",
+      "end": "circadian:blocks/scribbles_top"
     }
+  },
+  "variants": {
+    "inventory": [
+      {}
+    ],
+    "variant=0": {
+      "model": "cube_column",
+      "textures": {
+        "side": "circadian:blocks/scribbles_0",
+        "end": "circadian:blocks/scribbles_top"
+      }
+    },
+    "variant=1": {
+      "model": "cube_column",
+      "textures": {
+        "side": "circadian:blocks/scribbles_1",
+        "end": "circadian:blocks/scribbles_top"
+      }
+    },
+    "variant=2": {
+      "model": "cube_column",
+      "textures": {
+        "side": "circadian:blocks/scribbles_2",
+        "end": "circadian:blocks/scribbles_top"
+      }
+    },
+    "variant=3": {
+      "model": "cube_column",
+      "textures": {
+        "side": "circadian:blocks/scribbles_3",
+        "end": "circadian:blocks/scribbles_top"
+      }
+    },
+    "variant=4": {
+      "model": "cube_column",
+      "textures": {
+        "side": "circadian:blocks/scribbles_4",
+        "end": "circadian:blocks/scribbles_top"
+      }
+    },
+    "variant=5": {
+      "model": "cube_column",
+      "textures": {
+        "side": "circadian:blocks/scribbles_5",
+        "end": "circadian:blocks/scribbles_top"
+      }
+    },
+    "variant=6": {
+      "model": "cube_column",
+      "textures": {
+        "side": "circadian:blocks/scribbles_6",
+        "end": "circadian:blocks/scribbles_top"
+      }
+    },
+    "variant=7": {
+      "model": "cube_column",
+      "textures": {
+        "side": "circadian:blocks/scribbles_7",
+        "end": "circadian:blocks/scribbles_top"
+      }
+    },
+    "variant=8": {
+      "model": "cube_column",
+      "textures": {
+        "side": "circadian:blocks/scribbles_8",
+        "end": "circadian:blocks/scribbles_top"
+      }
+    },
+    "variant=9": {
+      "model": "cube_column",
+      "textures": {
+        "side": "circadian:blocks/scribbles_9",
+        "end": "circadian:blocks/scribbles_top"
+      }
+    },
+    "variant=10": {
+      "model": "cube_column",
+      "textures": {
+        "side": "circadian:blocks/scribbles_10",
+        "end": "circadian:blocks/scribbles_top"
+      }
+    },
+    "variant=11": {
+      "model": "cube_column",
+      "textures": {
+        "side": "circadian:blocks/scribbles_11",
+        "end": "circadian:blocks/scribbles_top"
+      }
+    },
+    "variant=12": {
+      "model": "cube_column",
+      "textures": {
+        "side": "circadian:blocks/scribbles_12",
+        "end": "circadian:blocks/scribbles_top"
+      }
+    },
+    "variant=13": {
+      "model": "cube_column",
+      "textures": {
+        "side": "circadian:blocks/scribbles_13",
+        "end": "circadian:blocks/scribbles_top"
+      }
+    },
+    "variant=14": {
+      "model": "cube_column",
+      "textures": {
+        "side": "circadian:blocks/scribbles_14",
+        "end": "circadian:blocks/scribbles_top"
+      }
+    },
+    "variant=15": {
+      "model": "cube_column",
+      "textures": {
+        "side": "circadian:blocks/scribbles_15",
+        "end": "circadian:blocks/scribbles_top"
+      }
+    }
+  }
 }

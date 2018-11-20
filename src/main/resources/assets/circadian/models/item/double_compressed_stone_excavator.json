@@ -1,6 +1,6 @@
 {
-    "parent": "item/handheld",
-    "textures": {
-        "layer0": "circadian:items/double_compressed_stone_excavator"
-    }
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "circadian:items/double_compressed_stone_excavator"
+  }
 }

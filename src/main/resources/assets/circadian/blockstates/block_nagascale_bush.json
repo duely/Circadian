@@ -1,15 +1,32 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "textures": { "all": "circadian:blocks/block_nagaleaf0" }
+    "textures": {
+      "all": "circadian:blocks/block_nagaleaf0"
+    }
   },
   "variants": {
-    "inventory": [ { "model": "oreberries:oreberry_bush_stage1" } ],
+    "inventory": [
+      {
+        "model": "oreberries:oreberry_bush_stage1"
+      }
+    ],
     "age": {
-      "0": { "model": "oreberries:oreberry_bush_stage0" },
-      "1": { "model": "oreberries:oreberry_bush_stage1" },
-      "2": { "model": "leaves" },
-      "3": { "model": "leaves", "textures": { "all": "circadian:blocks/block_nagaleaf1" } }
+      "0": {
+        "model": "oreberries:oreberry_bush_stage0"
+      },
+      "1": {
+        "model": "oreberries:oreberry_bush_stage1"
+      },
+      "2": {
+        "model": "leaves"
+      },
+      "3": {
+        "model": "leaves",
+        "textures": {
+          "all": "circadian:blocks/block_nagaleaf1"
+        }
+      }
     }
   }
 }

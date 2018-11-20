@@ -18,12 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+@SuppressWarnings("WeakerAccess")
 public class TwilightWorldGen extends OreberriesWorldGen {
+    public TwilightBushGen knightmetal_gen;
     protected List<TwilightBushGen> bushes = new ArrayList<>();
 
-    public TwilightBushGen knightmetal_gen;
-
-    public TwilightWorldGen () {
+    public TwilightWorldGen() {
 
         knightmetal_gen = new TwilightBushGen(Registrar.knightmetal_berry);
 
@@ -34,7 +34,7 @@ public class TwilightWorldGen extends OreberriesWorldGen {
     }
 
     @Override
-    public void generate (Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+    public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         if (world.provider.getDimension() == TFConfig.dimension.dimensionID) {
             for (TwilightBushGen gen : bushes) {
                 generateOreBushes(random, chunkX * 16 + 8, chunkZ * 16 + 8, world);
@@ -43,16 +43,15 @@ public class TwilightWorldGen extends OreberriesWorldGen {
     }
 
     @Override
-    protected void generateOreBushes (Random random, int xChunk, int zChunk, World world)
-    {
+    protected void generateOreBushes(Random random, int xChunk, int zChunk, World world) {
         Biome biome = world.getBiome(new BlockPos(xChunk, 64, zChunk));
 
-        for(TwilightBushGen gen : bushes) {
-		    if (biome.decorator instanceof TFDarkForestBiomeDecorator) {
+        for (TwilightBushGen gen : bushes) {
+            if (biome.decorator instanceof TFDarkForestBiomeDecorator) {
                 if (gen == knightmetal_gen) {
                     generateOreBush(random, xChunk, zChunk, world, gen, gen.oreberryConfig.getPreferredHeight(world), gen.oreberryConfig.getMaxHeight(world), gen.oreberryConfig.minHeight);
                 }
-            } else if (gen != knightmetal_gen){
+            } else if (gen != knightmetal_gen) {
                 generateOreBush(random, xChunk, zChunk, world, gen, gen.oreberryConfig.getPreferredHeight(world), gen.oreberryConfig.getMaxHeight(world), gen.oreberryConfig.minHeight);
             }
         }
@@ -69,12 +68,10 @@ public class TwilightWorldGen extends OreberriesWorldGen {
         }
     }
 
-    protected BlockPos findAdequateLocation (World world, int x, int y, int z, int heightLimit, int depthLimit)
-    {
+    protected BlockPos findAdequateLocation(World world, int x, int y, int z, int heightLimit, int depthLimit) {
         BlockPos pos = new BlockPos(x, Math.min(y, heightLimit), z);
-        do
-        {
-            if(world.isAirBlock(pos) && checkDownBlock(world, pos.down()))
+        do {
+            if (world.isAirBlock(pos) && checkDownBlock(world, pos.down()))
                 return pos.down();
             pos = pos.down();
         } while (pos.getY() > depthLimit);
@@ -82,12 +79,13 @@ public class TwilightWorldGen extends OreberriesWorldGen {
         return null;
     }
 
-    protected boolean checkDownBlock (World world, BlockPos down) {
+    protected boolean checkDownBlock(World world, BlockPos down) {
         if (world.isAirBlock(down)) return false;
 
         IBlockState state = world.getBlockState(down);
         Block block = state.getBlock();
-        if (block instanceof BlockLeaves || block instanceof BlockLiquid) return false; // don't place on flowing water or leaves
+        if (block instanceof BlockLeaves || block instanceof BlockLiquid)
+            return false; // don't place on flowing water or leaves
 
         return true;
     }

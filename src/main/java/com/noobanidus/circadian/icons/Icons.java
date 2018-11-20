@@ -12,7 +12,7 @@ public class Icons extends ItemMulti {
 
     public static boolean enabled = Circadian.CONFIG.get("Items.Icons", "Enable", true, "Enable additional icon items.");
 
-    public Icons () {
+    public Icons() {
         super("circadian");
 
         setUnlocalizedName("icon");
@@ -26,7 +26,7 @@ public class Icons extends ItemMulti {
         return true;
     }
 
-    public void registerModels () {
+    public void registerModels() {
         for (Map.Entry<Integer, ItemEntry> entry : itemMap.entrySet()) {
             ModelLoader.setCustomModelResourceLocation(this, entry.getKey(), new ModelResourceLocation("circadian:icons", "type=" + entry.getValue().name));
         }

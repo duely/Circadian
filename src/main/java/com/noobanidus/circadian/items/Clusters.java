@@ -9,11 +9,19 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import java.util.Map;
 
+@SuppressWarnings("WeakerAccess")
 public class Clusters extends ItemMulti {
 
     public static boolean enabled = Circadian.CONFIG.get("Items.Clusters", "Enable", true, "Enable extra clusters.");
-
-    public Clusters () {
+    public static ItemStack clusterAmber;
+    public static ItemStack clusterAquamarine;
+    public static ItemStack clusterCoal;
+    public static ItemStack clusterDiamond;
+    public static ItemStack clusterEmerald;
+    public static ItemStack clusterPlatinum;
+    public static ItemStack clusterRedstone;
+    public static ItemStack clusterStarmetal;
+    public Clusters() {
         super("circadian");
 
         setUnlocalizedName("cluster");
@@ -35,18 +43,9 @@ public class Clusters extends ItemMulti {
         return true;
     }
 
-    public void registerModels () {
+    public void registerModels() {
         for (Map.Entry<Integer, ItemEntry> entry : itemMap.entrySet()) {
             ModelLoader.setCustomModelResourceLocation(this, entry.getKey(), new ModelResourceLocation("circadian:cluster", "type=" + entry.getValue().name));
         }
     }
-
-    public static ItemStack clusterAmber;
-    public static ItemStack clusterAquamarine;
-    public static ItemStack clusterCoal;
-    public static ItemStack clusterDiamond;
-    public static ItemStack clusterEmerald;
-    public static ItemStack clusterPlatinum;
-    public static ItemStack clusterRedstone;
-    public static ItemStack clusterStarmetal;
 }

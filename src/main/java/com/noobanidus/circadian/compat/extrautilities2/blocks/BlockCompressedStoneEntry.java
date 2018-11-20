@@ -11,16 +11,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class BlockCompressedStoneEntry extends BlockEntry<BlockCompressed> {
+    public static boolean enabled = Circadian.CONFIG.get("Items.CompressedStones", "Enable", true, "Enable compressed sandstone.");
     private final IBlockState blockState;
     private final String texture;
     private final int max;
-
-    public static boolean enabled = Circadian.CONFIG.get("Items.CompressedStones", "Enable", true, "Enable additional compressed stone types.");
 
     public BlockCompressedStoneEntry(Block block, String texture, int max) {
         this(block.getDefaultState(), texture, max);
     }
 
+    @SuppressWarnings("unchecked")
     public BlockCompressedStoneEntry(IBlockState blockState, String texture, int max) {
         super("Compressed" + StringHelper.capFirst(texture, true), new Class[0]);
         this.blockState = blockState;
@@ -38,7 +38,7 @@ public class BlockCompressedStoneEntry extends BlockEntry<BlockCompressed> {
         CraftingHelper.addShaped("compressed_" + this.texture, this.newStack(1, 0), new Object[]{"BBB", "BBB", "BBB", 'B', base});
         CraftingHelper.addShapeless("compressed_" + this.texture + "_uncompress", new ItemStack(this.blockState.getBlock(), 9), new Object[]{this.newStack(1, 0)});
 
-        for(int i = 0; i < this.max - 1; ++i) {
+        for (int i = 0; i < this.max - 1; ++i) {
             CraftingHelper.addShaped("compressed_" + this.texture + "_" + (i + 1), this.newStack(1, i + 1), new Object[]{"BBB", "BBB", "BBB", 'B', this.newStack(1, i)});
             CraftingHelper.addShapeless("compressed_" + this.texture + "_" + (i + 1) + "_uncompress", this.newStack(9, i), new Object[]{this.newStack(1, i + 1)});
         }
@@ -46,7 +46,7 @@ public class BlockCompressedStoneEntry extends BlockEntry<BlockCompressed> {
     }
 
     public void registerOres() {
-        for(int i = 0; i < this.max; ++i) {
+        for (int i = 0; i < this.max; ++i) {
             OreDictionary.registerOre("compressed" + (i + 1) + "x" + StringHelper.capFirst(this.texture, true), this.newStack(1, i));
         }
 

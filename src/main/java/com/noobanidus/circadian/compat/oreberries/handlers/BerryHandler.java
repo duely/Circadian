@@ -2,17 +2,15 @@ package com.noobanidus.circadian.compat.oreberries.handlers;
 
 import com.noobanidus.circadian.Circadian;
 import com.noobanidus.circadian.config.Registrar;
-import josephcsible.oreberries.BlockOreberryBush;
 import josephcsible.oreberries.proxy.CommonProxy;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.event.FMLInterModComms;
 import thaumcraft.common.lib.utils.CropUtils;
 
 public class BerryHandler {
 
     public static boolean enabled = Circadian.CONFIG.get("Items.TwilightBushes", "Enable", true, "Enable Twilight Forest bushes.");
 
-    public static void init () {
+    public static void init() {
         if (enabled) {
             CropUtils.addClickableCrop(new ItemStack(CommonProxy.oreberryBushBlocks.get(0)), 3);
             /* WTB functional IMC

@@ -1,37 +1,35 @@
 package com.noobanidus.circadian.config;
 
-import cofh.core.util.helpers.ItemHelper;
 import com.noobanidus.circadian.Circadian;
-import com.noobanidus.circadian.compat.chisel.blocks.BlockRedScribbles;
-import com.noobanidus.circadian.compat.oreberries.blocks.BlockBerry;
-import com.noobanidus.circadian.compat.extrautilities2.blocks.BlockCompressedStoneEntry;
+import com.noobanidus.circadian.compat.OreDictionaryEntries;
 import com.noobanidus.circadian.compat.astralsorcery.blocks.BlockStarmetal;
+import com.noobanidus.circadian.compat.chisel.blocks.BlockRedScribbles;
+import com.noobanidus.circadian.compat.extrautilities2.blocks.BlockCompressedStoneEntry;
+import com.noobanidus.circadian.compat.oreberries.blocks.BlockBerry;
+import com.noobanidus.circadian.compat.thaumcraft.blocks.BlockCompressedVisBattery;
 import com.noobanidus.circadian.enchantment.EnchantmentManabound;
 import com.noobanidus.circadian.icons.Icons;
 import com.noobanidus.circadian.items.*;
-import net.minecraft.block.BlockStone;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.init.Items;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.*;
-import net.minecraft.block.Block;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
-
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 
-import com.noobanidus.circadian.compat.thaumcraft.blocks.BlockCompressedVisBattery;
+import javax.annotation.Nonnull;
 
-import net.minecraft.init.Blocks;
-
+@SuppressWarnings("WeakerAccess")
 @Mod.EventBusSubscriber
 public class Registrar {
     public static BlockCompressedVisBattery compressed;
@@ -69,11 +67,12 @@ public class Registrar {
     public static Item silveredMelon;
     public static Item silveredCarrot;
 
- 	public static Enchantment manabound;
+    public static Enchantment manabound;
 
-    public static BlockCompressedStoneEntry[] compressedBlocks = new BlockCompressedStoneEntry[] { new BlockCompressedStoneEntry(((BlockStone) Blocks.STONE).getStateFromMeta(0), "stone", 2), new BlockCompressedStoneEntry(((BlockStone) Blocks.STONE).getStateFromMeta(1), "stone_granite", 2), new BlockCompressedStoneEntry(((BlockStone) Blocks.STONE).getStateFromMeta(3), "stone_diorite", 2), new BlockCompressedStoneEntry(((BlockStone) Blocks.STONE).getStateFromMeta(5), "stone_andesite", 2), new BlockCompressedStoneEntry(Blocks.SANDSTONE, "sandstone_normal", 2), new BlockCompressedStoneEntry(Blocks.RED_SANDSTONE, "red_sandstone_normal", 2)};
+    public static BlockCompressedStoneEntry[] compressedBlocks = new BlockCompressedStoneEntry[]{new BlockCompressedStoneEntry(Blocks.SANDSTONE, "sandstone_normal", 2), new BlockCompressedStoneEntry(Blocks.RED_SANDSTONE, "red_sandstone_normal", 2)};
 
-    public static void preInit () {
+    @SuppressWarnings("ConstantConditions")
+    public static void preInit() {
         compressed = new BlockCompressedVisBattery();
         starmetal = new BlockStarmetal();
         knightmetal_berry = new BlockBerry("knight", BlockBerry.getDefaults("knight"));
@@ -97,7 +96,8 @@ public class Registrar {
 
         ib_scribbles = new ItemMultiTexture(scribbles, scribbles, new ItemMultiTexture.Mapper() {
             @Override
-            public String apply(ItemStack var1) {
+            @Nonnull
+            public String apply(@Nonnull ItemStack var1) {
                 return scribbles.getUnlocalizedName();
             }
         });
@@ -157,11 +157,11 @@ public class Registrar {
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
-        if (compressed.enabled) {
+        if (BlockCompressedStoneEntry.enabled) {
             event.getRegistry().register(compressed);
         }
 
-        if (scribbles.enabled) {
+        if (BlockRedScribbles.enabled) {
             event.getRegistry().register(scribbles);
         }
 
@@ -178,11 +178,11 @@ public class Registrar {
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
-        if (compressed.enabled) {
+        if (BlockCompressedStoneEntry.enabled) {
             event.getRegistry().register(ib_compressed);
         }
 
-        if (scribbles.enabled) {
+        if (BlockRedScribbles.enabled) {
             event.getRegistry().register(ib_scribbles);
         }
 
@@ -209,8 +209,8 @@ public class Registrar {
 
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
-    public static void registerModels (ModelRegistryEvent event) {
-        if (compressed.enabled) {
+    public static void registerModels(ModelRegistryEvent event) {
+        if (BlockCompressedStoneEntry.enabled) {
             ModelLoader.setCustomModelResourceLocation(ib_compressed, 0, new ModelResourceLocation(new ResourceLocation("circadian", "compressed_vis_battery"), "inventory"));
         }
 
@@ -231,7 +231,7 @@ public class Registrar {
         }
 
 
-        if (scribbles.enabled) {
+        if (BlockRedScribbles.enabled) {
             for (int i = 0; i < 16; i++) {
                 ModelLoader.setCustomModelResourceLocation(ib_scribbles, i, new ModelResourceLocation(new ResourceLocation("circadian", String.format("redscribbles", i)), String.format("variant=%d", i)));
             }
@@ -283,14 +283,13 @@ public class Registrar {
     }
 
     @SubscribeEvent
-	public static void registerEnchantments(RegistryEvent.Register<Enchantment> event) {
+    public static void registerEnchantments(RegistryEvent.Register<Enchantment> event) {
         if (EnchantmentManabound.enabled) {
-    		event.getRegistry().register(manabound);
-            Circadian.LOG.info(String.format("[Circadian] Manabound enchantment registered."));
+            event.getRegistry().register(manabound);
         }
-	}
+    }
 
-	@SubscribeEvent
+    @SubscribeEvent
     public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
         if (Satchels.enabled) {
             satchels.registerRecipes();
@@ -305,12 +304,13 @@ public class Registrar {
 
         protected ResourceLocation texture;
 
-        protected StateMapper (String path, String domain) {
+        protected StateMapper(String path, String domain) {
             this.texture = new ResourceLocation(path, domain);
         }
 
         @Override
-        public ModelResourceLocation getModelResourceLocation(IBlockState state) {
+        @Nonnull
+        public ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
             return new ModelResourceLocation(texture, this.getPropertyString(state.getProperties()));
         }
     }

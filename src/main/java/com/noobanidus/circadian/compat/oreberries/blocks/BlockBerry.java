@@ -41,30 +41,32 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 import twilightforest.item.TFItems;
 
+import javax.annotation.Nonnull;
 import java.util.Random;
 
+// TODO: Sort out licensing issues
+
+@SuppressWarnings("WeakerAccess")
 public class BlockBerry extends Block implements IPlantable, IGrowable {
 
-    public static boolean enabled = Circadian.CONFIG.get("Items.TwilightBushes", "Enable", true, "Enable Twilight Forest bushes.");
-
     public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 3); // small, medium, large, large with berries
-    public String name;
-    protected static final AxisAlignedBB[] OREBERRY_BUSH_AABB = new AxisAlignedBB[] {
+    protected static final AxisAlignedBB[] OREBERRY_BUSH_AABB = new AxisAlignedBB[]{
             new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 0.5D, 0.75D),
             new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.75D, 0.875D),
             new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)
     };
-    protected static final AxisAlignedBB[] OREBERRY_BUSH_COLLISION_AABB = new AxisAlignedBB[] {
+    protected static final AxisAlignedBB[] OREBERRY_BUSH_COLLISION_AABB = new AxisAlignedBB[]{
             new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 0.5D, 0.75D),
             new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.75D, 0.875D),
             new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 0.9375D, 0.9375D)
     };
-
-	public final OreberryConfig config;
+    public static boolean enabled = Circadian.CONFIG.get("Items.TwilightBushes", "Enable", true, "Enable Twilight Forest bushes.");
+    public final OreberryConfig config;
+    public String name;
 
     public BlockBerry(String name, OreberryConfig config) {
         super(Material.LEAVES);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(AGE, Integer.valueOf(0)));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(AGE, 0));
         this.setTickRandomly(true);
         this.setHardness(0.3F);
         this.setSoundType(SoundType.METAL);
@@ -75,226 +77,8 @@ public class BlockBerry extends Block implements IPlantable, IGrowable {
         this.name = name;
     }
 
-    @Override
-    public String getLocalizedName() {
-        return config.bushName;
-    }
-
-    @Override
-    protected BlockStateContainer createBlockState()
-    {
-        return new BlockStateContainer(this, AGE);
-    }
-
-    @Override
-    public IBlockState getStateFromMeta(int meta)
-    {
-        return this.getDefaultState().withProperty(AGE, Integer.valueOf(meta));
-    }
-
-    @Override
-    public int getMetaFromState(IBlockState state)
-    {
-        return state.getValue(AGE);
-    }
-
-    /* The following methods define a berry bush's size depending on metadata */
-    @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
-    {
-        return OREBERRY_BUSH_AABB[Math.min(state.getValue(AGE), 2)];
-    }
-
-    @Override
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess blockAccess, BlockPos pos)
-    {
-        return OREBERRY_BUSH_COLLISION_AABB[Math.min(state.getValue(AGE), 2)];
-    }
-
-    /* Left-click harvests berries */
-    @Override
-    public void onBlockClicked(World worldIn, BlockPos pos, EntityPlayer playerIn)
-    {
-        harvest(worldIn, pos, worldIn.getBlockState(pos), playerIn);
-    }
-
-    /* Right-click harvests berries */
-    @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-    {
-        return harvest(worldIn, pos, state, playerIn);
-    }
-
-    public ItemStack getBerriesStack (Random rand) {
-        Item item;
-
+    public static OreberryConfig getDefaults(String name) {
         switch (name) {
-            case "naga":
-                item = TFItems.naga_scale;
-                break;
-            case "knight":
-                item = TFItems.armor_shard;
-                break;
-            case "liveroot":
-                item = TFItems.liveroot;
-                break;
-            default:
-                return null;
-        }
-        return new ItemStack(item, rand.nextInt(config.maxDrops - config.minDrops + 1) + config.minDrops);
-    }
-
-    protected boolean harvest(World world, BlockPos pos, IBlockState state, EntityPlayer player)
-    {
-        if (state.getValue(AGE) >= 3)
-        {
-            if (world.isRemote)
-                return true;
-
-            world.setBlockState(pos, state.withProperty(AGE, 2));
-            if (player instanceof FakePlayer) {
-                WorldHelper.spawnItemInWorld(world, pos, getBerriesStack(world.rand));
-            } else {
-                ItemHandlerHelper.giveItemToPlayer(player, getBerriesStack(world.rand));
-            }
-
-        }
-
-        return false;
-    }
-
-    /* Render logic */
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
-    {
-        return Minecraft.getMinecraft().gameSettings.fancyGraphics ? BlockRenderLayer.CUTOUT_MIPPED : BlockRenderLayer.SOLID;
-    }
-
-    @Override
-    public boolean isOpaqueCube(IBlockState state) {
-        // TODO resolve the fact that this is called by the server, but the answer depends on whether fancy graphics are on
-        // For now, the answer is always just no on the server
-        return false;
-    }
-
-    @Override
-    public BlockFaceShape getBlockFaceShape(IBlockAccess blockAccess, IBlockState state, BlockPos pos, EnumFacing facing) {
-        return BlockFaceShape.UNDEFINED;
-    }
-
-    @Override
-    public boolean isFullCube(IBlockState state)
-    {
-        return state.getValue(AGE) >= 2;
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public boolean shouldSideBeRendered(IBlockState state, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
-    {
-        if(side != EnumFacing.DOWN && state.getValue(AGE) < 2) {
-            // This face is completely inside of our block, so it definitely has to be rendered
-            return true;
-        }
-        if(!Minecraft.getMinecraft().gameSettings.fancyGraphics) {
-            IBlockState touchingState = blockAccess.getBlockState(pos.offset(side));
-            if(touchingState.getBlock() == this && touchingState.getValue(AGE) >= 2) {
-                // Like vanilla leaves, don't render if we're on fast graphics and touching another one of ourself
-                // Note that it can only possibly be touching if our neighbor is full-size
-                return false;
-            }
-        }
-        @SuppressWarnings("deprecation")
-        boolean thisShouldNotBeDeprecated = super.shouldSideBeRendered(state, blockAccess, pos, side);
-        return thisShouldNotBeDeprecated;
-    }
-
-    /* Bush growth */
-    protected boolean ageAndLightOkayToGrow(World worldIn, BlockPos pos, IBlockState state) {
-        return state.getValue(AGE) < 3 && (config.growsInLight || worldIn.getLight(pos) < 10);
-    }
-
-    @Override
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
-    {
-        if(!worldIn.isRemote && ageAndLightOkayToGrow(worldIn, pos, state) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextDouble() < GeneralConfig.tickGrowthChance)) {
-            grow(worldIn, rand, pos, state);
-            ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
-        }
-    }
-
-    @Override
-    public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable) {
-        if (plantable instanceof BlockOreberryBush)
-            return state.getValue(AGE) > 1;
-        return super.canSustainPlant(state, world, pos, direction, plantable);
-    }
-
-    @Override
-    public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-        IBlockState soil = worldIn.getBlockState(pos.down());
-        return super.canPlaceBlockAt(worldIn, pos) &&
-                (config.growsInLight || worldIn.getLight(pos) < 13) &&
-                soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) &&
-                worldIn.isAirBlock(pos);
-    }
-
-    @Override
-    public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
-        return EnumPlantType.Cave;
-    }
-
-    @Override
-    public IBlockState getPlant(IBlockAccess world, BlockPos pos) {
-        return this.getDefaultState();
-    }
-
-    @Override
-    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
-    {
-        if (!(entityIn instanceof EntityItem))
-            entityIn.attackEntityFrom(DamageSource.CACTUS, 1.0F);
-    }
-
-    @Override
-    public PathNodeType getAiPathNodeType(IBlockState state, IBlockAccess world, BlockPos pos) {
-        return PathNodeType.DAMAGE_CACTUS;
-    }
-
-    @Override
-    public boolean causesSuffocation(IBlockState state) {
-        return false;
-    }
-
-    @Override
-    public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
-        return GeneralConfig.bonemealGrowthChance > 0.0D && ageAndLightOkayToGrow(worldIn, pos, state);
-    }
-
-    @Override
-    public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-        return rand.nextDouble() < GeneralConfig.bonemealGrowthChance;
-    }
-
-    @Override
-    public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-        worldIn.setBlockState(pos, state.withProperty(AGE, state.getValue(AGE) + 1));
-    }
-
-    @Override
-    public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
-        return player != null && EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, player.getHeldItemMainhand()) >= GeneralConfig.silkTouchRequirement;
-    }
-
-    @Override
-    public int quantityDropped(Random random) {
-        return GeneralConfig.silkTouchRequirement == 0 ? super.quantityDropped(random) : 0;
-    }
-
-	public static OreberryConfig getDefaults (String name) {
-		switch (name) {
             case "naga":
                 JsonObject naga = new JsonObject();
                 naga.addProperty("bushName", "Naga Stoneberry Bush");
@@ -332,5 +116,223 @@ public class BlockBerry extends Block implements IPlantable, IGrowable {
             default:
                 return null;
         }
-	}
+    }
+
+    @Override
+    @Nonnull
+    public String getLocalizedName() {
+        return config.bushName;
+    }
+
+    @Override
+    @Nonnull
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, AGE);
+    }
+
+    @Override
+    @Nonnull
+    @SuppressWarnings("deprecation")
+    public IBlockState getStateFromMeta(int meta) {
+        return this.getDefaultState().withProperty(AGE, meta);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return state.getValue(AGE);
+    }
+
+    /* The following methods define a berry bush's size depending on metadata */
+    @Override
+    @Nonnull
+    @SuppressWarnings("deprecation")
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return OREBERRY_BUSH_AABB[Math.min(state.getValue(AGE), 2)];
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState state, @Nonnull IBlockAccess blockAccess, @Nonnull BlockPos pos) {
+        return OREBERRY_BUSH_COLLISION_AABB[Math.min(state.getValue(AGE), 2)];
+    }
+
+    /* Left-click harvests berries */
+    @Override
+    public void onBlockClicked(World worldIn, BlockPos pos, EntityPlayer playerIn) {
+        harvest(worldIn, pos, worldIn.getBlockState(pos), playerIn);
+    }
+
+    /* Right-click harvests berries */
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        return harvest(worldIn, pos, state, playerIn);
+    }
+
+    public ItemStack getBerriesStack(Random rand) {
+        Item item;
+
+        switch (name) {
+            case "naga":
+                item = TFItems.naga_scale;
+                break;
+            case "knight":
+                item = TFItems.armor_shard;
+                break;
+            case "liveroot":
+                item = TFItems.liveroot;
+                break;
+            default:
+                return null;
+        }
+        return new ItemStack(item, rand.nextInt(config.maxDrops - config.minDrops + 1) + config.minDrops);
+    }
+
+    /* Render logic */
+
+    protected boolean harvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
+        if (state.getValue(AGE) >= 3) {
+            if (world.isRemote)
+                return true;
+
+            world.setBlockState(pos, state.withProperty(AGE, 2));
+            if (player instanceof FakePlayer) {
+                WorldHelper.spawnItemInWorld(world, pos, getBerriesStack(world.rand));
+            } else {
+                ItemHandlerHelper.giveItemToPlayer(player, getBerriesStack(world.rand));
+            }
+
+        }
+
+        return false;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    @Nonnull
+    public BlockRenderLayer getBlockLayer() {
+        return Minecraft.getMinecraft().gameSettings.fancyGraphics ? BlockRenderLayer.CUTOUT_MIPPED : BlockRenderLayer.SOLID;
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public boolean isOpaqueCube(IBlockState state) {
+        // TODO resolve the fact that this is called by the server, but the answer depends on whether fancy graphics are on
+        // For now, the answer is always just no on the server
+        return false;
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    @Nonnull
+    public BlockFaceShape getBlockFaceShape(IBlockAccess blockAccess, IBlockState state, BlockPos pos, EnumFacing facing) {
+        return BlockFaceShape.UNDEFINED;
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public boolean isFullCube(IBlockState state) {
+        return state.getValue(AGE) >= 2;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    @SuppressWarnings("deprecation")
+    public boolean shouldSideBeRendered(IBlockState state, @Nonnull IBlockAccess blockAccess, @Nonnull BlockPos pos, EnumFacing side) {
+        if (side != EnumFacing.DOWN && state.getValue(AGE) < 2) {
+            // This face is completely inside of our block, so it definitely has to be rendered
+            return true;
+        }
+        if (!Minecraft.getMinecraft().gameSettings.fancyGraphics) {
+            IBlockState touchingState = blockAccess.getBlockState(pos.offset(side));
+            if (touchingState.getBlock() == this && touchingState.getValue(AGE) >= 2) {
+                // Like vanilla leaves, don't render if we're on fast graphics and touching another one of ourself
+                // Note that it can only possibly be touching if our neighbor is full-size
+                return false;
+            }
+        }
+        @SuppressWarnings("deprecation")
+        boolean thisShouldNotBeDeprecated = super.shouldSideBeRendered(state, blockAccess, pos, side);
+        return thisShouldNotBeDeprecated;
+    }
+
+    /* Bush growth */
+    protected boolean ageAndLightOkayToGrow(World worldIn, BlockPos pos, IBlockState state) {
+        return state.getValue(AGE) < 3 && (config.growsInLight || worldIn.getLight(pos) < 10);
+    }
+
+    @Override
+    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+        if (!worldIn.isRemote && ageAndLightOkayToGrow(worldIn, pos, state) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextDouble() < GeneralConfig.tickGrowthChance)) {
+            grow(worldIn, rand, pos, state);
+            ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
+        }
+    }
+
+    @Override
+    public boolean canSustainPlant(@Nonnull IBlockState state, @Nonnull IBlockAccess world, BlockPos pos, @Nonnull EnumFacing direction, IPlantable plantable) {
+        if (plantable instanceof BlockOreberryBush)
+            return state.getValue(AGE) > 1;
+        return super.canSustainPlant(state, world, pos, direction, plantable);
+    }
+
+    @Override
+    public boolean canPlaceBlockAt(World worldIn, @Nonnull BlockPos pos) {
+        IBlockState soil = worldIn.getBlockState(pos.down());
+        return super.canPlaceBlockAt(worldIn, pos) &&
+                (config.growsInLight || worldIn.getLight(pos) < 13) &&
+                soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) &&
+                worldIn.isAirBlock(pos);
+    }
+
+    @Override
+    public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
+        return EnumPlantType.Cave;
+    }
+
+    @Override
+    public IBlockState getPlant(IBlockAccess world, BlockPos pos) {
+        return this.getDefaultState();
+    }
+
+    @Override
+    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+        if (!(entityIn instanceof EntityItem))
+            entityIn.attackEntityFrom(DamageSource.CACTUS, 1.0F);
+    }
+
+    @Override
+    public PathNodeType getAiPathNodeType(IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
+        return PathNodeType.DAMAGE_CACTUS;
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public boolean causesSuffocation(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public boolean canGrow(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, boolean isClient) {
+        return GeneralConfig.bonemealGrowthChance > 0.0D && ageAndLightOkayToGrow(worldIn, pos, state);
+    }
+
+    @Override
+    public boolean canUseBonemeal(@Nonnull World worldIn, @Nonnull Random rand, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
+        return rand.nextDouble() < GeneralConfig.bonemealGrowthChance;
+    }
+
+    @Override
+    public void grow(@Nonnull World worldIn, @Nonnull Random rand, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
+        worldIn.setBlockState(pos, state.withProperty(AGE, state.getValue(AGE) + 1));
+    }
+
+    @Override
+    public boolean canSilkHarvest(World world, BlockPos pos, @Nonnull IBlockState state, EntityPlayer player) {
+        return player != null && EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, player.getHeldItemMainhand()) >= GeneralConfig.silkTouchRequirement;
+    }
+
+    @Override
+    public int quantityDropped(Random random) {
+        return GeneralConfig.silkTouchRequirement == 0 ? super.quantityDropped(random) : 0;
+    }
 }

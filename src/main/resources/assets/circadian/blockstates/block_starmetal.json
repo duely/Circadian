@@ -1,14 +1,18 @@
 {
-	"forge_marker": 1,
-	"defaults": {
-		"model": "cube_all",
-		"transform": "forge:default-block",
-        "textures": {
-            "all": "circadian:blocks/block_starmetal"
-        }
-	},
-    "variants": {
-        "inventory": [{}],
-        "normal": [{}]
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "transform": "forge:default-block",
+    "textures": {
+      "all": "circadian:blocks/block_starmetal"
     }
+  },
+  "variants": {
+    "inventory": [
+      {}
+    ],
+    "normal": [
+      {}
+    ]
+  }
 }

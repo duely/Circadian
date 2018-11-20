@@ -14,43 +14,45 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class BlockStarmetal extends Block {
 
-	public static boolean enabled = Circadian.CONFIG.get("Items.BlockStarmetal", "Enable", true, "Enable the starmetal block.");
+    public static boolean enabled = Circadian.CONFIG.get("Items.BlockStarmetal", "Enable", true, "Enable the starmetal block.");
 
-	public BlockStarmetal() {
+    public BlockStarmetal() {
 
-		super(Material.IRON);
+        super(Material.IRON);
 
-		setUnlocalizedName("block_starmetal");
-		setRegistryName(new ResourceLocation("circadian", "block_starmetal"));
-		setCreativeTab(Circadian.TAB);
+        setUnlocalizedName("block_starmetal");
+        setRegistryName(new ResourceLocation("circadian", "block_starmetal"));
+        setCreativeTab(Circadian.TAB);
 
-		setHardness(5.0F);
-		setResistance(10.0F);
-		setSoundType(SoundType.METAL);
+        setHardness(5.0F);
+        setResistance(10.0F);
+        setSoundType(SoundType.METAL);
 
-		setHarvestLevel("pickaxe", 2);
-	}
+        setHarvestLevel("pickaxe", 2);
+    }
 
-	@Override
-	public boolean canCreatureSpawn(IBlockState state, IBlockAccess world, BlockPos pos, net.minecraft.entity.EntityLiving.SpawnPlacementType type) {
+    @Override
+    public boolean canCreatureSpawn(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, net.minecraft.entity.EntityLiving.SpawnPlacementType type) {
 
-		return false;
-	}
+        return false;
+    }
 
-	@Override
-	public boolean isBeaconBase(IBlockAccess worldObj, BlockPos pos, BlockPos beacon) {
-		return true;
-	}
+    @Override
+    public boolean isBeaconBase(IBlockAccess worldObj, BlockPos pos, BlockPos beacon) {
+        return true;
+    }
 
-	@Override
-	public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
-		return true;
-	}
+    @Override
+    public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return true;
+    }
 
-	@SideOnly(Side.CLIENT)
-	public void registerModels() {
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation("circadian:block_starmetal", "inventory"));
-	}
+    @SideOnly(Side.CLIENT)
+    public void registerModels() {
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation("circadian:block_starmetal", "inventory"));
+    }
 }

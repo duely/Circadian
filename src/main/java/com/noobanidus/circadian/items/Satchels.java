@@ -1,20 +1,38 @@
 package com.noobanidus.circadian.items;
 
-import cofh.core.util.helpers.RecipeHelper;
+import cofh.core.init.CoreEnchantments;
+import cofh.core.util.CoreUtils;
+import cofh.core.util.helpers.*;
 import cofh.thermalexpansion.item.ItemSatchel;
+import com.google.common.collect.ImmutableMap;
 import com.noobanidus.circadian.Circadian;
-import thaumcraft.api.items.ItemsTC;
-import vazkii.botania.common.item.ModItems;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import com.noobanidus.circadian.compat.cofh.thermalexpansion.GuiHandler;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import thaumcraft.api.items.ItemsTC;
+import vazkii.botania.common.item.ModItems;
 
+import java.util.Arrays;
+
+@SuppressWarnings("WeakerAccess")
 public class Satchels extends ItemSatchel {
 
     public static boolean enabled = Circadian.CONFIG.get("Items.Satchels", "Enable", true, "Enable magical satchels.");
+    public static ItemStack manasteel;
+    public static ItemStack thaumium;
+    public static ItemStack terrasteel;
+    public static ItemStack elementium;
+    public static ItemStack voidmetal;
 
     public Satchels() {
         super();
@@ -31,24 +49,35 @@ public class Satchels extends ItemSatchel {
 
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-        for (int metadata : itemList) {
-                items.add(setDefaultInventoryTag(new ItemStack(this, 1, metadata)));
-        }
+        items.addAll(Arrays.asList(manasteel, thaumium, terrasteel, elementium, voidmetal));
     }
 
     public boolean init() {
         ForgeRegistries.ITEMS.register(this);
 
-        manasteel = addEntryItem(0, "standard0", 0, EnumRarity.COMMON);
-        thaumium = addEntryItem(1, "standard1", 1, EnumRarity.COMMON);
-        terrasteel = addEntryItem(2, "standard2", 2, EnumRarity.UNCOMMON);
-        elementium = addEntryItem(3, "standard3", 3, EnumRarity.UNCOMMON);
-        voidmetal = addEntryItem(4, "standard4", 4, EnumRarity.RARE);
+        manasteel = addItem(0, "standard0", EnumRarity.COMMON);
+        thaumium = addItem(1, "standard1", EnumRarity.COMMON);
+        terrasteel = addItem(2, "standard2", EnumRarity.UNCOMMON);
+        elementium = addItem(3, "standard3", EnumRarity.UNCOMMON);
+        voidmetal = addItem(4, "standard4", EnumRarity.RARE);
 
         return true;
     }
 
     public void registerRecipes() {
+        RecipeHelper.addShapedUpgradeRecipe(thaumium,
+                "IPI",
+                "SCS",
+                "LLL",
+                'I', "ingotThaumium",
+                'P', "plateThaumium",
+                'S', "quicksilver",
+                'C', manasteel,
+                'L', ItemsTC.fabric
+        );
+
+        EnchantmentHelper.setEnchantments(ImmutableMap.of(CoreEnchantments.holding, 1), setDefaultInventoryTag(manasteel));
+
         RecipeHelper.addShapedRecipe(manasteel,
                 "IPI",
                 "LCL",
@@ -56,17 +85,7 @@ public class Satchels extends ItemSatchel {
                 'I', "ingotManasteel",
                 'P', "plateManasteel",
                 'L', "itemLeather",
-                'C', "chestIron"
-        );
-        RecipeHelper.addShapedUpgradeRecipe(manasteel,
-                "IPI",
-                "SCS",
-                "LLL",
-                'I', "ingotThaumium",
-                'P', "plateThaumium",
-                'S', "quicksilver",
-                'C', ItemSatchel.satchelBasic,
-                'L', ItemsTC.fabric
+                'C', "chest"
         );
 
         RecipeHelper.addShapedUpgradeRecipe(terrasteel,
@@ -76,7 +95,7 @@ public class Satchels extends ItemSatchel {
                 'I', "ingotTerrasteel",
                 'P', "plateTerrasteel",
                 'S', "manaDiamond",
-                'C', ItemSatchel.satchelHardened,
+                'C', thaumium,
                 'L', "clothManaweave"
         );
         RecipeHelper.addShapedUpgradeRecipe(elementium,
@@ -86,7 +105,7 @@ public class Satchels extends ItemSatchel {
                 'I', "ingotElvenElementium",
                 'P', "plateElementium",
                 'S', "gemResonating",
-                'C', ItemSatchel.satchelReinforced,
+                'C', terrasteel,
                 'L', ModItems.spellCloth
         );
 
@@ -97,36 +116,38 @@ public class Satchels extends ItemSatchel {
                 'I', "ingotVoid",
                 'P', "plateVoid",
                 'S', "blockPurpur",
-                'C', ItemSatchel.satchelSignalum,
+                'C', elementium,
                 'L', "clothCrimson",
                 'G', ItemsTC.primordialPearl
         );
     }
 
-    public class TypeEntry {
-
-        public final String name;
-        public final int level;
-
-        TypeEntry(String name, int level) {
-
-            this.name = name;
-            this.level = level;
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+        ItemStack stack = player.getHeldItem(hand);
+        if (CoreUtils.isFakePlayer(player) || hand != EnumHand.MAIN_HAND) {
+            return new ActionResult<>(EnumActionResult.FAIL, stack);
         }
+        if (needsTag(stack)) {
+            setDefaultInventoryTag(stack);
+        }
+        if (ServerHelper.isServerWorld(world)) {
+            if (SecurityHelper.isSecure(stack) && SecurityHelper.isDefaultUUID(SecurityHelper.getOwner(stack).getId())) {
+                SecurityHelper.setOwner(stack, player.getGameProfile());
+                ChatHelper.sendIndexedChatMessageToPlayer(player, new TextComponentTranslation("chat.cofh.secure.item.success"));
+                return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+            }
+            if (canPlayerAccess(stack, player)) {
+                if (player.isSneaking() && ItemHelper.getItemDamage(stack) != CREATIVE) {
+                    player.openGui(Circadian.instance, GuiHandler.SATCHEL_FILTER_ID, world, 0, 0, 0);
+                } else {
+                    player.openGui(Circadian.instance, GuiHandler.SATCHEL_ID, world, 0, 0, 0);
+                }
+            } else if (SecurityHelper.isSecure(stack)) {
+                ChatHelper.sendIndexedChatMessageToPlayer(player, new TextComponentTranslation("chat.cofh.secure.warning", SecurityHelper.getOwnerName(stack)));
+                return new ActionResult<>(EnumActionResult.FAIL, stack);
+            }
+        }
+        return new ActionResult<>(EnumActionResult.SUCCESS, stack);
     }
-
-    private ItemStack addEntryItem(int metadata, String name, int level, EnumRarity rarity) {
-
-        typeMap.put(metadata, new TypeEntry(name, level));
-        return addItem(metadata, name, rarity);
-    }
-
-    private static Int2ObjectOpenHashMap<TypeEntry> typeMap = new Int2ObjectOpenHashMap<>();
-
-    /* REFERENCES */
-    public static ItemStack manasteel;
-    public static ItemStack thaumium;
-    public static ItemStack terrasteel;
-    public static ItemStack elementium;
-    public static ItemStack voidmetal;
 }

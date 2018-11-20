@@ -9,11 +9,15 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import java.util.Map;
 
+@SuppressWarnings("WeakerAccess")
 public class Nuggets extends ItemMulti {
 
     public static boolean enabled = Circadian.CONFIG.get("Items.Nuggets", "Enable", true, "Enable extra nuggets.");
-
-    public Nuggets () {
+    public static ItemStack nuggetAquamarine;
+    public static ItemStack nuggetIronwood;
+    public static ItemStack nuggetKnightmetal;
+    public static ItemStack nuggetStarmetal;
+    public Nuggets() {
         super("circadian");
 
         setUnlocalizedName("nugget");
@@ -31,14 +35,9 @@ public class Nuggets extends ItemMulti {
         return true;
     }
 
-    public void registerModels () {
+    public void registerModels() {
         for (Map.Entry<Integer, ItemEntry> entry : itemMap.entrySet()) {
             ModelLoader.setCustomModelResourceLocation(this, entry.getKey(), new ModelResourceLocation("circadian:nugget", "type=" + entry.getValue().name));
         }
     }
-
-    public static ItemStack nuggetAquamarine;
-    public static ItemStack nuggetIronwood;
-    public static ItemStack nuggetKnightmetal;
-    public static ItemStack nuggetStarmetal;
 }

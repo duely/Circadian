@@ -10,7 +10,7 @@ public class ClusterHandler {
 
     public static boolean enabled = Circadian.CONFIG.get("Items.Clusters", "Enable", true, "Enable extra clusters.");
 
-    public static void init () {
+    public static void init() {
         // we only register platinum and starmetal. it should be done like this:
         /*
         String s1 = Item.getIdFromItem(BlockOre.orePlatinum.getItem()) + "," + BlockOre.orePlatinum.getItemDamage();

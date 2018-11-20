@@ -1,39 +1,39 @@
 {
-	"forge_marker": 1,
-	"defaults": {
-		"model": "builtin/generated",
-		"textures": {
-			"layer0": "blocks/dirt"
-		},
-		"transform": "forge:default-item"
-	},
-	"variants": {
-		"type": {
-            "goldenpotato": {
-				"textures": {
-					"layer0": "circadian:items/golden_potato"
-				}
-			},
-            "silveredpotato": {
-				"textures": {
-					"layer0": "circadian:items/silver_potato"
-				}
-			},
-            "silveredcarrot": {
-				"textures": {
-					"layer0": "circadian:items/silver_carrot"
-				}
-			},
-            "silveredapple": {
-				"textures": {
-					"layer0": "circadian:items/silver_apple"
-				}
-			},
-            "silveredmelon": {
-				"textures": {
-					"layer0": "circadian:items/silver_melon"
-				}
-			}
-		}
-	}
+  "forge_marker": 1,
+  "defaults": {
+    "model": "builtin/generated",
+    "textures": {
+      "layer0": "blocks/dirt"
+    },
+    "transform": "forge:default-item"
+  },
+  "variants": {
+    "type": {
+      "goldenpotato": {
+        "textures": {
+          "layer0": "circadian:items/golden_potato"
+        }
+      },
+      "silveredpotato": {
+        "textures": {
+          "layer0": "circadian:items/silver_potato"
+        }
+      },
+      "silveredcarrot": {
+        "textures": {
+          "layer0": "circadian:items/silver_carrot"
+        }
+      },
+      "silveredapple": {
+        "textures": {
+          "layer0": "circadian:items/silver_apple"
+        }
+      },
+      "silveredmelon": {
+        "textures": {
+          "layer0": "circadian:items/silver_melon"
+        }
+      }
+    }
+  }
 }

@@ -9,11 +9,21 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import java.util.Map;
 
+@SuppressWarnings("WeakerAccess")
 public class Plate extends ItemMulti {
 
     public static boolean enabled = Circadian.CONFIG.get("Items.Plates", "Enable", true, "Enable additional plates.");
+    // Botania
+    public static ItemStack plateManasteel;
+    public static ItemStack plateElementium;
+    public static ItemStack plateTerrasteel;
+    // Twilight Forest
+    public static ItemStack plateKnightmetal;
+    public static ItemStack plateIronwood;
+    // Astral Sorcery
+    public static ItemStack plateStarmetal;
 
-    public Plate () {
+    public Plate() {
         super("circadian");
 
         setUnlocalizedName("plate");
@@ -35,21 +45,9 @@ public class Plate extends ItemMulti {
         return true;
     }
 
-    public void registerModels () {
+    public void registerModels() {
         for (Map.Entry<Integer, ItemEntry> entry : itemMap.entrySet()) {
             ModelLoader.setCustomModelResourceLocation(this, entry.getKey(), new ModelResourceLocation("circadian:plate", "type=" + entry.getValue().name));
         }
     }
-
-    // Botania
-    public static ItemStack plateManasteel;
-    public static ItemStack plateElementium;
-    public static ItemStack plateTerrasteel;
-
-    // Twilight Forest
-    public static ItemStack plateKnightmetal;
-    public static ItemStack plateIronwood;
-
-    // Astral Sorcery
-    public static ItemStack plateStarmetal;
 }

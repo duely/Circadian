@@ -2,30 +2,26 @@ package com.noobanidus.circadian.events;
 
 import cofh.core.util.helpers.BaublesHelper;
 import com.google.common.collect.Iterables;
+import com.noobanidus.circadian.Circadian;
+import com.noobanidus.circadian.config.Registrar;
+import com.noobanidus.circadian.enchantment.EnchantmentManabound;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import com.noobanidus.circadian.config.Registrar;
-import com.noobanidus.circadian.enchantment.EnchantmentManabound;
-
 import vazkii.botania.api.mana.ManaItemHandler;
 
 import java.util.Arrays;
-
-import com.noobanidus.circadian.Circadian;
 
 public class CircadianEvents {
 
     private static int manaCost = Circadian.CONFIG.get("Enchantments.Manabound", "Cost", 370, "Cost to repair a point of damage.");
 
     @SubscribeEvent
-    public static void onLivingTick (LivingEvent.LivingUpdateEvent event) {
-        if (event.getEntity() instanceof EntityPlayer && ((EnchantmentManabound) Registrar.manabound).enabled) {
+    public static void onLivingTick(LivingEvent.LivingUpdateEvent event) {
+        if (EnchantmentManabound.enabled && event.getEntity() instanceof EntityPlayer) {
 
             EntityPlayer player = (EntityPlayer) event.getEntity();
 
@@ -33,8 +29,8 @@ public class CircadianEvents {
 
             for (ItemStack stack : equipment) {
                 if (stack.isItemDamaged() && stack.isItemEnchanted() && (EnchantmentHelper.getEnchantments(stack).get(Registrar.manabound) != null)) {
-                    if (ManaItemHandler.requestManaExactForTool(stack, player, 370, true)) {
-            			stack.setItemDamage(stack.getItemDamage() - 1);
+                    if (ManaItemHandler.requestManaExactForTool(stack, player, manaCost, true)) {
+                        stack.setItemDamage(stack.getItemDamage() - 1);
                     }
                 }
             }
@@ -42,7 +38,7 @@ public class CircadianEvents {
     }
 
     @SubscribeEvent
-    public static void onTrampleEvent (BlockEvent.FarmlandTrampleEvent event) {
+    public static void onTrampleEvent(BlockEvent.FarmlandTrampleEvent event) {
         if (Circadian.CONFIG.get("Farmland", "Trample", true, "Disable trampling of farmland.")) {
             event.setCanceled(true);
         }

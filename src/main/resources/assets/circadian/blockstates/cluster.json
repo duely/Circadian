@@ -1,54 +1,54 @@
 {
-	"forge_marker": 1,
-	"defaults": {
-		"model": "builtin/generated",
-		"textures": {
-			"layer0": "blocks/dirt"
-		},
-		"transform": "forge:default-item"
-	},
-	"variants": {
-		"type": {
-            "clusteramber": {
-				"textures": {
-					"layer0": "circadian:items/cluster_amber"
-				}
-			},
-            "clusteraquamarine": {
-				"textures": {
-					"layer0": "circadian:items/cluster_aquamarine"
-				}
-			},
-            "clustercoal": {
-				"textures": {
-					"layer0": "circadian:items/cluster_coal"
-				}
-			},
-            "clusterdiamond": {
-				"textures": {
-					"layer0": "circadian:items/cluster_diamond"
-				}
-			},
-            "clusteremerald": {
-				"textures": {
-					"layer0": "circadian:items/cluster_emerald"
-				}
-			},
-            "clusterplatinum": {
-				"textures": {
-					"layer0": "circadian:items/cluster_platinum"
-				}
-			},
-            "clusterredstone": {
-				"textures": {
-					"layer0": "circadian:items/cluster_redstone"
-				}
-			},
-            "clusterstarmetal": {
-				"textures": {
-					"layer0": "circadian:items/cluster_starmetal"
-				}
-			}
-		}
-	}
+  "forge_marker": 1,
+  "defaults": {
+    "model": "builtin/generated",
+    "textures": {
+      "layer0": "blocks/dirt"
+    },
+    "transform": "forge:default-item"
+  },
+  "variants": {
+    "type": {
+      "clusteramber": {
+        "textures": {
+          "layer0": "circadian:items/cluster_amber"
+        }
+      },
+      "clusteraquamarine": {
+        "textures": {
+          "layer0": "circadian:items/cluster_aquamarine"
+        }
+      },
+      "clustercoal": {
+        "textures": {
+          "layer0": "circadian:items/cluster_coal"
+        }
+      },
+      "clusterdiamond": {
+        "textures": {
+          "layer0": "circadian:items/cluster_diamond"
+        }
+      },
+      "clusteremerald": {
+        "textures": {
+          "layer0": "circadian:items/cluster_emerald"
+        }
+      },
+      "clusterplatinum": {
+        "textures": {
+          "layer0": "circadian:items/cluster_platinum"
+        }
+      },
+      "clusterredstone": {
+        "textures": {
+          "layer0": "circadian:items/cluster_redstone"
+        }
+      },
+      "clusterstarmetal": {
+        "textures": {
+          "layer0": "circadian:items/cluster_starmetal"
+        }
+      }
+    }
+  }
 }
