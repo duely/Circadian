@@ -148,11 +148,11 @@ public class Registrar {
             satchels.init();
         }
 
-        goldenPotato = (new ItemFood(2, 0.6f, false)).setUnlocalizedName("golden_potato").setRegistryName("circadian", "golden_potato").setCreativeTab(Circadian.TAB);
-        silveredPotato = (new ItemFood(2, 0.6f, false)).setUnlocalizedName("silvered_potato").setRegistryName("circadian", "silvered_potato").setCreativeTab(Circadian.TAB);
-        silveredApple = (new ItemFood(4, 1.2f, false)).setUnlocalizedName("silvered_apple").setRegistryName("circadian", "silvered_apple").setCreativeTab(Circadian.TAB);
+        goldenPotato = (new ItemFood(2, 0.6f, false)).setAlwaysEdible().setUnlocalizedName("golden_potato").setRegistryName("circadian", "golden_potato").setCreativeTab(Circadian.TAB);
+        silveredPotato = (new ItemFood(2, 0.6f, false)).setAlwaysEdible().setUnlocalizedName("silvered_potato").setRegistryName("circadian", "silvered_potato").setCreativeTab(Circadian.TAB);
+        silveredApple = (new ItemAppleGold(4, 1.2f, false)).setAlwaysEdible().setUnlocalizedName("silvered_apple").setRegistryName("circadian", "silvered_apple").setCreativeTab(Circadian.TAB);
         silveredMelon = (new Item()).setUnlocalizedName("silvered_melon").setRegistryName("circadian", "silvered_melon").setCreativeTab(Circadian.TAB);
-        silveredCarrot = (new ItemFood(6, 1.2f, false)).setUnlocalizedName("silvered_carrot").setRegistryName("circadian", "silvered_carrot").setCreativeTab(Circadian.TAB);
+        silveredCarrot = (new ItemFood(6, 1.2f, false)).setAlwaysEdible().setUnlocalizedName("silvered_carrot").setRegistryName("circadian", "silvered_carrot").setCreativeTab(Circadian.TAB);
     }
 
     @SubscribeEvent
@@ -277,6 +277,7 @@ public class Registrar {
         ModelLoader.setCustomModelResourceLocation(goldenPotato, 0, new ModelResourceLocation("circadian:food", "type=goldenpotato"));
         ModelLoader.setCustomModelResourceLocation(silveredPotato, 0, new ModelResourceLocation("circadian:food", "type=silveredpotato"));
         ModelLoader.setCustomModelResourceLocation(silveredApple, 0, new ModelResourceLocation("circadian:food", "type=silveredApple"));
+        ModelLoader.setCustomModelResourceLocation(silveredApple, 1, new ModelResourceLocation("circadian:food", "type=silveredApple"));
         ModelLoader.setCustomModelResourceLocation(silveredMelon, 0, new ModelResourceLocation("circadian:food", "type=silveredmelon"));
         ModelLoader.setCustomModelResourceLocation(silveredCarrot, 0, new ModelResourceLocation("circadian:food", "type=silveredcarrot"));
 
