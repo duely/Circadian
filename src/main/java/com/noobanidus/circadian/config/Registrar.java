@@ -69,7 +69,7 @@ public class Registrar {
 
     public static Enchantment manabound;
 
-    public static BlockCompressedStoneEntry[] compressedBlocks = new BlockCompressedStoneEntry[]{new BlockCompressedStoneEntry(Blocks.SANDSTONE, "sandstone_normal", 2), new BlockCompressedStoneEntry(Blocks.RED_SANDSTONE, "red_sandstone_normal", 2)};
+    public static BlockCompressedStoneEntry[] compressedBlocks = new BlockCompressedStoneEntry[]{new BlockCompressedStoneEntry(Blocks.SANDSTONE, "sandstone_normal", 2), new BlockCompressedStoneEntry(Blocks.RED_SANDSTONE, "red_sandstone_normal", 2), new BlockCompressedStoneEntry(Blocks.STONE, "stone", 2)};
 
     @SuppressWarnings("ConstantConditions")
     public static void preInit() {
