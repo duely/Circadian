@@ -12,7 +12,7 @@ import javax.annotation.Nonnull;
 @SuppressWarnings("unused")
 public class DayRitual extends ImperfectRitual {
     public DayRitual() {
-        super("day", s -> s.getBlock() == Blocks.GOLD_BLOCK, 5000, true, "ritual.circadian.imperfect.day");
+        super("day", s -> s.getBlock() == Blocks.GOLD_BLOCK, 500, true, "ritual.circadian.imperfect.day");
     }
 
     @Override
