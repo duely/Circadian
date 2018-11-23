@@ -1,16 +1,24 @@
 package com.noobanidus.circadian.compat.top;
 
+import WayofTime.bloodmagic.BloodMagic;
+import WayofTime.bloodmagic.block.BlockRitualController;
+import WayofTime.bloodmagic.block.enums.EnumRitualController;
+import WayofTime.bloodmagic.ritual.Ritual;
+import WayofTime.bloodmagic.ritual.imperfect.ImperfectRitual;
+import WayofTime.bloodmagic.tile.TileMasterRitualStone;
+import WayofTime.bloodmagic.util.helper.RitualHelper;
 import com.noobanidus.circadian.compat.oreberries.blocks.BlockBerry;
 import com.noobanidus.circadian.compat.thaumcraft.blocks.BlockCompressedVisBattery;
 import com.rwtema.extrautils2.blocks.BlockEnderLilly;
 import josephcsible.oreberries.BlockOreberryBush;
 import mcjty.theoneprobe.api.*;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
+import org.apache.commons.lang3.StringUtils;
 import thaumcraft.common.blocks.devices.BlockVisBattery;
 import vazkii.botania.api.brew.Brew;
 import vazkii.botania.common.block.BlockIncensePlate;
@@ -81,13 +89,51 @@ public class TOPProvider {
                         if (stack.isEmpty()) {
                             probeInfo.text(WARNING + "No brew.");
                         } else {
-                            String brew_name = I18n.translateToLocal(brew.getUnlocalizedName());
+                            String brew_name = I18n.format(brew.getUnlocalizedName());
                             probeInfo.text(OK + String.format("Brew: %s", brew_name));
                             if (timeLeft == 0) {
                                 probeInfo.text(WARNING + "Unlit.");
                             } else {
                                 probeInfo.text(OK + String.format("%d minutes remaining.", timeLeft));
                             }
+                        }
+                    } else if (blockState.getBlock() instanceof BlockRitualController) {
+                        // Ritual name
+                        // Current LP cost?
+                        // Active or not
+                        BlockRitualController block = (BlockRitualController) blockState.getBlock();
+                        EnumRitualController type = blockState.getValue(block.getProperty());
+
+                        String ritualType = type.toString();
+
+                        if (type == EnumRitualController.IMPERFECT) {
+                            ImperfectRitual ritual = BloodMagic.RITUAL_MANAGER.getImperfectRitual(world.getBlockState(data.getPos().up()));
+                            if (ritual != null) {
+                                String ritualName = StringUtils.capitalize(ritual.getName());
+                                probeInfo.text(OK + String.format("Imperfect Ritual of %s", ritualName));
+                                probeInfo.text(WARNING + String.format("Cost: %dLP", ritual.getActivationCost()));
+                            } else {
+                                probeInfo.text(WARNING + "Invalid ritual.");
+                            }
+                        } else {
+                            TileMasterRitualStone tile = (TileMasterRitualStone) world.getTileEntity(data.getPos());
+
+                            String key = RitualHelper.getValidRitual(world, data.getPos());
+                            if (!key.isEmpty()) {
+                                Ritual ritual = BloodMagic.RITUAL_MANAGER.getRitual(key);
+                                String ritualName = I18n.format(ritual.getUnlocalizedName());
+                                probeInfo.text(OK + ritualName);
+                                if (tile.isPowered()) {
+                                    probeInfo.text(WARNING + "(Disabled via redstone)");
+                                } else if (tile.isActive()) {
+                                    probeInfo.text(OK + "Active");
+                                } else {
+                                    probeInfo.text(WARNING + String.format("Activation cost: %,dLP", ritual.getActivationCost()));
+                                }
+                            } else {
+                                probeInfo.text(WARNING + "Invalid ritual.");
+                            }
+
                         }
                     }
 
