@@ -92,10 +92,6 @@ public class Circadian {
         LOG.info("Circadian: Load Complete.");
     }
 
-    @Mod.EventHandler
-    public void onFMLServerStarting(FMLServerStartingEvent event) {
-    }
-
     public final class CreativeTabCircadian extends CreativeTabs {
         public CreativeTabCircadian(int id, String id2) {
             super(id, id2);
