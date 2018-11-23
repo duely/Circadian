@@ -15,6 +15,7 @@ import vazkii.botania.common.item.ModItems;
 public class Brews {
     public static void registerBrews() {
         Brew flight_brew = new Brew("flight", "circadian.brew.Wings", 0x99ffff, Circadian.CONFIG.get("Items.FlightBrew", "Cost", 50000, "Mana cost of the Wings flight brew."), new PotionEffect(RegistrarBloodMagic.FLIGHT, 6000));
+        flight_brew.setNotBloodPendantInfusable();
 
         BotaniaAPI.registerBrew(flight_brew);
 
