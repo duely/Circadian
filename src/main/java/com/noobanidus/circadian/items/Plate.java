@@ -22,6 +22,8 @@ public class Plate extends ItemMulti {
     public static ItemStack plateIronwood;
     // Astral Sorcery
     public static ItemStack plateStarmetal;
+    // Extra Utilities 2
+    public static ItemStack plateDemonmetal;
 
     public Plate() {
         super("circadian");
@@ -41,6 +43,8 @@ public class Plate extends ItemMulti {
         plateIronwood = addOreDictItem(4, "plateIronwood");
 
         plateStarmetal = addOreDictItem(5, "plateStarmetal");
+
+        plateDemonmetal = addOreDictItem(6, "plateDemonmetal");
 
         return true;
     }

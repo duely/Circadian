@@ -17,6 +17,8 @@ public class Nuggets extends ItemMulti {
     public static ItemStack nuggetIronwood;
     public static ItemStack nuggetKnightmetal;
     public static ItemStack nuggetStarmetal;
+    public static ItemStack nuggetDemonmetal;
+
     public Nuggets() {
         super("circadian");
 
@@ -31,6 +33,7 @@ public class Nuggets extends ItemMulti {
         nuggetIronwood = addOreDictItem(1, "nuggetIronwood");
         nuggetKnightmetal = addOreDictItem(2, "nuggetKnightmetal");
         nuggetStarmetal = addOreDictItem(3, "nuggetStarmetal");
+        nuggetDemonmetal = addOreDictItem(4, "nuggetDemonmetal");
 
         return true;
     }

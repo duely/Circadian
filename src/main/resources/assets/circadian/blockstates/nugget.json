@@ -28,6 +28,11 @@
         "textures": {
           "layer0": "circadian:items/nugget_knightmetal"
         }
+      },
+      "nuggetdemonmetal": {
+        "textures": {
+          "layer0": "circadian:items/nugget_demonmetal"
+        }
       }
     }
   }

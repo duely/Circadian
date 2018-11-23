@@ -38,6 +38,11 @@
         "textures": {
           "layer0": "circadian:items/plate_ironwood"
         }
+      },
+      "platedemonmetal": {
+        "textures": {
+          "layer0": "circadian:items/plate_demonmetal"
+        }
       }
     }
   }
