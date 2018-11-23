@@ -14,6 +14,7 @@ import com.noobanidus.circadian.compat.twilightforest.Mobs;
 import com.noobanidus.circadian.config.Registrar;
 import com.noobanidus.circadian.events.CircadianEvents;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -79,6 +80,11 @@ public class Circadian {
 
     @Mod.EventHandler
     public void loadComplete(FMLLoadCompleteEvent event) {
+        int cakeCount = CONFIG.get("Vanilla.Items", "CakeStackSize", 64, "Modify default stack size of cakes.");
+        if (cakeCount <= 64 && cakeCount > 0) {
+            Items.CAKE.setMaxStackSize(cakeCount);
+        }
+
         RightClickHandler.init();
 
         CONFIG.cleanUp(false, true);
