@@ -1,0 +1,9 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "inventory_nether_portal":             [{ "model": "circadian:miniature/nether_portal"              }],
+    "variant": {
+      "nether_portal":             { "model": "circadian:miniature/nether_portal"              }
+    }
+  }
+}
