@@ -13,6 +13,11 @@
         "textures": {
           "layer0": "circadian:items/quests/horse_head"
         }
+      },
+      "wither": {
+        "textures": {
+          "layer0": "circadian:items/quests/wither"
+        }
       }
     }
   }

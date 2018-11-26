@@ -3,6 +3,7 @@ package com.noobanidus.circadian.icons;
 import cofh.core.item.ItemMulti;
 import com.noobanidus.circadian.Circadian;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
@@ -16,12 +17,14 @@ public class Icons extends ItemMulti {
         super("circadian");
 
         setUnlocalizedName("icon");
+        setCreativeTab(Circadian.TAB);
     }
 
     public boolean init() {
         ForgeRegistries.ITEMS.register(this.setRegistryName("circadian", "icon"));
 
-        addItem(0, "horse_head");
+        wither = addItem(0, "wither");
+        horseHead = addItem(1, "horse_head");
 
         return true;
     }
@@ -31,4 +34,7 @@ public class Icons extends ItemMulti {
             ModelLoader.setCustomModelResourceLocation(this, entry.getKey(), new ModelResourceLocation("circadian:icons", "type=" + entry.getValue().name));
         }
     }
+
+    ItemStack horseHead;
+    ItemStack wither;
 }
