@@ -32,9 +32,6 @@ public class CicadaTweakerTransformer implements IClassTransformer, Opcodes {
         if (Circadian.CONFIG.get("Reliquary.Items", "HarvestRodFertilizer", true, "Patch HarvestRod to consume Circadian fertilizer as well as bone meal.").getBoolean(true)) {
             tweaks.add(new HarvestRodTweak());
         }
-        if (Circadian.CONFIG.get("Reliquary.Items", "BetterLanternTorchPlacement", true, "Patch Lantern of Paranoia to allow placement of torches on snow, and to place torches on unlit blocks during daylight.").getBoolean(true)) {
-            tweaks.add(new LanternOfParanoiaTweak());
-        }
         if (Circadian.CONFIG.get("Agricraft.Info", "RemoveAlphaWarning", true, "Remove Agricraft 'still in alpha!' warning message from spamming on login.").getBoolean(true)) {
             tweaks.add(new DeCancerAgriCraftTweak());
         }
