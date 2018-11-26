@@ -12,7 +12,7 @@ import java.util.Map;
 @SuppressWarnings("WeakerAccess")
 public class MobIngredients extends ItemMulti {
 
-    public static boolean enabled = Circadian.CONFIG.get("Items.MobDrops", "Enable", true, "Enable additional mob drops.");
+    public static boolean enabled = Circadian.CONFIG.get("Items.MobDrops", "Enable", true, "Enable additional mob drops.").getBoolean(true);
     public static ItemStack PenguinFeather;
 
     public MobIngredients() {

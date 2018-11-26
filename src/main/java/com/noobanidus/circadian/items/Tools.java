@@ -17,9 +17,9 @@ public class Tools {
     public static final ToolMaterial TOOL_MATERIAL_BRASS = EnumHelper.addToolMaterial("TC:ALCHEMICAL_BRASS", 2, 325, 6.0F, 2.0F, 10);
     private static final ToolMaterial TOOL_MATERIAL_COMPRESSED_COBBLESTONE = EnumHelper.addToolMaterial("EX:COMPRESSED_COBBLESTONE", 1, 750, 3.5f, 1.0f, 5);
     private static final ToolMaterial TOOL_MATERIAL_DOUBLE_COMPRESSED_COBBLESTONE = EnumHelper.addToolMaterial("EX:DOUBLE_COMPRESSED_COBBLESTONE", 1, 1500, 3.5f, 1.0f, 5);
-    public static boolean enabledBrass = Circadian.CONFIG.get("Tools.Brass", "Enable", false, "Enable tools made of alchemical brass.");
-    public static boolean enabledCompressed = Circadian.CONFIG.get("Tools.Compressed", "Enable", true, "Enable tools made of compressed cobblestone and stone.");
-    public static boolean enabledDoubleCompressed = Circadian.CONFIG.get("Tools.DoubleCompressed", "Enable", true, "Enable tools made out of double-compressed cobblestone and stone.");
+    public static boolean enabledBrass = Circadian.CONFIG.get("Tools.Brass", "Enable", false, "Enable tools made of alchemical brass.").getBoolean(true);
+    public static boolean enabledCompressed = Circadian.CONFIG.get("Tools.Compressed", "Enable", true, "Enable tools made of compressed cobblestone and stone.").getBoolean(true);
+    public static boolean enabledDoubleCompressed = Circadian.CONFIG.get("Tools.DoubleCompressed", "Enable", true, "Enable tools made out of double-compressed cobblestone and stone.").getBoolean(true);
     public ItemSwordCore itemBrassSword;
     public ItemShovelCore itemBrassShovel;
     public ItemPickaxeCore itemBrassPickaxe;

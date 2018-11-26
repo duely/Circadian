@@ -18,22 +18,15 @@ public class BloodMagicRitualTweak extends Tweak {
 	
 	@Override
 	public void doPatch(String transformedName, ClassNode node) {
-        int remove = -1;
+        for (MethodNode mnode : node.methods) {
+            if (!(mnode.name.equals("<init>"))) continue;
 
-        for (int i = 0; i < node.methods.size(); i++) {
-            if (node.methods.get(i).name.equals("<init>")) {
-                remove = i;
-                break;
-            }
-        }
-
-        if (remove != -1) {
-            MethodNode mnode = node.methods.get(remove);
+            if (!(mnode.desc.equals("(Ljava/lang/String;IILjava/lang/String;)V "))) continue;
 
             AbstractInsnNode before = mnode.instructions.get(mnode.instructions.size()-2);
 
             mnode.instructions.insertBefore(before, new VarInsnNode(ALOAD, 0));
-            mnode.instructions.insertBefore(before, new VarInsnNode(ALOAD, 5));
+            mnode.instructions.insertBefore(before, new VarInsnNode(ALOAD, 4));
             mnode.instructions.insertBefore(before, new VarInsnNode(ILOAD, 3));
             mnode.instructions.insertBefore(before, new MethodInsnNode(INVOKESTATIC, getHooksClass(), "modifyActivationCost", "(Ljava/lang/String;I)I", false));
             mnode.instructions.insertBefore(before, new FieldInsnNode(PUTFIELD, "WayofTime/bloodmagic/ritual/Ritual", "activationCost", "I"));

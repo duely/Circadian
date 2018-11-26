@@ -13,6 +13,7 @@ import com.noobanidus.circadian.compat.top.TOPProvider;
 import com.noobanidus.circadian.compat.twilightforest.Mobs;
 import com.noobanidus.circadian.config.Registrar;
 import com.noobanidus.circadian.events.CircadianEvents;
+import com.noobanidus.circadian.events.RitualEventHandler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -36,12 +37,13 @@ import java.io.File;
 public class Circadian {
     public static final String MODID = "circadian";
     public static final String MODNAME = "Circadian";
-    public static final String VERSION = "1.0.0";
+    public static final String VERSION = "GRADLE:VERSION";
     public static final String DEPENDS = "required-after:twilightforest;required-after:thaumcraft;required-after:thermalfoundation;required-after:theoneprobe;required-after:astralsorcery;required-after:agricraft;required-after:oreberries;required-after:bloodmagic;required-after:thermalexpansion;before:jei;";
+    public static final String KEY = "ca23084fc26ce53879eea4b7afb0a8d9da9744d7";
 
     public final static Logger LOG = LogManager.getLogger(MODID);
-    public final static ConfigHandler CONFIG = new ConfigHandler(VERSION);
-    public final static GuiHandler GUI_HANDLER = new GuiHandler();
+    public final static Configuration CONFIG = new Configuration(new File("config", "circadian.cfg"), true);
+    public static GuiHandler GUI_HANDLER;
 
     public static CreativeTabCircadian TAB;
 
@@ -50,10 +52,11 @@ public class Circadian {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        CONFIG.setConfiguration(new Configuration(new File(event.getModConfigurationDirectory(), "circadian.cfg"), true));
         TAB = new CreativeTabCircadian(CreativeTabs.getNextID(), MODID);
         Registrar.preInit();
         MinecraftForge.EVENT_BUS.register(CircadianEvents.class);
+        MinecraftForge.EVENT_BUS.register(RitualEventHandler.class);
+        GUI_HANDLER = new GuiHandler();
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, GUI_HANDLER);
     }
 
@@ -80,16 +83,15 @@ public class Circadian {
 
     @Mod.EventHandler
     public void loadComplete(FMLLoadCompleteEvent event) {
-        int cakeCount = CONFIG.get("Vanilla.Items", "CakeStackSize", 64, "Modify default stack size of cakes.");
+        int cakeCount = CONFIG.get("Vanilla.Items", "CakeStackSize", 64, "Modify default stack size of cakes.").getInt(64);
         if (cakeCount <= 64 && cakeCount > 0) {
             Items.CAKE.setMaxStackSize(cakeCount);
         }
 
         RightClickHandler.init();
 
-        CONFIG.cleanUp(false, true);
-
         LOG.info("Circadian: Load Complete.");
+        CONFIG.save();
     }
 
     public final class CreativeTabCircadian extends CreativeTabs {

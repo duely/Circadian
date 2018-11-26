@@ -18,7 +18,7 @@ import javax.annotation.Nonnull;
 public class BlockRedScribbles extends Block {
     public static final PropertyInteger VARIANT = PropertyInteger.create("variant", 0, 15);
 
-    public static boolean enabled = Circadian.CONFIG.get("Items.RedSandstoneScribbles", "Enable", true, "Enable red variant of Chisel sandstone scribbles.");
+    public static boolean enabled = Circadian.CONFIG.get("Items.RedSandstoneScribbles", "Enable", true, "Enable red variant of Chisel sandstone scribbles.").getBoolean(true);
 
     public BlockRedScribbles() {
         super(Material.ROCK);

@@ -12,7 +12,7 @@ import java.util.Map;
 @SuppressWarnings("WeakerAccess")
 public class Plate extends ItemMulti {
 
-    public static boolean enabled = Circadian.CONFIG.get("Items.Plates", "Enable", true, "Enable additional plates.");
+    public static boolean enabled = Circadian.CONFIG.get("Items.Plates", "Enable", true, "Enable additional plates.").getBoolean(true);
     // Botania
     public static ItemStack plateManasteel;
     public static ItemStack plateElementium;

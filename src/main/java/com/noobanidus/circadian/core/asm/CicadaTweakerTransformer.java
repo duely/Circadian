@@ -11,7 +11,7 @@ import java.util.List;
 
 @SuppressWarnings("WeakerAccess")
 public class CicadaTweakerTransformer implements IClassTransformer, Opcodes {
-	public static final String HOOKS = "com/noobanidus/cicadatweaks/asm/CicadaTweakerHooks";
+	public static final String HOOKS = "com/noobanidus/circadian/core/asm/CicadaTweakerHooks";
 	
 	static List<Tweak> tweaks = new ArrayList<>();
 	static List<String> allPatchedClasses = new ArrayList<>();
@@ -41,14 +41,8 @@ public class CicadaTweakerTransformer implements IClassTransformer, Opcodes {
         if (Circadian.CONFIG.get("FTB.Utilities", "TrashCanSize", true, "Increase FTB Utilities trash can size to be equal to that of the inventory.").getBoolean(true)) {
             tweaks.add(new IncreaseFTBUtilitiesTrashCanSizeTweak());
         }
-        if (Circadian.CONFIG.get("TwilightForest.Animals", "PenguinLoot", true, "Patch EntityTFPenguin to have its own loot file instead of using default bird loot file.").getBoolean(true)) {
-            tweaks.add(new PenguinLoot());
-        }
         if (Circadian.CONFIG.get("BloodMagic.Rituals", "AdjustCosts", true, "Adjust costs of Blood Magic rituals.").getBoolean(true)) {
             tweaks.add(new BloodMagicRitualTweak());
-        }
-        if (Circadian.CONFIG.get("BloodMagic.Rituals", "MeteorPlatform", true, "Automatically generate a platform for meteor to land on.").getBoolean(true)) {
-            tweaks.add(new MeteorTweak());
         }
         if (Circadian.CONFIG.get("ExtraUtils2.DemonMetal", "ChangeInput", true, "Change Extrautils2 input material for Demon Metal from gold to thaumium, alchemical brass or void metal.").getBoolean(true)) {
             tweaks.add(new DemonMetalTweak());

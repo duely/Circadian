@@ -8,7 +8,7 @@ import thaumcraft.common.lib.utils.CropUtils;
 
 public class BerryHandler {
 
-    public static boolean enabled = Circadian.CONFIG.get("Items.TwilightBushes", "Enable", true, "Enable Twilight Forest bushes.");
+    public static boolean enabled = Circadian.CONFIG.get("Items.TwilightBushes", "Enable", true, "Enable Twilight Forest bushes.").getBoolean(true);
 
     public static void init() {
         if (enabled) {

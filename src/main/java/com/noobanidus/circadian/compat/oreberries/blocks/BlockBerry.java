@@ -60,7 +60,7 @@ public class BlockBerry extends Block implements IPlantable, IGrowable {
             new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.75D, 0.875D),
             new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 0.9375D, 0.9375D)
     };
-    public static boolean enabled = Circadian.CONFIG.get("Items.TwilightBushes", "Enable", true, "Enable Twilight Forest bushes.");
+    public static boolean enabled = Circadian.CONFIG.get("Items.TwilightBushes", "Enable", true, "Enable Twilight Forest bushes.").getBoolean(true);
     public final OreberryConfig config;
     public String name;
 

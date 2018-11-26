@@ -1,7 +1,6 @@
 package com.noobanidus.circadian.core.asm.tweaks;
 
 import com.google.common.collect.ImmutableList;
-import com.noobanidus.circadian.core.asm.tweaks.Tweak;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.*;
@@ -22,17 +21,8 @@ public class LanternOfParanoiaTweak extends Tweak {
 	
 	@Override
 	public void doPatch(String transformedName, ClassNode node) {
-        int remove = -1;
-
-        for (int i = 0; i < node.methods.size(); i++) {
-            if (node.methods.get(i).name.equals(resolveDeobf("onUpdate", "func_77663_a"))) {
-                remove = i;
-                break;
-            }
-        }
-
-        if (remove != -1) {
-            MethodNode mnode = node.methods.get(remove);
+	    for (MethodNode mnode : node.methods) {
+            if (!(mnode.name.equals(resolveDeobf("onUpdate", "func_77663_a")))) continue;
 
             mnode.instructions.clear();
             mnode.visitCode();

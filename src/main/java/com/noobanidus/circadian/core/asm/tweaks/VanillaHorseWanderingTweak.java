@@ -1,7 +1,7 @@
 package com.noobanidus.circadian.core.asm.tweaks;
 
 import com.google.common.collect.ImmutableList;
-import com.noobanidus.circadian.core.asm.tweaks.Tweak;
+import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.Opcodes;
@@ -22,17 +22,8 @@ public class VanillaHorseWanderingTweak extends Tweak {
 	
 	@Override
 	public void doPatch(String transformedName, ClassNode node) {
-        int remove = -1;
-
-        for (int i = 0; i < node.methods.size(); i++) {
-            if (node.methods.get(i).name.equals("getPosition")) {
-                remove = i;
-                break;
-            }
-        }
-
-        if (remove != -1) {
-            MethodNode mnode = node.methods.get(remove);
+	    for (MethodNode mnode : node.methods) {
+            if (!(mnode.name.equals(resolveDeobf("getPosition", "func_190864_f")))) continue;
 
             mnode.instructions.clear();
             AnnotationVisitor av0 = mnode.visitAnnotation("Ljavax/annotation/Nullable;", true);
@@ -84,7 +75,7 @@ public class VanillaHorseWanderingTweak extends Tweak {
             mnode.visitMethodInsn(INVOKEVIRTUAL, "net/minecraft/entity/EntityCreature", resolveDeobf("getRNG", "func_70681_au"), "()Ljava/util/Random;", false);
             mnode.visitMethodInsn(INVOKEVIRTUAL, "java/util/Random", "nextFloat", "()F", false);
             mnode.visitVarInsn(ALOAD, 0);
-            mnode.visitFieldInsn(GETFIELD, "net/minecraft/entity/ai/EntityAIWanderAvoidWater", "probability", "F");
+            mnode.visitFieldInsn(GETFIELD, "net/minecraft/entity/ai/EntityAIWanderAvoidWater", resolveDeobf("probability", "field_190865_h"), "F");
             mnode.visitInsn(FCMPL);
             Label l4 = new Label();
             mnode.visitJumpInsn(IFLT, l4);

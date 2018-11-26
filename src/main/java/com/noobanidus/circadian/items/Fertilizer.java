@@ -15,11 +15,9 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 
 public class Fertilizer extends Item {
-    public boolean enabled;
+    public boolean enabled = Circadian.CONFIG.get("Items.Fertilizer", "Enable", true, "Enable fertilizer (bone-meal alternative).").getBoolean(true);
 
     public Fertilizer() {
-        enabled = Circadian.CONFIG.get("Items.Fertilizer", "Enable", true, "Enable fertilizer (bone-meal alternative).");
-
         setCreativeTab(Circadian.TAB);
         setRegistryName(new ResourceLocation("circadian", "fertilizer"));
         setUnlocalizedName("fertilizer");

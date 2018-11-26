@@ -12,7 +12,7 @@ import java.util.Map;
 @SuppressWarnings("WeakerAccess")
 public class Clusters extends ItemMulti {
 
-    public static boolean enabled = Circadian.CONFIG.get("Items.Clusters", "Enable", true, "Enable extra clusters.");
+    public static boolean enabled = Circadian.CONFIG.get("Items.Clusters", "Enable", true, "Enable extra clusters.").getBoolean(true);
     public static ItemStack clusterAmber;
     public static ItemStack clusterAquamarine;
     public static ItemStack clusterCoal;

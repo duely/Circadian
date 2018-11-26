@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class Icons extends ItemMulti {
 
-    public static boolean enabled = Circadian.CONFIG.get("Items.Icons", "Enable", true, "Enable additional icon items.");
+    public static boolean enabled = Circadian.CONFIG.get("Items.Icons", "Enable", true, "Enable additional icon items.").getBoolean(true);
 
     public Icons() {
         super("circadian");

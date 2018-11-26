@@ -1,5 +1,6 @@
 package com.noobanidus.circadian.core.asm;
 
+import WayofTime.bloodmagic.ritual.Ritual;
 import com.infinityraider.agricraft.blocks.BlockCrop;
 import com.infinityraider.agricraft.tiles.TileEntityCrop;
 import com.infinityraider.infinitylib.utility.WorldHelper;
@@ -138,24 +139,7 @@ public class CicadaTweakerHooks {
 		return flag;
 	}
 
-	public static EntityCreature entity;
-
-	public static ResourceLocation getLootTable() {
-		return PENGUIN_LOOT_TABLE;
-	}
-
 	public static int modifyActivationCost (String ritualName, int activationCost) {
 		return Circadian.CONFIG.get("BloodMagic.Rituals", ritualName, activationCost, "Modify activation cost for ritual").getInt(activationCost);
 	}
-
-	public static void placePlatform (World world, BlockPos p) {
-	    int y = Circadian.CONFIG.get("BloodMagic.Rituals", "MeteorPlatformHeight", 24, "Height above the ritual stone to place platform.").getInt(24);
-
-	    BlockPos pos = new BlockPos(p.getX(), p.getY() + y, p.getZ());
-
-        if (world.isAirBlock(pos)) {
-            IBlockState stone = Blocks.STONE.getDefaultState();
-            world.setBlockState(pos, stone);
-        }
-    }
 }

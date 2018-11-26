@@ -18,17 +18,8 @@ public class ThaumcraftMaturityTweak extends Tweak {
 	
 	@Override
 	public void doPatch(String transformedName, ClassNode node) {
-        int remove = -1;
-
-        for (int i = 0; i < node.methods.size(); i++) {
-            if (node.methods.get(i).name.equals("isGrownCrop")) {
-                remove = i;
-                break;
-            }
-        }
-
-        if (remove != -1) {
-            MethodNode mnode = node.methods.get(remove);
+	    for (MethodNode mnode : node.methods) {
+	        if (!(mnode.name.equals("isGrownCrop"))) continue;
 
             mnode.instructions.clear();
             mnode.instructions.add(new VarInsnNode(ALOAD, 0));

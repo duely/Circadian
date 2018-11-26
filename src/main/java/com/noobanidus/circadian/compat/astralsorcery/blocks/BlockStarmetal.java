@@ -18,7 +18,7 @@ import javax.annotation.Nonnull;
 
 public class BlockStarmetal extends Block {
 
-    public static boolean enabled = Circadian.CONFIG.get("Items.BlockStarmetal", "Enable", true, "Enable the starmetal block.");
+    public static boolean enabled = Circadian.CONFIG.get("Items.BlockStarmetal", "Enable", true, "Enable the starmetal block.").getBoolean(true);
 
     public BlockStarmetal() {
 

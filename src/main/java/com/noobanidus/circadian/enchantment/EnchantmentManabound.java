@@ -13,7 +13,7 @@ import vazkii.botania.api.mana.IManaUsingItem;
 import javax.annotation.Nonnull;
 
 public class EnchantmentManabound extends Enchantment {
-    public static boolean enabled = Circadian.CONFIG.get("Enchantments.Manabound", "Enable", true, "Enable manabound enchantment.");
+    public static boolean enabled = Circadian.CONFIG.get("Enchantments.Manabound", "Enable", true, "Enable manabound enchantment.").getBoolean(true);
 
     public EnchantmentManabound(String id) {
         super(Rarity.VERY_RARE, EnumEnchantmentType.BREAKABLE, new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND, EntityEquipmentSlot.OFFHAND, EntityEquipmentSlot.FEET, EntityEquipmentSlot.LEGS, EntityEquipmentSlot.CHEST, EntityEquipmentSlot.HEAD});

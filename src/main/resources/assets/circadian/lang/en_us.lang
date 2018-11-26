@@ -77,3 +77,10 @@ item.circadian.satchel.standard1.name=Thaumium Satchel
 item.circadian.satchel.standard2.name=Terrasteel Satchel
 item.circadian.satchel.standard3.name=Elementium Satchel
 item.circadian.satchel.standard4.name=Voidmetal Satchel
+tile.redscribbles.tile.redscribbles.name=Red Sandstone Scribbles
+tile.circadian.miniature.nether_portal.name=Miniature Nether Portal
+tile.circadian.miniature.enchanted_forest.name=Miniature Enchanted Forest
+tile.circadian.miniature.enchanted_forest2.name=Miniature Enchanted Forest
+tile.circadian.miniature.desert_temple.name=Miniature Desert Temple
+tile.circadian.miniature.desert_temple2.name=Miniature Desert Temple
+

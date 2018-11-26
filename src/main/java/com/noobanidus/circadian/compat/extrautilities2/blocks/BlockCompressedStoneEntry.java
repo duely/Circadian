@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class BlockCompressedStoneEntry extends BlockEntry<BlockCompressed> {
-    public static boolean enabled = Circadian.CONFIG.get("Items.CompressedStones", "Enable", true, "Enable compressed sandstone.");
+    public static boolean enabled = Circadian.CONFIG.get("Items.CompressedStones", "Enable", true, "Enable compressed sandstone.").getBoolean(true);
     private final IBlockState blockState;
     private final String texture;
     private final int max;

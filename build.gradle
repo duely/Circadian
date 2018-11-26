@@ -9,7 +9,7 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "1.0.5"
+version = "1.1.0"
 group = "com.noobanidus.circadian"
 archivesBaseName = "circadian"
 
@@ -25,6 +25,8 @@ minecraft {
     runDir = "run"
     mappings = "snapshot_20180407"
     useDepAts = true
+
+    replace "GRADLE:VERSION", project.version
 }
 
 runClient {
@@ -97,9 +99,22 @@ dependencies {
     deobfCompile "mcjty.theoneprobe:TheOneProbe-1.12:1.12-1.4.23-16"
     deobfCompile "info.amerifrance.guideapi:Guide-API:1.12-2.1.4-57"
 
+    deobfCompile "com.azanor.baubles:Baubles:1.12-1.5.2"
+    deobfCompile "codechicken:CodeChickenLib:1.12.2-3.2.2.352:universal"
+
     compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.1'
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.1'
 }
+
+minecraft.coreMod = "com.noobanidus.circadian.core.asm.CicadaTweakerPlugin"
+
+jar {
+    manifest {
+        attributes "FMLCorePlugin": "com.noobanidus.circadian.core.asm.CicadaTweakerPlugin", "FMLCorePluginContainsFMLMod": true
+        attributes 'FMLAT': 'cicadatweaks_at.cfg'
+    }
+}
+
 
 processResources {
     inputs.property "version", project.version
@@ -114,6 +129,6 @@ processResources {
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+
+    rename '(.+at\\.cfg)', 'META-INF/$1'
 }
-
-

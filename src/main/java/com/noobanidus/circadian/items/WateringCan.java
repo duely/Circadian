@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 public class WateringCan extends ItemWateringCan {
 
     public static final int CAPACITY_BASE = 8000;
-    public static boolean enabled = Circadian.CONFIG.get("Items.WateringCans", "Enable", true, "Enable magical watering cans.");
+    public static boolean enabled = Circadian.CONFIG.get("Items.WateringCans", "Enable", true, "Enable magical watering cans.").getBoolean(true);
     public static Int2ObjectOpenHashMap<TypeEntry> typeMap = new Int2ObjectOpenHashMap<>();
     public static ItemStack manasteel;
     public static ItemStack thaumium;

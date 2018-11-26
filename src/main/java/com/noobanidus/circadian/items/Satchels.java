@@ -27,7 +27,7 @@ import java.util.Arrays;
 @SuppressWarnings("WeakerAccess")
 public class Satchels extends ItemSatchel {
 
-    public static boolean enabled = Circadian.CONFIG.get("Items.Satchels", "Enable", true, "Enable magical satchels.");
+    public static boolean enabled = Circadian.CONFIG.get("Items.Satchels", "Enable", true, "Enable magical satchels.").getBoolean(true);
     public static ItemStack manasteel;
     public static ItemStack thaumium;
     public static ItemStack terrasteel;

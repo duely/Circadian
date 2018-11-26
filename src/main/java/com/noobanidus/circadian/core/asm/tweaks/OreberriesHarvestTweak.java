@@ -18,26 +18,20 @@ public class OreberriesHarvestTweak extends Tweak {
 
     @Override
     public void doPatch(String transformedName, ClassNode node) {
-        int remove = -1;
-
-        for (int i = 0; i < node.methods.size(); i++) {
-            if (node.methods.get(i).name.equals("harvest")) {
-                remove = i;
-                break;
+        for (MethodNode mnode : node.methods) {
+            if (mnode.name.equals("harvest")) {
+                mnode.instructions.clear();
+                mnode.instructions.add(new VarInsnNode(ALOAD, 1));
+                mnode.instructions.add(new VarInsnNode(ALOAD, 2));
+                mnode.instructions.add(new VarInsnNode(ALOAD, 3));
+                mnode.instructions.add(new VarInsnNode(ALOAD, 4));
+                mnode.instructions.add(new MethodInsnNode(INVOKESTATIC, getHooksClass(), "harvest", "(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/entity/player/EntityPlayer;)Z", false));
+                mnode.instructions.add(new InsnNode(IRETURN));
+            } else if (mnode.name.equals(resolveDeobf("canGrow", "func_176473_a"))) {
+                mnode.instructions.clear();
+                mnode.instructions.add(new InsnNode(ICONST_1));
+                mnode.instructions.add(new InsnNode(IRETURN));
             }
-        }
-
-        if (remove != -1) {
-            MethodNode mnode = node.methods.get(remove);
-
-            mnode.instructions.clear();
-            //mnode.instructions.add(new VarInsnNode(ALOAD, 0));
-            mnode.instructions.add(new VarInsnNode(ALOAD, 1));
-            mnode.instructions.add(new VarInsnNode(ALOAD, 2));
-            mnode.instructions.add(new VarInsnNode(ALOAD, 3));
-            mnode.instructions.add(new VarInsnNode(ALOAD, 4));
-            mnode.instructions.add(new MethodInsnNode(INVOKESTATIC, getHooksClass(), "harvest", "(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/entity/player/EntityPlayer;)Z", false));
-            mnode.instructions.add(new InsnNode(IRETURN));
         }
     }
 }

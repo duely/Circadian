@@ -8,7 +8,7 @@ import thaumcraft.common.lib.utils.Utils;
 
 public class ClusterHandler {
 
-    public static boolean enabled = Circadian.CONFIG.get("Items.Clusters", "Enable", true, "Enable extra clusters.");
+    public static boolean enabled = Circadian.CONFIG.get("Items.Clusters", "Enable", true, "Enable extra clusters.").getBoolean(true);
 
     public static void init() {
         // we only register platinum and starmetal. it should be done like this:

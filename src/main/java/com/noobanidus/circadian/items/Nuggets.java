@@ -12,7 +12,7 @@ import java.util.Map;
 @SuppressWarnings("WeakerAccess")
 public class Nuggets extends ItemMulti {
 
-    public static boolean enabled = Circadian.CONFIG.get("Items.Nuggets", "Enable", true, "Enable extra nuggets.");
+    public static boolean enabled = Circadian.CONFIG.get("Items.Nuggets", "Enable", true, "Enable extra nuggets.").getBoolean(true);
     public static ItemStack nuggetAquamarine;
     public static ItemStack nuggetIronwood;
     public static ItemStack nuggetKnightmetal;

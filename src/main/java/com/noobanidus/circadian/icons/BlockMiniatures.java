@@ -35,6 +35,10 @@ public class BlockMiniatures extends Block {
         this.setUnlocalizedName("circadian.miniature");
     }
 
+    public int damageDropped(IBlockState state) {
+        return getMetaFromState(state);
+    }
+
     @Override
     @SuppressWarnings("deprecation")
     public boolean isOpaqueCube(IBlockState state)
@@ -94,9 +98,11 @@ public class BlockMiniatures extends Block {
     }
 
     public enum MiniatureVariant implements IStringSerializable {
-        NETHER_PORTAL(0),
-        ENCHANTED_FOREST(1),
-        HORSE_HEAD(2);
+        ENCHANTED_FOREST2(0),
+        NETHER_PORTAL(1),
+        DESERT_TEMPLE(2),
+        DESERT_TEMPLE2(3),
+        ASTRAL_TEMPLE4(4);
 
         public final int meta;
 

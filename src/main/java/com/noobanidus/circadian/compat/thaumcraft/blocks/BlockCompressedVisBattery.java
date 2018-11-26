@@ -26,12 +26,10 @@ import java.util.Random;
 public class BlockCompressedVisBattery extends Block {
     public static final PropertyInteger CHARGE = PropertyInteger.create("charge", 0, 10);
 
-    public boolean enabled;
+    public static boolean enabled = Circadian.CONFIG.get("Items.CompressedVisBattery", "Enable", true, "Enable the compressed Vis Battery.").getBoolean(true);
 
     public BlockCompressedVisBattery() {
         super(Material.ROCK);
-
-        enabled = Circadian.CONFIG.get("Items.CompressedVisBattery", "Enable", true, "Enable the compressed Vis Battery.");
 
         setUnlocalizedName("compressed_vis_battery");
         setRegistryName("circadian", "compressed_vis_battery");

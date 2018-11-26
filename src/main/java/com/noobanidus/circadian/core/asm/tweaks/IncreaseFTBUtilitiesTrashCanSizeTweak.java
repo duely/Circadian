@@ -1,7 +1,6 @@
 package com.noobanidus.circadian.core.asm.tweaks;
 
 import com.google.common.collect.ImmutableList;
-import com.noobanidus.circadian.core.asm.tweaks.Tweak;
 import org.objectweb.asm.tree.*;
 
 import java.util.Collection;
@@ -19,17 +18,8 @@ public class IncreaseFTBUtilitiesTrashCanSizeTweak extends Tweak {
 	
 	@Override
 	public void doPatch(String transformedName, ClassNode node) {
-        int remove = -1;
-
-        for (int i = 0; i < node.methods.size(); i++) {
-            if (node.methods.get(i).name.equals("execute")) {
-                remove = i;
-                break;
-            }
-        }
-
-        if (remove != -1) {
-            MethodNode mnode = node.methods.get(remove);
+        for (MethodNode mnode : node.methods) {
+            if (!(mnode.name.equals(resolveDeobf("execute", "func_184881_a")))) continue;
 
             mnode.instructions.clear();
             mnode.visitCode();

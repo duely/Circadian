@@ -10,12 +10,17 @@ import com.noobanidus.circadian.Circadian;
 import com.noobanidus.circadian.items.WateringCan;
 import com.rwtema.extrautils2.items.ItemWateringCan;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
+import xreliquary.items.ItemHarvestRod;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 public class RightClickHandler {
+    public static boolean enabled = Circadian.CONFIG.get("Agricraft.Harvesting", "WateringCanHarvesting", true, "Disable harvesting with a watering can, allowing you to water crop sticks.").getBoolean();
+
     public static void init() {
+        if (!enabled) return;
+
         try {
             modifyFields();
         } catch (ReflectiveOperationException e) {
@@ -40,7 +45,8 @@ public class RightClickHandler {
                 ItemDebugger.class,
                 ItemWateringCan.class,
                 cofh.thermalcultivation.item.ItemWateringCan.class,
-                WateringCan.class
+                WateringCan.class,
+                ItemHarvestRod.class,
         };
 
         field.set(null, newExcludes);

@@ -18,7 +18,7 @@ import java.util.Arrays;
 
 public class CircadianEvents {
 
-    private static int manaCost = Circadian.CONFIG.get("Enchantments.Manabound", "Cost", 370, "Cost to repair a point of damage.");
+    private static int manaCost = Circadian.CONFIG.get("Enchantments.Manabound", "Cost", 370, "Cost to repair a point of damage.").getInt(370);
 
     @SubscribeEvent
     public static void onLivingTick(LivingEvent.LivingUpdateEvent event) {
@@ -40,7 +40,7 @@ public class CircadianEvents {
 
     @SubscribeEvent
     public static void onTrampleEvent(BlockEvent.FarmlandTrampleEvent event) {
-        if (Circadian.CONFIG.get("Farmland", "Trample", true, "Disable trampling of farmland.")) {
+        if (Circadian.CONFIG.get("Farmland", "Trample", true, "Disable trampling of farmland.").getBoolean(true)) {
             event.setCanceled(true);
         }
     }

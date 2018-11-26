@@ -1,26 +1,35 @@
 package com.noobanidus.circadian.config;
 
 import com.noobanidus.circadian.Circadian;
-import com.noobanidus.circadian.compat.OreDictionaryEntries;
 import com.noobanidus.circadian.compat.astralsorcery.blocks.BlockStarmetal;
 import com.noobanidus.circadian.compat.chisel.blocks.BlockRedScribbles;
 import com.noobanidus.circadian.compat.extrautilities2.blocks.BlockCompressedStoneEntry;
 import com.noobanidus.circadian.compat.oreberries.blocks.BlockBerry;
 import com.noobanidus.circadian.compat.thaumcraft.blocks.BlockCompressedVisBattery;
 import com.noobanidus.circadian.enchantment.EnchantmentManabound;
+import com.noobanidus.circadian.icons.BlockMiniatures;
 import com.noobanidus.circadian.icons.Icons;
 import com.noobanidus.circadian.items.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
+import net.minecraft.client.renderer.color.BlockColors;
+import net.minecraft.client.renderer.color.IBlockColor;
+import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.ColorizerFoliage;
+import net.minecraft.world.ColorizerGrass;
+import net.minecraft.world.biome.BiomeColorHelper;
+import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -34,12 +43,14 @@ import javax.annotation.Nonnull;
 public class Registrar {
     public static BlockCompressedVisBattery compressed;
     public static BlockStarmetal starmetal;
+    public static BlockMiniatures miniatures;
 
     public static ItemBlock ib_compressed;
     public static ItemBlock ib_starmetal;
     public static ItemBlock ib_knightmetal;
     public static ItemBlock ib_liveroot;
     public static ItemBlock ib_naga;
+    public static ItemBlock ib_miniatures;
 
     public static BlockBerry knightmetal_berry;
     public static BlockBerry liveroot_berry;
@@ -69,6 +80,7 @@ public class Registrar {
 
     public static Enchantment manabound;
 
+    @SuppressWarnings("unused")
     public static BlockCompressedStoneEntry[] compressedBlocks = new BlockCompressedStoneEntry[]{new BlockCompressedStoneEntry(Blocks.SANDSTONE, "sandstone_normal", 2), new BlockCompressedStoneEntry(Blocks.RED_SANDSTONE, "red_sandstone_normal", 2), new BlockCompressedStoneEntry(Blocks.STONE, "stone", 2)};
 
     @SuppressWarnings("ConstantConditions")
@@ -88,11 +100,29 @@ public class Registrar {
         clusters = new Clusters();
         nuggets = new Nuggets();
         scribbles = new BlockRedScribbles();
+        miniatures = new BlockMiniatures();
+        miniatures.setRegistryName("circadian:miniatures");
 
         wateringCan = new WateringCan();
         satchels = new Satchels();
 
         icons = new Icons();
+
+        ib_miniatures = new ItemMultiTexture(miniatures, miniatures, new ItemMultiTexture.Mapper() {
+            @Override
+            @Nonnull
+            public String apply (@Nonnull ItemStack stack) {
+                for (BlockMiniatures.MiniatureVariant var : BlockMiniatures.MiniatureVariant.values()) {
+                    if (var.meta == stack.getItemDamage()) {
+                        return var.getName();
+                    }
+                }
+
+                return "invalid";
+            }
+        });
+
+        ib_miniatures.setRegistryName(miniatures.getRegistryName());
 
         ib_scribbles = new ItemMultiTexture(scribbles, scribbles, new ItemMultiTexture.Mapper() {
             @Override
@@ -174,6 +204,8 @@ public class Registrar {
             event.getRegistry().register(liveroot_berry);
             event.getRegistry().register(naga_berry);
         }
+
+        event.getRegistry().register(miniatures);
     }
 
     @SubscribeEvent
@@ -199,6 +231,8 @@ public class Registrar {
             event.getRegistry().register(fertilizer);
             event.getRegistry().register(fertilizerBag);
         }
+
+        event.getRegistry().register(ib_miniatures);
 
         event.getRegistry().register(goldenPotato);
         event.getRegistry().register(silveredPotato);
@@ -229,6 +263,8 @@ public class Registrar {
         if (Satchels.enabled) {
             satchels.registerModels();
         }
+
+        miniatures.registerModel();
 
 
         if (BlockRedScribbles.enabled) {
@@ -314,5 +350,25 @@ public class Registrar {
         public ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
             return new ModelResourceLocation(texture, this.getPropertyString(state.getProperties()));
         }
+    }
+
+    @SideOnly(Side.CLIENT)
+    @SubscribeEvent
+    public static void registerBlockColors(ColorHandlerEvent.Block e) {
+        BlockColors blocks = e.getBlockColors();
+
+        final IBlockColor grassHandler = (state, worldIn, pos, tintIndex) -> (worldIn != null && pos != null && state.getBlock() instanceof BlockMiniatures && Registrar.miniatures.getMetaFromState(state) <= 1) ? 5635969 : BiomeColorHelper.getFoliageColorAtPos(worldIn, pos);
+
+        blocks.registerBlockColorHandler(grassHandler, Registrar.miniatures);
+    }
+
+    @SideOnly(Side.CLIENT)
+    @SubscribeEvent
+    public static void registerItemColors(ColorHandlerEvent.Item e) {
+        ItemColors items = e.getItemColors();
+
+        final IItemColor grassHandler = (stack, tintIndex) -> (stack.getItem() instanceof ItemBlock && ((ItemBlock) stack.getItem()).getBlock() instanceof BlockMiniatures && stack.getItemDamage() <= 1) ? 5635969 : ColorizerGrass.getGrassColor(0.5, 1.0);
+
+        items.registerItemColorHandler(grassHandler, Registrar.miniatures);
     }
 }

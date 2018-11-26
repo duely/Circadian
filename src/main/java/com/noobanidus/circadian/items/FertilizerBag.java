@@ -23,11 +23,9 @@ import javax.annotation.Nonnull;
 
 @SuppressWarnings("WeakerAccess")
 public class FertilizerBag extends Item {
-    public boolean enabled;
+    public static boolean enabled = Circadian.CONFIG.get("Items.Fertilizer", "Enable", true, "Enable fertilizer (bone-meal alternative).").getBoolean(true);
 
     public FertilizerBag() {
-        enabled = Circadian.CONFIG.get("Items.Fertilizer", "Enable", true, "Enable fertilizer (bone-meal alternative).");
-
         setCreativeTab(Circadian.TAB);
         setRegistryName(new ResourceLocation("circadian", "fertilizer_bag"));
         setUnlocalizedName("Fertilizer_Bag");
