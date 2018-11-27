@@ -357,9 +357,32 @@ public class Registrar {
     public static void registerBlockColors(ColorHandlerEvent.Block e) {
         BlockColors blocks = e.getBlockColors();
 
-        final IBlockColor grassHandler = (state, worldIn, pos, tintIndex) -> (worldIn != null && pos != null && state.getBlock() instanceof BlockMiniatures && Registrar.miniatures.getMetaFromState(state) <= 1) ? 5635969 : BiomeColorHelper.getFoliageColorAtPos(worldIn, pos);
+        final IBlockColor grassHandler = (state, worldIn, pos, tintIndex) -> {
+            if (tintIndex == 1 && worldIn != null && pos != null && state.getBlock() instanceof BlockMiniatures) {
+                if (Registrar.miniatures.getMetaFromState(state) == 0) {
+                    return 5635969;
+                } else if (Registrar.miniatures.getMetaFromState(state) == 1) {
+                    return ColorizerGrass.getGrassColor(0.25, 0.8);
+                }
+            }
+
+            return BiomeColorHelper.getGrassColorAtPos(worldIn, pos);
+        };
+
+         final IBlockColor leafHandler = (state, worldIn, pos, tintIndex) -> {
+            if (tintIndex == 2 && worldIn != null && pos != null && state.getBlock() instanceof BlockMiniatures) {
+                if (Registrar.miniatures.getMetaFromState(state) == 0) {
+                    return 6750149;
+                } else if (Registrar.miniatures.getMetaFromState(state) == 1) {
+                    return ColorizerFoliage.getFoliageColor(0.25, 0.8);
+                }
+            }
+
+            return BiomeColorHelper.getFoliageColorAtPos(worldIn, pos);
+        };
 
         blocks.registerBlockColorHandler(grassHandler, Registrar.miniatures);
+        blocks.registerBlockColorHandler(leafHandler, Registrar.miniatures);
     }
 
     @SideOnly(Side.CLIENT)
@@ -367,8 +390,31 @@ public class Registrar {
     public static void registerItemColors(ColorHandlerEvent.Item e) {
         ItemColors items = e.getItemColors();
 
-        final IItemColor grassHandler = (stack, tintIndex) -> (stack.getItem() instanceof ItemBlock && ((ItemBlock) stack.getItem()).getBlock() instanceof BlockMiniatures && stack.getItemDamage() <= 1) ? 5635969 : ColorizerGrass.getGrassColor(0.5, 1.0);
+        final IItemColor grassHandler = (stack, tintIndex) -> {
+            if (tintIndex == 1 && stack.getItem() instanceof ItemBlock && ((ItemBlock) stack.getItem()).getBlock() instanceof BlockMiniatures) {
+                if (stack.getItemDamage() == 0) {
+                    return 5635969;
+                } else if (stack.getItemDamage() == 1) {
+                    return ColorizerGrass.getGrassColor(0.25, 0.8);
+                }
+            }
+
+            return ColorizerGrass.getGrassColor(0.5, 1.0);
+        };
+
+        final IItemColor leafHandler = (stack, tintIndex) -> {
+            if (tintIndex == 2 && stack.getItem() instanceof ItemBlock && ((ItemBlock) stack.getItem()).getBlock() instanceof BlockMiniatures) {
+                if (stack.getItemDamage() == 0) {
+                    return 6750149;
+                } else if (stack.getItemDamage() == 1) {
+                     return ColorizerFoliage.getFoliageColor(0.25, 0.8);
+                }
+            }
+
+            return ColorizerFoliage.getFoliageColor(0.5, 1.0);
+        };
 
         items.registerItemColorHandler(grassHandler, Registrar.miniatures);
+        items.registerItemColorHandler(leafHandler, Registrar.miniatures);
     }
 }

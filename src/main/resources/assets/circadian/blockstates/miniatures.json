@@ -6,6 +6,8 @@
     "inventory_desert_temple": [{ "model": "circadian:miniature/desert_temple"}],
     "inventory_desert_temple2": [{ "model": "circadian:miniature/desert_temple2"}],
     "inventory_astral_temple4": [{ "model": "circadian:miniature/astral_temple4"}],
+    "inventory_mountain": [{ "model": "circadian:miniature/mountain"}],
+    "inventory_desert": [{ "model": "circadian:miniature/desert"}],
     "variant": {
       "nether_portal": {
         "model": "circadian:miniature/nether_portal"
@@ -15,6 +17,12 @@
       },
       "desert_temple": {
         "model": "circadian:miniature/desert_temple"
+      },
+      "mountain": {
+        "model": "circadian:miniature/mountain"
+      },
+      "desert": {
+        "model": "circadian:miniature/desert"
       },
       "desert_temple2": {
         "model": "circadian:miniature/desert_temple2"

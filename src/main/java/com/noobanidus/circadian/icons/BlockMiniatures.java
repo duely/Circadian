@@ -99,10 +99,12 @@ public class BlockMiniatures extends Block {
 
     public enum MiniatureVariant implements IStringSerializable {
         ENCHANTED_FOREST2(0),
-        NETHER_PORTAL(1),
-        DESERT_TEMPLE(2),
-        DESERT_TEMPLE2(3),
-        ASTRAL_TEMPLE4(4);
+        MOUNTAIN(1),
+        NETHER_PORTAL(2),
+        DESERT_TEMPLE(3),
+        DESERT_TEMPLE2(4),
+        ASTRAL_TEMPLE4(5),
+        DESERT(6);
 
         public final int meta;
 
