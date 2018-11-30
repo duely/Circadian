@@ -1,10 +1,8 @@
 package com.noobanidus.circadian.core.asm;
 
-import WayofTime.bloodmagic.ritual.Ritual;
 import com.infinityraider.agricraft.blocks.BlockCrop;
 import com.infinityraider.agricraft.tiles.TileEntityCrop;
 import com.infinityraider.infinitylib.utility.WorldHelper;
-import com.noobanidus.circadian.Circadian;
 import com.noobanidus.circadian.config.Registrar;
 import josephcsible.oreberries.BlockOreberryBush;
 import net.minecraft.block.Block;
@@ -12,7 +10,6 @@ import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockStem;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.passive.AbstractHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -20,7 +17,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.FakePlayer;
@@ -29,7 +25,7 @@ import thaumcraft.common.lib.utils.CropUtils;
 
 @SuppressWarnings("unused")
 public class CicadaTweakerHooks {
-	public static final ResourceLocation PENGUIN_LOOT_TABLE = new ResourceLocation("cicadatweaks", "entities/twilightforest/penguin");
+
 
 	public static boolean isGrownCrop(World world, BlockPos pos) {
 		if (world.isAirBlock(pos)) {
@@ -139,7 +135,5 @@ public class CicadaTweakerHooks {
 		return flag;
 	}
 
-	public static int modifyActivationCost (String ritualName, int activationCost) {
-		return Circadian.CONFIG.get("BloodMagic.Rituals", ritualName, activationCost, "Modify activation cost for ritual").getInt(activationCost);
-	}
+
 }

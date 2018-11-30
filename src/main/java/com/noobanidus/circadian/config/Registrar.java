@@ -316,7 +316,6 @@ public class Registrar {
         ModelLoader.setCustomModelResourceLocation(silveredApple, 1, new ModelResourceLocation("circadian:food", "type=silveredApple"));
         ModelLoader.setCustomModelResourceLocation(silveredMelon, 0, new ModelResourceLocation("circadian:food", "type=silveredmelon"));
         ModelLoader.setCustomModelResourceLocation(silveredCarrot, 0, new ModelResourceLocation("circadian:food", "type=silveredcarrot"));
-
     }
 
     @SubscribeEvent

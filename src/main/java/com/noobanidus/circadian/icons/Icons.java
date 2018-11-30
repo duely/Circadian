@@ -25,6 +25,8 @@ public class Icons extends ItemMulti {
 
         wither = addItem(0, "wither");
         horseHead = addItem(1, "horse_head");
+        enderLily = addItem(2, "ender_lily");
+        blaze = addItem(3, "blaze");
 
         return true;
     }
@@ -37,4 +39,6 @@ public class Icons extends ItemMulti {
 
     ItemStack horseHead;
     ItemStack wither;
+    ItemStack enderLily;
+    ItemStack blaze;
 }

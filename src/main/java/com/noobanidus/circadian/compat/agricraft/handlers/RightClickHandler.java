@@ -1,6 +1,5 @@
 package com.noobanidus.circadian.compat.agricraft.handlers;
 
-import akka.util.Reflect;
 import com.infinityraider.agricraft.api.v1.items.IAgriClipperItem;
 import com.infinityraider.agricraft.api.v1.items.IAgriRakeItem;
 import com.infinityraider.agricraft.api.v1.items.IAgriTrowelItem;

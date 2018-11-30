@@ -1,9 +1,9 @@
 package com.noobanidus.circadian;
 
-import cofh.core.util.ConfigHandler;
 import com.noobanidus.circadian.compat.OreDictionaryEntries;
 import com.noobanidus.circadian.compat.agricraft.handlers.CropHandler;
 import com.noobanidus.circadian.compat.agricraft.handlers.RightClickHandler;
+import com.noobanidus.circadian.compat.bloodmagic.rituals.handler.RitualCostHandler;
 import com.noobanidus.circadian.compat.botania.brew.Brews;
 import com.noobanidus.circadian.compat.cofh.thermalexpansion.GuiHandler;
 import com.noobanidus.circadian.compat.oreberries.handlers.BerryHandler;
@@ -11,8 +11,10 @@ import com.noobanidus.circadian.compat.oreberries.world.TwilightWorldGen;
 import com.noobanidus.circadian.compat.thaumcraft.handlers.ClusterHandler;
 import com.noobanidus.circadian.compat.top.TOPProvider;
 import com.noobanidus.circadian.compat.twilightforest.Mobs;
+import com.noobanidus.circadian.compat.vanilla.handlers.MansionBiomeTypesHandler;
 import com.noobanidus.circadian.config.Registrar;
 import com.noobanidus.circadian.events.CircadianEvents;
+import com.noobanidus.circadian.events.ModelErrorEventSuppressor;
 import com.noobanidus.circadian.events.RitualEventHandler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
@@ -30,6 +32,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 
 @Mod.EventBusSubscriber
 @Mod(modid = Circadian.MODID, name = Circadian.MODNAME, version = Circadian.VERSION, dependencies = Circadian.DEPENDS)
@@ -50,12 +54,13 @@ public class Circadian {
     @Mod.Instance(Circadian.MODID)
     public static Circadian instance;
 
+    private List<Class> EventClasses = Arrays.asList(CircadianEvents.class, RitualEventHandler.class, ModelErrorEventSuppressor.class);
+
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         TAB = new CreativeTabCircadian(CreativeTabs.getNextID(), MODID);
         Registrar.preInit();
-        MinecraftForge.EVENT_BUS.register(CircadianEvents.class);
-        MinecraftForge.EVENT_BUS.register(RitualEventHandler.class);
+        EventClasses.forEach(MinecraftForge.EVENT_BUS::register);
         GUI_HANDLER = new GuiHandler();
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, GUI_HANDLER);
     }
@@ -87,8 +92,14 @@ public class Circadian {
         if (cakeCount <= 64 && cakeCount > 0) {
             Items.CAKE.setMaxStackSize(cakeCount);
         }
+        int enderCount = CONFIG.get("Vanilla.Items", "EnderPearlStackSize", 64, "Modify default stack size of ender pearls.").getInt(65);
+        if (enderCount <= 64 && enderCount > 0) {
+            Items.ENDER_PEARL.setMaxStackSize(enderCount);
+        }
 
         RightClickHandler.init();
+        MansionBiomeTypesHandler.init();
+        RitualCostHandler.init();
 
         LOG.info("Circadian: Load Complete.");
         CONFIG.save();

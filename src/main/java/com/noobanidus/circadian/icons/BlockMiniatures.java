@@ -86,7 +86,8 @@ public class BlockMiniatures extends Block {
     }
 
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer() {
+    @Override
+    public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 
@@ -104,7 +105,10 @@ public class BlockMiniatures extends Block {
         DESERT_TEMPLE(3),
         DESERT_TEMPLE2(4),
         ASTRAL_TEMPLE4(5),
-        DESERT(6);
+        DESERT(6),
+        DESERT2(7),
+        END_CITY(8),
+        END_ISLAND_PORTAL(9);
 
         public final int meta;
 

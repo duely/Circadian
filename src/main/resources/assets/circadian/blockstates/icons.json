@@ -18,6 +18,16 @@
         "textures": {
           "layer0": "circadian:items/quests/wither"
         }
+      },
+      "ender_lily": {
+        "textures": {
+          "layer0": "extrautils2:plants/ender_lilly_stage_6"
+        }
+      },
+      "blaze": {
+        "textures": {
+          "layer0": "circadian:items/quests/blaze"
+        }
       }
     }
   }

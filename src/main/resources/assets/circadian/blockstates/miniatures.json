@@ -1,13 +1,17 @@
 {
   "forge_marker": 1,
   "variants": {
-    "inventory_nether_portal":             [{ "model": "circadian:miniature/nether_portal"              }],
+    "inventory_nether_portal": [{ "model": "circadian:miniature/nether_portal"}],
     "inventory_enchanted_forest2": [{ "model": "circadian:miniature/enchanted_forest2"}],
     "inventory_desert_temple": [{ "model": "circadian:miniature/desert_temple"}],
     "inventory_desert_temple2": [{ "model": "circadian:miniature/desert_temple2"}],
     "inventory_astral_temple4": [{ "model": "circadian:miniature/astral_temple4"}],
     "inventory_mountain": [{ "model": "circadian:miniature/mountain"}],
     "inventory_desert": [{ "model": "circadian:miniature/desert"}],
+    "inventory_desert2": [{ "model": "circadian:miniature/desert2"}],
+    "inventory_horse_head": [{ "model": "circadian:miniature/horse_head.obj"}],
+    "inventory_end_city": [{ "model": "circadian:miniature/end_city"}],
+    "inventory_end_island_portal": [{ "model": "circadian:miniature/end_island_portal"}],
     "variant": {
       "nether_portal": {
         "model": "circadian:miniature/nether_portal"
@@ -24,11 +28,20 @@
       "desert": {
         "model": "circadian:miniature/desert"
       },
+      "desert2": {
+        "model": "circadian:miniature/desert2"
+      },
       "desert_temple2": {
         "model": "circadian:miniature/desert_temple2"
       },
       "astral_temple4": {
         "model": "circadian:miniature/astral_temple4"
+      },
+      "end_city": {
+          "model": "circadian:miniature/end_city"
+      },
+      "end_island_portal": {
+          "model": "circadian:miniature/end_island_portal"
       }
     }
   }

@@ -38,9 +38,6 @@ public class CicadaTweakerTransformer implements IClassTransformer, Opcodes {
         if (Circadian.CONFIG.get("FTB.Utilities", "TrashCanSize", true, "Increase FTB Utilities trash can size to be equal to that of the inventory.").getBoolean(true)) {
             tweaks.add(new IncreaseFTBUtilitiesTrashCanSizeTweak());
         }
-        if (Circadian.CONFIG.get("BloodMagic.Rituals", "AdjustCosts", true, "Adjust costs of Blood Magic rituals.").getBoolean(true)) {
-            tweaks.add(new BloodMagicRitualTweak());
-        }
         if (Circadian.CONFIG.get("ExtraUtils2.DemonMetal", "ChangeInput", true, "Change Extrautils2 input material for Demon Metal from gold to thaumium, alchemical brass or void metal.").getBoolean(true)) {
             tweaks.add(new DemonMetalTweak());
         }

@@ -23,7 +23,7 @@ public class VanillaHorseWanderingTweak extends Tweak {
 	@Override
 	public void doPatch(String transformedName, ClassNode node) {
 	    for (MethodNode mnode : node.methods) {
-            if (!(mnode.name.equals(resolveDeobf("getPosition", "func_190864_f")))) continue;
+            if (!(mnode.name.equals(resolveDeobf("canSpawnStructureAtCoords", "func_75047_a")))) continue;
 
             mnode.instructions.clear();
             AnnotationVisitor av0 = mnode.visitAnnotation("Ljavax/annotation/Nullable;", true);
