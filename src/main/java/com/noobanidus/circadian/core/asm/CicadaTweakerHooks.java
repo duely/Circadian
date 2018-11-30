@@ -20,6 +20,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.items.ItemHandlerHelper;
 import thaumcraft.common.lib.utils.CropUtils;
 

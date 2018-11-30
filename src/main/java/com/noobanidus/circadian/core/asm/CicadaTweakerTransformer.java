@@ -23,9 +23,6 @@ public class CicadaTweakerTransformer implements IClassTransformer, Opcodes {
         if (Circadian.CONFIG.get("Oreberries.Harvest", "DropBerries", true, "Patch Oreberries to drop berries instead of placing them in inventories (Thaumcraft Golem compatibility)").getBoolean(true)) {
             tweaks.add(new OreberriesHarvestTweak());
         }
-        if (Circadian.CONFIG.get("Vanilla.Animals", "SilverBreeding", true, "Patch vanilla Horse breeding to use silvered versions of carrots, potatos and apples.").getBoolean(true)) {
-            tweaks.add(new VanillaHorseBreedingTweak());
-        }
 		if (Circadian.CONFIG.get("Vanilla.Animals", "NoSaddledWandering", true, "Prevent saddled horses from wandering away.").getBoolean(true)) {
             tweaks.add(new VanillaHorseWanderingTweak());
         }
