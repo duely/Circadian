@@ -40,7 +40,7 @@ public class MansionBiomeTypesHandler {
 
         List<Biome> newBiomes = new ArrayList<>();
 
-        newBiomes.addAll(Arrays.asList(Biomes.ROOFED_FOREST, Biomes.MUTATED_ROOFED_FOREST, Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.FOREST, Biomes.FOREST_HILLS, Biomes.MUTATED_FOREST, Biomes.MUTATED_BIRCH_FOREST, Biomes.TAIGA, Biomes.MUTATED_TAIGA));
+        newBiomes.addAll(Arrays.asList(Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.MUTATED_BIRCH_FOREST, Biomes.MUTATED_FOREST, Biomes.FOREST_HILLS, Biomes.FOREST, Biomes.MUTATED_TAIGA, Biomes.MUTATED_ROOFED_FOREST, Biomes.ROOFED_FOREST, Biomes.TAIGA, Biomes.COLD_TAIGA, Biomes.COLD_TAIGA_HILLS, Biomes.MUTATED_REDWOOD_TAIGA, Biomes.MUTATED_REDWOOD_TAIGA_HILLS));
 
         if (Loader.isModLoaded("traverse")) {
             newBiomes.add(ForgeRegistries.BIOMES.getValue(new ResourceLocation("traverse:woodlands")));
@@ -49,6 +49,7 @@ public class MansionBiomeTypesHandler {
             newBiomes.add(ForgeRegistries.BIOMES.getValue(new ResourceLocation("traverse:forested_hills")));
             newBiomes.add(ForgeRegistries.BIOMES.getValue(new ResourceLocation("traverse:birch_forested_hills")));
             newBiomes.add(ForgeRegistries.BIOMES.getValue(new ResourceLocation("traverse:autumnal_wooded_hills")));
+            newBiomes.add(ForgeRegistries.BIOMES.getValue(new ResourceLocation("traverse:snowy_coniferous_forest")));
         }
         if (Loader.isModLoaded("thaumcraft")) {
             newBiomes.add(ForgeRegistries.BIOMES.getValue(new ResourceLocation("thaumcraft:magical_forest")));
