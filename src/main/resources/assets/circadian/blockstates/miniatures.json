@@ -12,6 +12,8 @@
     "inventory_horse_head": [{ "model": "circadian:miniature/horse_head.obj"}],
     "inventory_end_city": [{ "model": "circadian:miniature/end_city"}],
     "inventory_end_island_portal": [{ "model": "circadian:miniature/end_island_portal"}],
+    "inventory_demon_metal": [{ "model": "circadian:miniature/demon_metal"}],
+    "inventory_chopping": [{ "model": "circadian:miniature/chopping"}],
     "variant": {
       "nether_portal": {
         "model": "circadian:miniature/nether_portal"
@@ -38,10 +40,16 @@
         "model": "circadian:miniature/astral_temple4"
       },
       "end_city": {
-          "model": "circadian:miniature/end_city"
+        "model": "circadian:miniature/end_city"
       },
       "end_island_portal": {
-          "model": "circadian:miniature/end_island_portal"
+        "model": "circadian:miniature/end_island_portal"
+      },
+      "demon_metal": {
+        "model": "circadian:miniature/demon_metal"
+      },
+      "chopping": {
+        "model": "circadian:miniature/chopping"
       }
     }
   }
