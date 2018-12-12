@@ -9,15 +9,19 @@ import com.noobanidus.circadian.compat.cofh.thermalexpansion.GuiHandler;
 import com.noobanidus.circadian.compat.oreberries.handlers.BerryHandler;
 import com.noobanidus.circadian.compat.oreberries.world.TwilightWorldGen;
 import com.noobanidus.circadian.compat.thaumcraft.handlers.ClusterHandler;
+import com.noobanidus.circadian.compat.thaumcraft.handlers.LootHandler;
 import com.noobanidus.circadian.compat.top.TOPProvider;
 import com.noobanidus.circadian.compat.twilightforest.Mobs;
 import com.noobanidus.circadian.compat.vanilla.handlers.HorseBreedingHandler;
 import com.noobanidus.circadian.compat.vanilla.handlers.MansionBiomeTypesHandler;
+import com.noobanidus.circadian.compat.vanilla.handlers.VillagerAgingHandler;
 import com.noobanidus.circadian.config.Registrar;
 import com.noobanidus.circadian.events.CircadianEvents;
 import com.noobanidus.circadian.events.ModelErrorEventSuppressor;
 import com.noobanidus.circadian.events.RitualEventHandler;
+import net.minecraft.block.BlockObsidian;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -55,7 +59,7 @@ public class Circadian {
     @Mod.Instance(Circadian.MODID)
     public static Circadian instance;
 
-    private List<Class> EventClasses = Arrays.asList(CircadianEvents.class, RitualEventHandler.class, ModelErrorEventSuppressor.class, HorseBreedingHandler.class);
+    private List<Class> EventClasses = Arrays.asList(CircadianEvents.class, RitualEventHandler.class, HorseBreedingHandler.class, VillagerAgingHandler.class);
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -64,6 +68,12 @@ public class Circadian {
         EventClasses.forEach(MinecraftForge.EVENT_BUS::register);
         GUI_HANDLER = new GuiHandler();
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, GUI_HANDLER);
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Mod.EventHandler
+    public void clientPreInit(FMLPreInitializationEvent event) {
+        MinecraftForge.EVENT_BUS.register(ModelErrorEventSuppressor.class);
     }
 
     // TODO: Better config attention
