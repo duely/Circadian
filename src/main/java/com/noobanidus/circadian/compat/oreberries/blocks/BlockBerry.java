@@ -110,7 +110,7 @@ public class BlockBerry extends Block implements IPlantable, IGrowable {
                 liveroot.addProperty("special", "Liveroots");
                 liveroot.addProperty("growsInLight", true);
                 liveroot.addProperty("tradeable", false);
-                liveroot.addProperty("maxHeight", 35);
+                liveroot.addProperty("maxHeight", 50);
                 liveroot.addProperty("sizeChance", 7);
                 return new OreberryConfig("Liveroot", liveroot);
             default:
