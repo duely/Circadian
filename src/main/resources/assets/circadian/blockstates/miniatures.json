@@ -14,6 +14,10 @@
     "inventory_end_island_portal": [{ "model": "circadian:miniature/end_island_portal"}],
     "inventory_demon_metal": [{ "model": "circadian:miniature/demon_metal"}],
     "inventory_chopping": [{ "model": "circadian:miniature/chopping"}],
+    "inventory_imperfect_ritual": [{ "model": "circadian:miniature/imperfect_ritual"}],
+    "inventory_mining_portal": [{ "model": "circadian:miniature/mining_portal" }],
+    "inventory_soul_multiblock": [{ "model": "circadian:miniature/soul_multiblock" }],
+    "inventory_crusher_ritual": [{ "model": "circadian:miniature/crusher_ritual"}],
     "variant": {
       "nether_portal": {
         "model": "circadian:miniature/nether_portal"
@@ -50,6 +54,18 @@
       },
       "chopping": {
         "model": "circadian:miniature/chopping"
+      },
+      "imperfect_ritual": {
+        "model": "circadian:miniature/imperfect_ritual"
+      },
+      "mining_portal": {
+        "model": "circadian:miniature/mining_portal"
+      },
+      "soul_multiblock": {
+        "model": "circadian:miniature/soul_multiblock"
+      },
+      "crusher_ritual": {
+        "model": "circadian:miniature/crusher_ritual"
       }
     }
   }

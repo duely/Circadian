@@ -1,0 +1,5 @@
+# Blender MTL File: 'horse_head.obj'
+# Material Count: 1
+
+newmtl head
+map_Kd minecraft:block/stone

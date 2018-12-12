@@ -28,6 +28,11 @@
         "textures": {
           "layer0": "circadian:items/quests/blaze"
         }
+      },
+      "vitium": {
+        "textures": {
+          "layer0": "circadian:items/quests/vitium"
+        }
       }
     }
   }

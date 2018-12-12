@@ -110,7 +110,11 @@ public class BlockMiniatures extends Block {
         END_CITY(8),
         END_ISLAND_PORTAL(9),
         DEMON_METAL(10),
-        CHOPPING(11);
+        CHOPPING(11),
+        IMPERFECT_RITUAL(12),
+        MINING_PORTAL(13),
+        SOUL_MULTIBLOCK(14),
+        CRUSHER_RITUAL(15);
 
         public final int meta;
 
