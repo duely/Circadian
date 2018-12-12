@@ -13,6 +13,7 @@ import com.noobanidus.circadian.compat.thaumcraft.handlers.LootHandler;
 import com.noobanidus.circadian.compat.top.TOPProvider;
 import com.noobanidus.circadian.compat.twilightforest.Mobs;
 import com.noobanidus.circadian.compat.vanilla.handlers.HorseBreedingHandler;
+import com.noobanidus.circadian.compat.vanilla.handlers.HorseMovementHandler;
 import com.noobanidus.circadian.compat.vanilla.handlers.MansionBiomeTypesHandler;
 import com.noobanidus.circadian.compat.vanilla.handlers.VillagerAgingHandler;
 import com.noobanidus.circadian.config.Registrar;
@@ -59,7 +60,7 @@ public class Circadian {
     @Mod.Instance(Circadian.MODID)
     public static Circadian instance;
 
-    private List<Class> EventClasses = Arrays.asList(CircadianEvents.class, RitualEventHandler.class, HorseBreedingHandler.class, VillagerAgingHandler.class);
+    private List<Class> EventClasses = Arrays.asList(CircadianEvents.class, RitualEventHandler.class, HorseBreedingHandler.class, VillagerAgingHandler.class, HorseMovementHandler.class);
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
