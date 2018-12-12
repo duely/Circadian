@@ -19,7 +19,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 import org.apache.commons.lang3.StringUtils;
+import thaumcraft.common.blocks.crafting.BlockVoidSiphon;
 import thaumcraft.common.blocks.devices.BlockVisBattery;
+import thaumcraft.common.blocks.world.ore.BlockCrystal;
+import thaumcraft.common.tiles.crafting.TileVoidSiphon;
 import vazkii.botania.api.brew.Brew;
 import vazkii.botania.common.block.BlockIncensePlate;
 import vazkii.botania.common.block.tile.TileIncensePlate;
@@ -75,6 +78,18 @@ public class TOPProvider {
                     } else if (blockState.getBlock() instanceof BlockBerry) {
                         int growthState = blockState.getValue(BlockBerry.AGE);
                         probeInfo.text((growthState == 3) ? OK + "Ready to Harvest" : "");
+                    } else if (blockState.getBlock() instanceof BlockCrystal) {
+                        int size = blockState.getValue(BlockCrystal.SIZE);
+                        String progress = ((size == 0) ? "25%" : ((size == 1)) ? "50%" : ((size == 2)) ? "75%" : "100%");
+
+                        probeInfo.text(((size == 3) ? OK : WARNING) + "Growth: " + progress);
+                    } else if (blockState.getBlock() instanceof BlockVoidSiphon) {
+                        TileVoidSiphon siphon = (TileVoidSiphon) world.getTileEntity(data.getPos());
+
+                        int progress = (int) ((siphon.progress/2000.f) * 100.f);
+
+                        probeInfo.text(((progress < 80) ? WARNING : OK ) + String.format("Growth: %d%%", progress));
+
                     } else if (blockState.getBlock() instanceof BlockIncensePlate) {
                         TileIncensePlate plate = (TileIncensePlate) world.getTileEntity(data.getPos());
 
