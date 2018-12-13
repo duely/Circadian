@@ -18,9 +18,7 @@ import com.noobanidus.circadian.compat.vanilla.handlers.MansionBiomeTypesHandler
 import com.noobanidus.circadian.compat.vanilla.handlers.VillagerAgingHandler;
 import com.noobanidus.circadian.config.Registrar;
 import com.noobanidus.circadian.events.CircadianEvents;
-import com.noobanidus.circadian.events.ModelErrorEventSuppressor;
 import com.noobanidus.circadian.events.RitualEventHandler;
-import net.minecraft.block.BlockObsidian;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -69,12 +67,6 @@ public class Circadian {
         EventClasses.forEach(MinecraftForge.EVENT_BUS::register);
         GUI_HANDLER = new GuiHandler();
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, GUI_HANDLER);
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Mod.EventHandler
-    public void clientPreInit(FMLPreInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register(ModelErrorEventSuppressor.class);
     }
 
     // TODO: Better config attention
