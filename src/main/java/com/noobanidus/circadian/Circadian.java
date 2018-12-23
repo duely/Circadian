@@ -47,7 +47,7 @@ public class Circadian {
     public static final String MODID = "circadian";
     public static final String MODNAME = "Circadian";
     public static final String VERSION = "GRADLE:VERSION";
-    public static final String DEPENDS = "required-after:twilightforest;required-after:thaumcraft;required-after:thermalfoundation;required-after:theoneprobe;required-after:astralsorcery;required-after:agricraft;required-after:oreberries;required-after:bloodmagic;required-after:thermalexpansion;before:jei;";
+    public static final String DEPENDS = "after:twilightforest;required-after:thaumcraft;required-after:thermalfoundation;required-after:theoneprobe;required-after:agricraft;required-after:oreberries;required-after:bloodmagic;required-after:thermalexpansion;before:jei;";
     public static final String KEY = "ca23084fc26ce53879eea4b7afb0a8d9da9744d7";
 
     public final static Logger LOG = LogManager.getLogger(MODID);
