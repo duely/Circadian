@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "minecraft:torch",
+    "count": 16
+  },
+  "pattern": [
+    "B",
+    "S"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "B": {
+      "item": "minecraft:glowstone_dust"
+    },
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "stickWood"
+    }
+  }
+}
