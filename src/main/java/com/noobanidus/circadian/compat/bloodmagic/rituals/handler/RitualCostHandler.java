@@ -27,7 +27,7 @@ public class RitualCostHandler {
 	}
 
     public static void modifyFields () throws ReflectiveOperationException {
-        Field field = ReflectionHelper.findField(Ritual.class, "activationCost");
+        Field field = ReflectionHelper.findField(Ritual.class, "activationCost", "activationCost");
         field.setAccessible(true);
 
         Field modifiers = Field.class.getDeclaredField("modifiers");

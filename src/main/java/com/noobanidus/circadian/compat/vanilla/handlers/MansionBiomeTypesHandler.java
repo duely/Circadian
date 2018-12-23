@@ -31,7 +31,7 @@ public class MansionBiomeTypesHandler {
     }
 
     public static void modifyFields () throws ReflectiveOperationException {
-        Field field = ReflectionHelper.findField(WoodlandMansion.class, Tweak.resolveDeobf("ALLOWED_BIOMES", "field_191072_a"));
+        Field field = ReflectionHelper.findField(WoodlandMansion.class, "ALLOWED_BIOMES", "field_191072_a");
         field.setAccessible(true);
 
         Field modifiers = Field.class.getDeclaredField("modifiers");

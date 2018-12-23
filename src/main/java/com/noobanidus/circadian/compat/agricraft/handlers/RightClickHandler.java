@@ -29,7 +29,7 @@ public class RightClickHandler {
     }
 
     public static void modifyFields () throws ReflectiveOperationException {
-        Field field = ReflectionHelper.findField(BlockCrop.class, "ITEM_EXCLUDES");
+        Field field = ReflectionHelper.findField(BlockCrop.class, "ITEM_EXCLUDES", "ITEM_EXCLUDES");
         field.setAccessible(true);
 
         Field modifiers = Field.class.getDeclaredField("modifiers");
