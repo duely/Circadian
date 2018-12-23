@@ -6,6 +6,7 @@ import com.noobanidus.circadian.compat.agricraft.handlers.RightClickHandler;
 import com.noobanidus.circadian.compat.bloodmagic.rituals.handler.RitualCostHandler;
 import com.noobanidus.circadian.compat.botania.brew.Brews;
 import com.noobanidus.circadian.compat.cofh.thermalexpansion.GuiHandler;
+import com.noobanidus.circadian.compat.extrautilities2.handlers.EnderLilySpawning;
 import com.noobanidus.circadian.compat.oreberries.handlers.BerryHandler;
 import com.noobanidus.circadian.compat.oreberries.world.TwilightWorldGen;
 import com.noobanidus.circadian.compat.thaumcraft.handlers.ClusterHandler;
@@ -64,6 +65,7 @@ public class Circadian {
     public void preInit(FMLPreInitializationEvent event) {
         TAB = new CreativeTabCircadian(CreativeTabs.getNextID(), MODID);
         Registrar.preInit();
+        EnderLilySpawning.preInit();
         EventClasses.forEach(MinecraftForge.EVENT_BUS::register);
         GUI_HANDLER = new GuiHandler();
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, GUI_HANDLER);

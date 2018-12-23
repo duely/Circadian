@@ -4,6 +4,8 @@ import com.infinityraider.agricraft.blocks.BlockCrop;
 import com.infinityraider.agricraft.tiles.TileEntityCrop;
 import com.infinityraider.infinitylib.utility.WorldHelper;
 import com.noobanidus.circadian.config.Registrar;
+import com.rwtema.extrautils2.blocks.BlockEnderLilly;
+import fluke.stygian.block.ModBlocks;
 import josephcsible.oreberries.BlockOreberryBush;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
@@ -136,5 +138,8 @@ public class CicadaTweakerHooks {
 		return flag;
 	}
 
-
+	public static boolean validLocation (World world, BlockPos pos) {
+		Block block = world.getBlockState(pos.down()).getBlock();
+		return BlockEnderLilly.isEndStoneBlock(world, pos) || block == Blocks.DIRT || block == Blocks.GRASS || block == ModBlocks.endGrass || block == ModBlocks.endObsidian || block == ModBlocks.endMagma;
+	}
 }
