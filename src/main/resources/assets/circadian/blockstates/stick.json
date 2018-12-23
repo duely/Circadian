@@ -1,0 +1,24 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "builtin/generated",
+    "textures": {
+      "layer0": "blocks/dirt"
+    },
+    "transform": "forge:default-item"
+  },
+  "variants": {
+    "type": {
+      "stickcompressed": {
+        "textures": {
+          "layer0": "circadian:items/stick_compressed"
+        }
+      },
+      "stickdoublecompressed": {
+        "textures": {
+          "layer0": "circadian:items/stick_double_compressed"
+        }
+      }
+    }
+  }
+}

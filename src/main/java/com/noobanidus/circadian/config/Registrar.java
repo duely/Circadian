@@ -63,6 +63,7 @@ public class Registrar {
     public static Clusters clusters;
     public static Nuggets nuggets;
     public static Tools tools;
+    public static Sticks sticks;
 
     public static Satchels satchels;
     public static WateringCan wateringCan;
@@ -97,6 +98,7 @@ public class Registrar {
         mobIngredients = new MobIngredients();
         plates = new Plate();
         tools = new Tools();
+        sticks = new Sticks();
         clusters = new Clusters();
         nuggets = new Nuggets();
         scribbles = new BlockRedScribbles();
@@ -153,6 +155,10 @@ public class Registrar {
         }
 
         tools.init();
+
+        if (Sticks.enabled) {
+            sticks.init();
+        }
 
         if (Clusters.enabled) {
             clusters.init();
@@ -301,6 +307,10 @@ public class Registrar {
         }
 
         tools.registerModels();
+
+        if (Sticks.enabled) {
+            sticks.registerModels();
+        }
 
         if (Clusters.enabled) {
             clusters.registerModels();
