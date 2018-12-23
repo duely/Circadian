@@ -3,7 +3,10 @@ package com.noobanidus.circadian.compat.thaumcraft.handlers;
 import cofh.thermalfoundation.block.BlockOre;
 import com.noobanidus.circadian.Circadian;
 import com.noobanidus.circadian.items.Clusters;
-import hellfirepvp.astralsorcery.common.block.BlockCustomOre;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.Loader;
 import thaumcraft.common.lib.utils.Utils;
 
 public class ClusterHandler {
@@ -27,8 +30,19 @@ public class ClusterHandler {
         */
 
         if (ClusterHandler.enabled) {
-            Utils.addSpecialMiningResult(BlockOre.orePlatinum, Clusters.clusterPlatinum, 1);
-            Utils.addSpecialMiningResult(BlockCustomOre.OreType.STARMETAL.asStack(), Clusters.clusterStarmetal, 1);
+            if (Loader.isModLoaded("astralsorcery")) {
+                Item starmetal = Item.REGISTRY.getObject(new ResourceLocation("astralsorcery:blockcustomore"));
+                if (starmetal == null) {
+                    Circadian.LOG.error("Couldn't find Starmetal Ore to register custom cluster!");
+                } else {
+                    ItemStack ore = new ItemStack(starmetal, 1, 1);
+                    Utils.addSpecialMiningResult(ore, Clusters.clusterStarmetal, 1);
+                }
+            }
+
+            if (Loader.isModLoaded("thermalfoundation")) {
+                Utils.addSpecialMiningResult(BlockOre.orePlatinum, Clusters.clusterPlatinum, 1);
+            }
         }
     }
 }

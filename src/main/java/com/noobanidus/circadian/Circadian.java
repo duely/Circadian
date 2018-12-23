@@ -80,7 +80,6 @@ public class Circadian {
         }
         GameRegistry.registerWorldGenerator(new TwilightWorldGen(), 0);
 
-        ClusterHandler.init();
         CropHandler.init();
         BerryHandler.init();
         Brews.registerBrews();
@@ -91,6 +90,7 @@ public class Circadian {
         Mobs.registerSpawns();
         OreDictionaryEntries.initEntries();
         LootHandler.removeLootEntries();
+        ClusterHandler.init();
     }
 
     @Mod.EventHandler
