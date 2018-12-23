@@ -3,6 +3,7 @@ package com.noobanidus.circadian.config;
 import com.noobanidus.circadian.Circadian;
 import com.noobanidus.circadian.compat.astralsorcery.blocks.BlockStarmetal;
 import com.noobanidus.circadian.compat.chisel.blocks.BlockRedScribbles;
+import com.noobanidus.circadian.compat.extrautilities2.blocks.BlockCompressedStoneEntry;
 import com.noobanidus.circadian.compat.oreberries.blocks.BlockBerry;
 import com.noobanidus.circadian.compat.thaumcraft.blocks.BlockCompressedVisBattery;
 import com.noobanidus.circadian.enchantment.EnchantmentManabound;
@@ -79,6 +80,9 @@ public class Registrar {
     public static Item silveredCarrot;
 
     public static Enchantment manabound;
+
+    @SuppressWarnings("unused")
+    public static BlockCompressedStoneEntry[] compressedBlocks = new BlockCompressedStoneEntry[]{new BlockCompressedStoneEntry(Blocks.SANDSTONE, "sandstone_normal", 2), new BlockCompressedStoneEntry(Blocks.RED_SANDSTONE, "red_sandstone_normal", 2), new BlockCompressedStoneEntry(Blocks.STONE, "stone", 2)};
 
     @SuppressWarnings("ConstantConditions")
     public static void preInit() {
@@ -189,7 +193,7 @@ public class Registrar {
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
-        if (BlockCompressedVisBattery.enabled) {
+        if (BlockCompressedStoneEntry.enabled) {
             event.getRegistry().register(compressed);
         }
 
@@ -212,7 +216,7 @@ public class Registrar {
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
-        if (BlockCompressedVisBattery.enabled) {
+        if (BlockCompressedStoneEntry.enabled) {
             event.getRegistry().register(ib_compressed);
         }
 
@@ -246,7 +250,7 @@ public class Registrar {
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public static void registerModels(ModelRegistryEvent event) {
-        if (BlockCompressedVisBattery.enabled) {
+        if (BlockCompressedStoneEntry.enabled) {
             ModelLoader.setCustomModelResourceLocation(ib_compressed, 0, new ModelResourceLocation(new ResourceLocation("circadian", "compressed_vis_battery"), "inventory"));
         }
 
