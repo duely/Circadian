@@ -38,6 +38,9 @@ public class CicadaTweakerTransformer implements IClassTransformer, Opcodes {
         if (Circadian.CONFIG.get("ExtraUtils2.EnderLily", "StygianCompat", true, "Allow Ender Lily plants to spawn on Stygian end biome features.").getBoolean(true)) {
         	tweaks.add(new StygianEnderLilyTweak());
 		}
+		if (Circadian.CONFIG.get("WaterStrainers.Invetory", "StackSize", true, "Increase the maximum stack size of the Water Strainer's inventory.").getBoolean(true)) {
+			tweaks.add(new WaterStrainerSizeTweak());
+		}
 
 		for(Tweak t : tweaks) {
 			allPatchedClasses.addAll(t.getAffectedClasses());
