@@ -109,6 +109,10 @@ public class Circadian {
         if (snowballCount <= 64 && snowballCount > 0) {
             Items.SNOWBALL.setMaxStackSize(snowballCount);
         }
+        int signCount = CONFIG.get("Vanilla.Items", "SignStackSize", 64, "Modify default stack size of signs.").getInt(65);
+        if (signCount <= 64 && signCount > 0) {
+            Items.SIGN.setMaxStackSize(signCount);
+        }
 
         RightClickHandler.init();
         MansionBiomeTypesHandler.init();
