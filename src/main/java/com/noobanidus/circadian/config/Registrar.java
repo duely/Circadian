@@ -11,6 +11,7 @@ import com.noobanidus.circadian.icons.BlockMiniatures;
 import com.noobanidus.circadian.icons.Icons;
 import com.noobanidus.circadian.items.*;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockStone;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
@@ -81,7 +82,7 @@ public class Registrar {
     public static Enchantment manabound;
 
     @SuppressWarnings("unused")
-    public static BlockCompressedStoneEntry[] compressedBlocks = new BlockCompressedStoneEntry[]{new BlockCompressedStoneEntry(Blocks.SANDSTONE, "sandstone_normal", 2), new BlockCompressedStoneEntry(Blocks.RED_SANDSTONE, "red_sandstone_normal", 2), new BlockCompressedStoneEntry(Blocks.STONE, "stone", 2)};
+    public static BlockCompressedStoneEntry[] compressedBlocks = new BlockCompressedStoneEntry[] { new BlockCompressedStoneEntry(((BlockStone) Blocks.STONE).getStateFromMeta(0), "stone", 2), new BlockCompressedStoneEntry(((BlockStone) Blocks.STONE).getStateFromMeta(1), "stone_granite", 2), new BlockCompressedStoneEntry(((BlockStone) Blocks.STONE).getStateFromMeta(3), "stone_diorite", 2), new BlockCompressedStoneEntry(((BlockStone) Blocks.STONE).getStateFromMeta(5), "stone_andesite", 2), new BlockCompressedStoneEntry(Blocks.SANDSTONE, "sandstone_normal", 2), new BlockCompressedStoneEntry(Blocks.RED_SANDSTONE, "red_sandstone_normal", 2)};
 
     @SuppressWarnings("ConstantConditions")
     public static void preInit() {
