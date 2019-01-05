@@ -55,7 +55,7 @@ public class HorseBreedingHandler {
             didStuff = true;
         }
 
-        if (horse.isChild() && i > 0) {
+        if (horse.isChild()) {
  			horse.world.spawnParticle(EnumParticleTypes.VILLAGER_HAPPY, horse.posX + (double) (horse.rand.nextFloat() * horse.width * 2.0F) - (double) horse.width, horse.posY + 0.5D + (double) (horse.rand.nextFloat() * horse.height), horse.posZ + (double) (horse.rand.nextFloat() * horse.width * 2.0F) - (double) horse.width, 0.0D, 0.0D, 0.0D);
 
  			horse.addGrowth(i);

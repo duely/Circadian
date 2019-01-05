@@ -5,6 +5,7 @@ import com.google.common.eventbus.EventBus;
 import com.noobanidus.circadian.Circadian;
 import net.minecraftforge.fml.common.*;
 
+@SuppressWarnings("unused")
 public class CicadaTweakerContainer extends DummyModContainer {
 	public CicadaTweakerContainer() {
 		super(new ModMetadata());

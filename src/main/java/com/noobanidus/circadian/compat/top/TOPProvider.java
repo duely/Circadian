@@ -138,9 +138,9 @@ public class TOPProvider {
                                 Ritual ritual = BloodMagic.RITUAL_MANAGER.getRitual(key);
                                 String ritualName = I18n.format(ritual.getUnlocalizedName());
                                 probeInfo.text(OK + ritualName);
-                                if (tile.isPowered()) {
+                                if (tile != null && tile.isPowered()) {
                                     probeInfo.text(WARNING + "(Disabled via redstone)");
-                                } else if (tile.isActive()) {
+                                } else if (tile != null && tile.isActive()) {
                                     probeInfo.text(OK + "Active");
                                 } else {
                                     probeInfo.text(WARNING + String.format("Activation cost: %,dLP", ritual.getActivationCost()));

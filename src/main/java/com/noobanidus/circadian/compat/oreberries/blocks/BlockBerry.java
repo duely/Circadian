@@ -301,6 +301,7 @@ public class BlockBerry extends Block implements IPlantable, IGrowable {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public PathNodeType getAiPathNodeType(IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
         return PathNodeType.DAMAGE_CACTUS;
     }

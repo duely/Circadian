@@ -13,7 +13,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 
 public class GuiSatchel extends GuiContainerCore {
 
-    public GuiSatchel(InventoryPlayer inventory, ContainerSatchel container) {
+    GuiSatchel(InventoryPlayer inventory, ContainerSatchel container) {
 
         super(container);
 

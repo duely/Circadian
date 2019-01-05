@@ -1,14 +1,13 @@
 package com.noobanidus.circadian.compat.vanilla.handlers;
 
 import com.noobanidus.circadian.Circadian;
-import com.noobanidus.circadian.core.asm.tweaks.Tweak;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.structure.WoodlandMansion;
 import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -31,7 +30,7 @@ public class MansionBiomeTypesHandler {
     }
 
     public static void modifyFields () throws ReflectiveOperationException {
-        Field field = ReflectionHelper.findField(WoodlandMansion.class, "ALLOWED_BIOMES", "field_191072_a");
+        Field field = ObfuscationReflectionHelper.findField(WoodlandMansion.class, "ALLOWED_BIOMES");
         field.setAccessible(true);
 
         Field modifiers = Field.class.getDeclaredField("modifiers");

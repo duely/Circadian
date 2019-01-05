@@ -1,5 +1,6 @@
 package com.noobanidus.circadian;
 
+import com.google.common.collect.Lists;
 import com.noobanidus.circadian.compat.OreDictionaryEntries;
 import com.noobanidus.circadian.compat.agricraft.handlers.CropHandler;
 import com.noobanidus.circadian.compat.agricraft.handlers.RightClickHandler;
@@ -48,6 +49,8 @@ public class Circadian {
     public static final String MODNAME = "Circadian";
     public static final String VERSION = "GRADLE:VERSION";
     public static final String DEPENDS = "after:twilightforest;required-after:thaumcraft;required-after:thermalfoundation;required-after:theoneprobe;required-after:agricraft;required-after:oreberries;required-after:bloodmagic;required-after:thermalexpansion;before:jei;";
+
+    @SuppressWarnings("unused")
     public static final String KEY = "ca23084fc26ce53879eea4b7afb0a8d9da9744d7";
 
     public final static Logger LOG = LogManager.getLogger(MODID);
@@ -59,7 +62,7 @@ public class Circadian {
     @Mod.Instance(Circadian.MODID)
     public static Circadian instance;
 
-    private List<Class> EventClasses = Arrays.asList(CircadianEvents.class, RitualEventHandler.class, HorseBreedingHandler.class, VillagerAgingHandler.class, HorseMovementHandler.class);
+    private List<Class> EventClasses = Lists.newArrayList(CircadianEvents.class, RitualEventHandler.class, HorseBreedingHandler.class, VillagerAgingHandler.class, HorseMovementHandler.class);
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -109,7 +112,7 @@ public class Circadian {
         if (snowballCount <= 64 && snowballCount > 0) {
             Items.SNOWBALL.setMaxStackSize(snowballCount);
         }
-        int signCount = CONFIG.get("Vanilla.Items", "SignStackSize", 64, "Modify default stack size of signs.").getInt(65);
+        int signCount = CONFIG.get("Vanilla.Items", "SignStackSize", 64, "Modify default stack size of signs.").getInt(64);
         if (signCount <= 64 && signCount > 0) {
             Items.SIGN.setMaxStackSize(signCount);
         }

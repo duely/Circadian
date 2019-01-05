@@ -13,7 +13,7 @@ public abstract class Tweak implements Opcodes {
 	public abstract void doPatch(String transformedName, ClassNode node);
 	public abstract String getLogMessage(String transformedName);
 	
-	Collection<String> affectedClasses;
+	private Collection<String> affectedClasses;
 	
 	public Collection<String> getAffectedClasses() {
 		if(affectedClasses == null) affectedClasses = computeAffectedClasses();

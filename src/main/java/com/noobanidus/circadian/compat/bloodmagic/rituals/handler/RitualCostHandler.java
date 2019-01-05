@@ -3,7 +3,7 @@ package com.noobanidus.circadian.compat.bloodmagic.rituals.handler;
 import WayofTime.bloodmagic.BloodMagic;
 import WayofTime.bloodmagic.ritual.Ritual;
 import com.noobanidus.circadian.Circadian;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -22,12 +22,12 @@ public class RitualCostHandler {
         }
     }
 
- 	public static int modifyActivationCost (String ritualName, int activationCost) {
+ 	private static int modifyActivationCost (String ritualName, int activationCost) {
 		return Circadian.CONFIG.get("BloodMagic.Rituals", ritualName, activationCost, String.format("Modify activation cost for ritual %s", ritualName)).getInt(activationCost);
 	}
 
-    public static void modifyFields () throws ReflectiveOperationException {
-        Field field = ReflectionHelper.findField(Ritual.class, "activationCost", "activationCost");
+    private static void modifyFields () throws ReflectiveOperationException {
+        Field field = ObfuscationReflectionHelper.findField(Ritual.class, "activationCost");
         field.setAccessible(true);
 
         Field modifiers = Field.class.getDeclaredField("modifiers");

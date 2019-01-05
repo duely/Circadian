@@ -35,12 +35,12 @@ public class BlockCompressedStoneEntry extends BlockEntry<BlockCompressed> {
     public void addRecipes() {
         ItemStack base = new ItemStack(this.blockState.getBlock());
         base.setItemDamage(this.blockState.getBlock().getMetaFromState(this.blockState));
-        CraftingHelper.addShaped("compressed_" + this.texture, this.newStack(1, 0), new Object[]{"BBB", "BBB", "BBB", 'B', base});
-        CraftingHelper.addShapeless("compressed_" + this.texture + "_uncompress", new ItemStack(this.blockState.getBlock(), 9), new Object[]{this.newStack(1, 0)});
+        CraftingHelper.addShaped("compressed_" + this.texture, this.newStack(1, 0), "BBB", "BBB", "BBB", 'B', base);
+        CraftingHelper.addShapeless("compressed_" + this.texture + "_uncompress", new ItemStack(this.blockState.getBlock(), 9), this.newStack(1, 0));
 
         for (int i = 0; i < this.max - 1; ++i) {
-            CraftingHelper.addShaped("compressed_" + this.texture + "_" + (i + 1), this.newStack(1, i + 1), new Object[]{"BBB", "BBB", "BBB", 'B', this.newStack(1, i)});
-            CraftingHelper.addShapeless("compressed_" + this.texture + "_" + (i + 1) + "_uncompress", this.newStack(9, i), new Object[]{this.newStack(1, i + 1)});
+            CraftingHelper.addShaped("compressed_" + this.texture + "_" + (i + 1), this.newStack(1, i + 1), "BBB", "BBB", "BBB", 'B', this.newStack(1, i));
+            CraftingHelper.addShapeless("compressed_" + this.texture + "_" + (i + 1) + "_uncompress", this.newStack(9, i), this.newStack(1, i + 1));
         }
 
     }

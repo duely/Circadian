@@ -8,7 +8,7 @@ import com.infinityraider.agricraft.items.ItemDebugger;
 import com.noobanidus.circadian.Circadian;
 import com.noobanidus.circadian.items.WateringCan;
 import com.rwtema.extrautils2.items.ItemWateringCan;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import xreliquary.items.ItemHarvestRod;
 
 import java.lang.reflect.Field;
@@ -29,7 +29,7 @@ public class RightClickHandler {
     }
 
     public static void modifyFields () throws ReflectiveOperationException {
-        Field field = ReflectionHelper.findField(BlockCrop.class, "ITEM_EXCLUDES", "ITEM_EXCLUDES");
+        Field field = ObfuscationReflectionHelper.findField(BlockCrop.class, "ITEM_EXCLUDES");
         field.setAccessible(true);
 
         Field modifiers = Field.class.getDeclaredField("modifiers");
