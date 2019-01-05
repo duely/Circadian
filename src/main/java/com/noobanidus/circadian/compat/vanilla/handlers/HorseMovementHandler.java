@@ -23,7 +23,7 @@ public class HorseMovementHandler {
     public static boolean swimmingEnabled = Circadian.CONFIG.get("Vanilla.Horse", "AllowSwimming", true, "Set to false to prevent horses from gaining vertical motion while in water (allowing swimming).").getBoolean(true);
 
     @SubscribeEvent
-    public static void onLeafEvent (GetCollisionBoxesEvent event) {
+    public static void onLeafEvent(GetCollisionBoxesEvent event) {
         if (!leafEnabled || event.getEntity() == null || !event.getEntity().isBeingRidden() || !(event.getEntity() instanceof AbstractHorse)) {
             return;
         }
@@ -41,7 +41,7 @@ public class HorseMovementHandler {
 
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
-    public static void onSwimEvent (TickEvent.ClientTickEvent event) {
+    public static void onSwimEvent(TickEvent.ClientTickEvent event) {
         if (!swimmingEnabled || FMLClientHandler.instance().getClient().isGamePaused()) {
             return;
         }

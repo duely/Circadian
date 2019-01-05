@@ -41,15 +41,13 @@ public class BlockMiniatures extends Block {
 
     @Override
     @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(IBlockState state)
-    {
+    public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public boolean isFullCube(IBlockState state)
-    {
+    public boolean isFullCube(IBlockState state) {
         return false;
     }
 
@@ -80,7 +78,7 @@ public class BlockMiniatures extends Block {
 
     @Override
     public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
-        for (MiniatureVariant variation : MiniatureVariant.values() ) {
+        for (MiniatureVariant variation : MiniatureVariant.values()) {
             list.add(new ItemStack(this, 1, variation.ordinal()));
         }
     }
@@ -94,7 +92,7 @@ public class BlockMiniatures extends Block {
     @SideOnly(Side.CLIENT)
     public void registerModel() {
         for (MiniatureVariant variation : MiniatureVariant.values()) {
-            ModelLoader.setCustomModelResourceLocation( Registrar.ib_miniatures, variation.ordinal(), new ModelResourceLocation("circadian:miniatures", "inventory_"+variation.getName()));
+            ModelLoader.setCustomModelResourceLocation(Registrar.ib_miniatures, variation.ordinal(), new ModelResourceLocation("circadian:miniatures", "inventory_" + variation.getName()));
         }
     }
 

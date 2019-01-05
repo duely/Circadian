@@ -3,24 +3,25 @@ package com.noobanidus.circadian.core.asm.tweaks;
 import com.google.common.collect.ImmutableList;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.tree.*;
+import org.objectweb.asm.tree.ClassNode;
+import org.objectweb.asm.tree.MethodNode;
 
 import java.util.Collection;
 
 @SuppressWarnings("unused")
 public class HarvestRodTweak extends Tweak {
-	@Override
-	protected Collection<String> computeAffectedClasses() {
-		return ImmutableList.of("xreliquary.items.ItemHarvestRod");
-	}
-	
-	@Override
-	public String getLogMessage(String transformedName) {
-		return "[CicadaTweaks] Patching Harvest Rod to consume fertilizer...";
-	}
-	
-	@Override
-	public void doPatch(String transformedName, ClassNode node) {
+    @Override
+    protected Collection<String> computeAffectedClasses() {
+        return ImmutableList.of("xreliquary.items.ItemHarvestRod");
+    }
+
+    @Override
+    public String getLogMessage(String transformedName) {
+        return "[CicadaTweaks] Patching Harvest Rod to consume fertilizer...";
+    }
+
+    @Override
+    public void doPatch(String transformedName, ClassNode node) {
         for (MethodNode mnode : node.methods) {
             if (!(mnode.name.equals(resolveDeobf("onUpdate", "func_77663_a")))) continue;
 
@@ -50,7 +51,7 @@ public class HarvestRodTweak extends Tweak {
             mnode.visitTypeInsn(CHECKCAST, "net/minecraft/entity/player/EntityPlayer");
             mnode.visitVarInsn(ASTORE, 6);
             mnode.visitLabel(label4);
-            mnode.visitFrame(Opcodes.F_APPEND,1, new Object[] {"net/minecraft/entity/player/EntityPlayer"}, 0, null);
+            mnode.visitFrame(Opcodes.F_APPEND, 1, new Object[]{"net/minecraft/entity/player/EntityPlayer"}, 0, null);
             mnode.visitVarInsn(ALOAD, 6);
             Label label6 = new Label();
             mnode.visitJumpInsn(IFNONNULL, label6);
@@ -145,5 +146,5 @@ public class HarvestRodTweak extends Tweak {
             mnode.visitMaxs(5, 7);
             mnode.visitEnd();
         }
-	}
+    }
 }

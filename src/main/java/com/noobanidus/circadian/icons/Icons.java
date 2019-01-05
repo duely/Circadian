@@ -13,6 +13,12 @@ public class Icons extends ItemMulti {
 
     public static boolean enabled = Circadian.CONFIG.get("Items.Icons", "Enable", true, "Enable additional icon items.").getBoolean(true);
 
+    ItemStack horseHead;
+    ItemStack wither;
+    ItemStack enderLily;
+    ItemStack blaze;
+    ItemStack vitium;
+
     public Icons() {
         super("circadian");
 
@@ -37,10 +43,4 @@ public class Icons extends ItemMulti {
             ModelLoader.setCustomModelResourceLocation(this, entry.getKey(), new ModelResourceLocation("circadian:icons", "type=" + entry.getValue().name));
         }
     }
-
-    ItemStack horseHead;
-    ItemStack wither;
-    ItemStack enderLily;
-    ItemStack blaze;
-    ItemStack vitium;
 }

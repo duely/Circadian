@@ -33,7 +33,7 @@ runClient {
     args '--username', 'nooblybear'
 }
 
-task deobfJar (type: Jar) {
+task deobfJar(type: Jar) {
     from sourceSets.main.output
     classifier = "deobf"
 }

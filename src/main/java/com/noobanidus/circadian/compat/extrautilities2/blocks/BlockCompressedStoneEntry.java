@@ -22,7 +22,7 @@ public class BlockCompressedStoneEntry extends BlockEntry<BlockCompressed> {
 
     @SuppressWarnings("unchecked")
     public BlockCompressedStoneEntry(IBlockState blockState, String texture, int max) {
-        super("Compressed" + StringHelper.capFirst(texture, true), new Class[0]);
+        super("Compressed" + StringHelper.capFirst(texture, true));
         this.blockState = blockState;
         this.texture = texture;
         this.max = max;

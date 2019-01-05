@@ -9,39 +9,40 @@ import org.objectweb.asm.tree.ClassNode;
 import java.util.Collection;
 
 public abstract class Tweak implements Opcodes {
-	protected abstract Collection<String> computeAffectedClasses();
-	public abstract void doPatch(String transformedName, ClassNode node);
-	public abstract String getLogMessage(String transformedName);
-	
-	private Collection<String> affectedClasses;
-	
-	public Collection<String> getAffectedClasses() {
-		if(affectedClasses == null) affectedClasses = computeAffectedClasses();
-		return affectedClasses;
-	}
-	
-	public void patch(String transformedName, ClassNode node) {
-		if(affectedClasses.contains(transformedName)) {
-			log(getLogMessage(transformedName));
-			doPatch(transformedName, node);
-		}
-	}
-	
-	public static String getHooksClass() {
-		return CicadaTweakerTransformer.HOOKS;
-	}
+    public static Boolean deobf = null;
+    private Collection<String> affectedClasses;
 
-	public static Boolean deobf = null;
+    public static String getHooksClass() {
+        return CicadaTweakerTransformer.HOOKS;
+    }
 
-	public static String resolveDeobf (String deobfString, String obfString) {
-		if (deobf == null) {
-			deobf = (Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
-		}
+    public static String resolveDeobf(String deobfString, String obfString) {
+        if (deobf == null) {
+            deobf = (Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
+        }
 
-		return (deobf) ? deobfString : obfString;
-	}
-	
-	static void log(String message) {
-		LogManager.getLogger("Cicada Tweaks ASM").info(message);
-	}
+        return (deobf) ? deobfString : obfString;
+    }
+
+    static void log(String message) {
+        LogManager.getLogger("Cicada Tweaks ASM").info(message);
+    }
+
+    protected abstract Collection<String> computeAffectedClasses();
+
+    public abstract void doPatch(String transformedName, ClassNode node);
+
+    public abstract String getLogMessage(String transformedName);
+
+    public Collection<String> getAffectedClasses() {
+        if (affectedClasses == null) affectedClasses = computeAffectedClasses();
+        return affectedClasses;
+    }
+
+    public void patch(String transformedName, ClassNode node) {
+        if (affectedClasses.contains(transformedName)) {
+            log(getLogMessage(transformedName));
+            doPatch(transformedName, node);
+        }
+    }
 }

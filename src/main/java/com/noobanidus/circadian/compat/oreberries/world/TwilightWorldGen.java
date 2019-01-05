@@ -16,14 +16,7 @@ import twilightforest.TFConfig;
 import twilightforest.biomes.TFDarkForestBiomeDecorator;
 import twilightforest.block.BlockTFRoots;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
 
 @SuppressWarnings("WeakerAccess")
 public class TwilightWorldGen extends OreberriesWorldGen {
@@ -87,7 +80,7 @@ public class TwilightWorldGen extends OreberriesWorldGen {
         return null;
     }
 
-    protected boolean checkBlock (World world, BlockPos pos) {
+    protected boolean checkBlock(World world, BlockPos pos) {
         if (world.isAirBlock(pos)) return false;
 
         IBlockState state = world.getBlockState(pos);
@@ -99,9 +92,7 @@ public class TwilightWorldGen extends OreberriesWorldGen {
 
             // if there isn't an air but there's already a liveroot block we're good
 
-            if (world.getBlockState(pos.east()).getBlock() instanceof BlockBerry || world.getBlockState(pos.west()).getBlock() instanceof BlockBerry || world.getBlockState(pos.north()).getBlock() instanceof BlockBerry || world.getBlockState(pos.south()).getBlock() instanceof BlockBerry || world.getBlockState(pos.up()).getBlock() instanceof BlockBerry || world.getBlockState(pos.down()).getBlock() instanceof BlockBerry) {
-                return true;
-            }
+            return world.getBlockState(pos.east()).getBlock() instanceof BlockBerry || world.getBlockState(pos.west()).getBlock() instanceof BlockBerry || world.getBlockState(pos.north()).getBlock() instanceof BlockBerry || world.getBlockState(pos.south()).getBlock() instanceof BlockBerry || world.getBlockState(pos.up()).getBlock() instanceof BlockBerry || world.getBlockState(pos.down()).getBlock() instanceof BlockBerry;
         }
 
         return false;
@@ -112,9 +103,6 @@ public class TwilightWorldGen extends OreberriesWorldGen {
 
         IBlockState state = world.getBlockState(down);
         Block block = state.getBlock();
-        if (block instanceof BlockLeaves || block instanceof BlockLiquid)
-            return false; // don't place on flowing water or leaves
-
-        return true;
+        return !(block instanceof BlockLeaves) && !(block instanceof BlockLiquid);
     }
 }

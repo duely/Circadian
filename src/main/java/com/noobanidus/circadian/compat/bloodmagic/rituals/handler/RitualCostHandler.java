@@ -22,11 +22,11 @@ public class RitualCostHandler {
         }
     }
 
- 	private static int modifyActivationCost (String ritualName, int activationCost) {
-		return Circadian.CONFIG.get("BloodMagic.Rituals", ritualName, activationCost, String.format("Modify activation cost for ritual %s", ritualName)).getInt(activationCost);
-	}
+    private static int modifyActivationCost(String ritualName, int activationCost) {
+        return Circadian.CONFIG.get("BloodMagic.Rituals", ritualName, activationCost, String.format("Modify activation cost for ritual %s", ritualName)).getInt(activationCost);
+    }
 
-    private static void modifyFields () throws ReflectiveOperationException {
+    private static void modifyFields() throws ReflectiveOperationException {
         Field field = ObfuscationReflectionHelper.findField(Ritual.class, "activationCost");
         field.setAccessible(true);
 

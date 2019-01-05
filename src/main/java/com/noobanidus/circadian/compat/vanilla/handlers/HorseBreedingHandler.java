@@ -14,7 +14,7 @@ public class HorseBreedingHandler {
     public static boolean enabled = Circadian.CONFIG.get("Vanilla.Animals", "SilverBreeding", true, "Patch vanilla Horse breeding to use silvered versions of carrots, potatos and apples.").getBoolean(true);
 
     @SubscribeEvent
-    public static void OnInteract (PlayerInteractEvent.EntityInteract event) {
+    public static void OnInteract(PlayerInteractEvent.EntityInteract event) {
         if (!enabled) return;
 
         EntityPlayer player = event.getEntityPlayer();
@@ -32,13 +32,13 @@ public class HorseBreedingHandler {
         int j = 0;
 
         if (type == Registrar.silveredCarrot || type == Registrar.silveredPotato) {
-			f = 4.0F;
-			i = 60;
-			j = 5;
+            f = 4.0F;
+            i = 60;
+            j = 5;
         } else if (type == Registrar.silveredApple || type == Registrar.goldenPotato) {
-			f = 10.0F;
-			i = 240;
-			j = 10;
+            f = 10.0F;
+            i = 240;
+            j = 10;
         } else {
             return;
         }
@@ -56,10 +56,10 @@ public class HorseBreedingHandler {
         }
 
         if (horse.isChild()) {
- 			horse.world.spawnParticle(EnumParticleTypes.VILLAGER_HAPPY, horse.posX + (double) (horse.rand.nextFloat() * horse.width * 2.0F) - (double) horse.width, horse.posY + 0.5D + (double) (horse.rand.nextFloat() * horse.height), horse.posZ + (double) (horse.rand.nextFloat() * horse.width * 2.0F) - (double) horse.width, 0.0D, 0.0D, 0.0D);
+            horse.world.spawnParticle(EnumParticleTypes.VILLAGER_HAPPY, horse.posX + (double) (horse.rand.nextFloat() * horse.width * 2.0F) - (double) horse.width, horse.posY + 0.5D + (double) (horse.rand.nextFloat() * horse.height), horse.posZ + (double) (horse.rand.nextFloat() * horse.width * 2.0F) - (double) horse.width, 0.0D, 0.0D, 0.0D);
 
- 			horse.addGrowth(i);
- 			didStuff = true;
+            horse.addGrowth(i);
+            didStuff = true;
         }
 
         if (didStuff) {

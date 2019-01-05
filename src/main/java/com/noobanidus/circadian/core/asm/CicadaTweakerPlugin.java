@@ -10,29 +10,29 @@ import java.util.Map;
 @IFMLLoadingPlugin.MCVersion("1.12.2")
 @IFMLLoadingPlugin.SortingIndex(1337)
 public class CicadaTweakerPlugin implements IFMLLoadingPlugin {
-	@Override
-	public String[] getASMTransformerClass() {
-		return new String[] {"com.noobanidus.circadian.core.asm.CicadaTweakerTransformer"};
-	}
-	
-	@Override
-	public String getModContainerClass() {
-		return "com.noobanidus.circadian.core.asm.CicadaTweakerContainer";
-	}
-	
-	@Nullable
-	@Override
-	public String getSetupClass() {
-		return null;
-	}
-	
-	@Override
-	public void injectData(Map<String, Object> data) {
-		
-	}
-	
-	@Override
-	public String getAccessTransformerClass() {
-		return null;
-	}
+    @Override
+    public String[] getASMTransformerClass() {
+        return new String[]{"com.noobanidus.circadian.core.asm.CicadaTweakerTransformer"};
+    }
+
+    @Override
+    public String getModContainerClass() {
+        return "com.noobanidus.circadian.core.asm.CicadaTweakerContainer";
+    }
+
+    @Nullable
+    @Override
+    public String getSetupClass() {
+        return null;
+    }
+
+    @Override
+    public void injectData(Map<String, Object> data) {
+
+    }
+
+    @Override
+    public String getAccessTransformerClass() {
+        return null;
+    }
 }

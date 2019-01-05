@@ -86,9 +86,9 @@ public class TOPProvider {
                     } else if (blockState.getBlock() instanceof BlockVoidSiphon) {
                         TileVoidSiphon siphon = (TileVoidSiphon) world.getTileEntity(data.getPos());
 
-                        int progress = (int) ((siphon.progress/2000.f) * 100.f);
+                        int progress = (int) ((siphon.progress / 2000.f) * 100.f);
 
-                        probeInfo.text(((progress < 80) ? WARNING : OK ) + String.format("Growth: %d%%", progress));
+                        probeInfo.text(((progress < 80) ? WARNING : OK) + String.format("Growth: %d%%", progress));
 
                     } else if (blockState.getBlock() instanceof BlockIncensePlate) {
                         TileIncensePlate plate = (TileIncensePlate) world.getTileEntity(data.getPos());

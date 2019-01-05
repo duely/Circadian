@@ -73,8 +73,8 @@ public class TwilightBushGen extends WorldGenerator {
         IBlockState state = world.getBlockState(pos);
         if (block == Registrar.liveroot_berry && state.getBlock() instanceof BlockTFRoots || (
                 world.isAirBlock(pos) || (state.getBlockHardness(world, pos) >= 0 && !state.isFullBlock()) ||
-                state.getBlock().isReplaceableOreGen(state, world, pos, (s) -> s != null && replaceBlocks.contains(s.getBlock())
-                ))) {
+                        state.getBlock().isReplaceableOreGen(state, world, pos, (s) -> s != null && replaceBlocks.contains(s.getBlock())
+                        ))) {
             world.setBlockState(pos, newState, 2);
             if (block == Registrar.liveroot_berry) {
                 Circadian.LOG.error(String.format("Placed a Liveroot Bush at %d/%d/%d", pos.getX(), pos.getY(), pos.getZ()));

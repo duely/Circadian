@@ -11,13 +11,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import vazkii.botania.common.block.tile.TileCocoon;
 
 public class VillagerAgingHandler {
     public static boolean enabled = Circadian.CONFIG.get("Vanilla.Villagers", "EmeraldAging", true, "Feeding baby villagers emeralds will cause them to grow.").getBoolean(true);
 
     @SubscribeEvent
-    public static void OnInteract (PlayerInteractEvent.EntityInteract event) {
+    public static void OnInteract(PlayerInteractEvent.EntityInteract event) {
         if (!enabled) return;
 
         EntityPlayer player = event.getEntityPlayer();

@@ -7,7 +7,6 @@ import com.rwtema.extrautils2.worldgen.SingleChunkWorldGenManager;
 import fluke.stygian.block.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.Chunk;
@@ -15,7 +14,7 @@ import net.minecraft.world.chunk.Chunk;
 import java.util.Random;
 
 public class EnderLilySpawning {
-    public static void preInit ()  {
+    public static void preInit() {
         SingleChunkWorldGenManager.register(new SingleChunkGen("StygianEnderLillies", 0) {
             BlockEnderLilly lily = null;
 
@@ -34,10 +33,10 @@ public class EnderLilySpawning {
                 int dz = random.nextInt(16);
                 int dy = chunk.getHeightValue(dx, dz) - 1;
                 if (dy <= 0) return;
-                pos.setPos(dx, dy+1, dz);
+                pos.setPos(dx, dy + 1, dz);
                 IBlockState blockState = chunk.getBlockState(pos.down());
                 Block block = blockState.getBlock();
-                if ((block ==  ModBlocks.endGrass || block == ModBlocks.endObsidian || block == ModBlocks.endMagma) && isAir(chunk, pos)) {
+                if ((block == ModBlocks.endGrass || block == ModBlocks.endObsidian || block == ModBlocks.endMagma) && isAir(chunk, pos)) {
                     setBlockState(chunk, pos, lily.FULLY_GROWN_STATE);
                 }
             }

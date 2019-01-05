@@ -22,7 +22,6 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.FakePlayer;
-import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.items.ItemHandlerHelper;
 import thaumcraft.common.lib.utils.CropUtils;
 
@@ -30,116 +29,116 @@ import thaumcraft.common.lib.utils.CropUtils;
 public class CicadaTweakerHooks {
 
 
-	public static boolean isGrownCrop(World world, BlockPos pos) {
-		if (world.isAirBlock(pos)) {
-			return false;
-		}
-		boolean found = false;
-		IBlockState bs = world.getBlockState(pos);
-		Block bi = bs.getBlock();
-		int md = bi.getMetaFromState(bs);
+    public static boolean isGrownCrop(World world, BlockPos pos) {
+        if (world.isAirBlock(pos)) {
+            return false;
+        }
+        boolean found = false;
+        IBlockState bs = world.getBlockState(pos);
+        Block bi = bs.getBlock();
+        int md = bi.getMetaFromState(bs);
 
-		if (bi instanceof BlockCrop) {
-			md = ((BlockCrop) bi).getCropTile(world, pos).map(TileEntityCrop::getGrowthStage).orElse(0);
-		}
-		if (CropUtils.standardCrops.contains(bi.getUnlocalizedName() + md) || CropUtils.clickableCrops.contains(bi.getUnlocalizedName() + md) || CropUtils.stackedCrops.contains(bi.getUnlocalizedName() + md)) {
-			found = true;
-		}
+        if (bi instanceof BlockCrop) {
+            md = ((BlockCrop) bi).getCropTile(world, pos).map(TileEntityCrop::getGrowthStage).orElse(0);
+        }
+        if (CropUtils.standardCrops.contains(bi.getUnlocalizedName() + md) || CropUtils.clickableCrops.contains(bi.getUnlocalizedName() + md) || CropUtils.stackedCrops.contains(bi.getUnlocalizedName() + md)) {
+            found = true;
+        }
 
-		Block biB = world.getBlockState(pos.down()).getBlock();
-		return (bi instanceof IGrowable && !((IGrowable) bi).canGrow(world, pos, world.getBlockState(pos), world.isRemote) && !(bi instanceof BlockStem)) || (bi instanceof BlockCrops && md == 7 && !found) || CropUtils.standardCrops.contains(bi.getUnlocalizedName() + md) || CropUtils.clickableCrops.contains(bi.getUnlocalizedName() + md) || (CropUtils.stackedCrops.contains(bi.getUnlocalizedName() + md) && biB == bi);
-	}
+        Block biB = world.getBlockState(pos.down()).getBlock();
+        return (bi instanceof IGrowable && !((IGrowable) bi).canGrow(world, pos, world.getBlockState(pos), world.isRemote) && !(bi instanceof BlockStem)) || (bi instanceof BlockCrops && md == 7 && !found) || CropUtils.standardCrops.contains(bi.getUnlocalizedName() + md) || CropUtils.clickableCrops.contains(bi.getUnlocalizedName() + md) || (CropUtils.stackedCrops.contains(bi.getUnlocalizedName() + md) && biB == bi);
+    }
 
-	public static boolean harvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
-		if (state.getValue(BlockOreberryBush.AGE) >= 3) {
-			if (world.isRemote)
-				return true;
+    public static boolean harvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
+        if (state.getValue(BlockOreberryBush.AGE) >= 3) {
+            if (world.isRemote)
+                return true;
 
-			world.setBlockState(pos, state.withProperty(BlockOreberryBush.AGE, 2));
-			if (player instanceof FakePlayer) {
-				WorldHelper.spawnItemInWorld(world, pos, ((BlockOreberryBush) state.getBlock()).getBerriesStack(world.rand));
-			} else {
-				ItemHandlerHelper.giveItemToPlayer(player, ((BlockOreberryBush) state.getBlock()).getBerriesStack(world.rand));
-			}
-		}
+            world.setBlockState(pos, state.withProperty(BlockOreberryBush.AGE, 2));
+            if (player instanceof FakePlayer) {
+                WorldHelper.spawnItemInWorld(world, pos, ((BlockOreberryBush) state.getBlock()).getBerriesStack(world.rand));
+            } else {
+                ItemHandlerHelper.giveItemToPlayer(player, ((BlockOreberryBush) state.getBlock()).getBerriesStack(world.rand));
+            }
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	public static boolean handleEating(AbstractHorse horse, EntityPlayer player, ItemStack stack) {
-		boolean flag = false;
-		float f = 0.0F;
-		int i = 0;
-		int j = 0;
-		Item item = stack.getItem();
+    public static boolean handleEating(AbstractHorse horse, EntityPlayer player, ItemStack stack) {
+        boolean flag = false;
+        float f = 0.0F;
+        int i = 0;
+        int j = 0;
+        Item item = stack.getItem();
 
-		if (item == Items.WHEAT) {
-			f = 2.0F;
-			i = 20;
-			j = 3;
-		} else if (item == Items.SUGAR) {
-			f = 1.0F;
-			i = 30;
-			j = 3;
-		} else if (item == Item.getItemFromBlock(Blocks.HAY_BLOCK)) {
-			f = 20.0F;
-			i = 180;
-		} else if (item == Items.APPLE) {
-			f = 3.0F;
-			i = 60;
-			j = 3;
-		} else if (item == Items.GOLDEN_CARROT || item == Registrar.silveredCarrot || item == Registrar.silveredPotato) {
-			f = 4.0F;
-			i = 60;
-			j = 5;
+        if (item == Items.WHEAT) {
+            f = 2.0F;
+            i = 20;
+            j = 3;
+        } else if (item == Items.SUGAR) {
+            f = 1.0F;
+            i = 30;
+            j = 3;
+        } else if (item == Item.getItemFromBlock(Blocks.HAY_BLOCK)) {
+            f = 20.0F;
+            i = 180;
+        } else if (item == Items.APPLE) {
+            f = 3.0F;
+            i = 60;
+            j = 3;
+        } else if (item == Items.GOLDEN_CARROT || item == Registrar.silveredCarrot || item == Registrar.silveredPotato) {
+            f = 4.0F;
+            i = 60;
+            j = 5;
 
-			if (horse.isTame() && horse.getGrowingAge() == 0 && !horse.isInLove()) {
-				flag = true;
-				horse.setInLove(player);
-			}
-		} else if (item == Items.GOLDEN_APPLE || item == Registrar.silveredApple || item == Registrar.goldenPotato) {
-			f = 10.0F;
-			i = 240;
-			j = 10;
+            if (horse.isTame() && horse.getGrowingAge() == 0 && !horse.isInLove()) {
+                flag = true;
+                horse.setInLove(player);
+            }
+        } else if (item == Items.GOLDEN_APPLE || item == Registrar.silveredApple || item == Registrar.goldenPotato) {
+            f = 10.0F;
+            i = 240;
+            j = 10;
 
-			if (horse.isTame() && horse.getGrowingAge() == 0 && !horse.isInLove()) {
-				flag = true;
-				horse.setInLove(player);
-			}
-		}
+            if (horse.isTame() && horse.getGrowingAge() == 0 && !horse.isInLove()) {
+                flag = true;
+                horse.setInLove(player);
+            }
+        }
 
-		if (horse.getHealth() < horse.getMaxHealth() && f > 0.0F) {
-			horse.heal(f);
-			flag = true;
-		}
+        if (horse.getHealth() < horse.getMaxHealth() && f > 0.0F) {
+            horse.heal(f);
+            flag = true;
+        }
 
-		if (horse.isChild() && i > 0) {
-			horse.world.spawnParticle(EnumParticleTypes.VILLAGER_HAPPY, horse.posX + (double) (horse.rand.nextFloat() * horse.width * 2.0F) - (double) horse.width, horse.posY + 0.5D + (double) (horse.rand.nextFloat() * horse.height), horse.posZ + (double) (horse.rand.nextFloat() * horse.width * 2.0F) - (double) horse.width, 0.0D, 0.0D, 0.0D);
+        if (horse.isChild() && i > 0) {
+            horse.world.spawnParticle(EnumParticleTypes.VILLAGER_HAPPY, horse.posX + (double) (horse.rand.nextFloat() * horse.width * 2.0F) - (double) horse.width, horse.posY + 0.5D + (double) (horse.rand.nextFloat() * horse.height), horse.posZ + (double) (horse.rand.nextFloat() * horse.width * 2.0F) - (double) horse.width, 0.0D, 0.0D, 0.0D);
 
-			if (!horse.world.isRemote) {
-				horse.addGrowth(i);
-			}
+            if (!horse.world.isRemote) {
+                horse.addGrowth(i);
+            }
 
-			flag = true;
-		}
+            flag = true;
+        }
 
-		if (j > 0 && (flag || !horse.isTame()) && horse.getTemper() < horse.getMaxTemper()) {
-			flag = true;
+        if (j > 0 && (flag || !horse.isTame()) && horse.getTemper() < horse.getMaxTemper()) {
+            flag = true;
 
-			if (!horse.world.isRemote) {
-				horse.increaseTemper(j);
-			}
-		}
+            if (!horse.world.isRemote) {
+                horse.increaseTemper(j);
+            }
+        }
 
-		if (flag) {
-			horse.eatingHorse();
-		}
+        if (flag) {
+            horse.eatingHorse();
+        }
 
-		return flag;
-	}
+        return flag;
+    }
 
-	public static boolean validLocation (World world, BlockPos pos) {
-		Block block = world.getBlockState(pos.down()).getBlock();
-		return BlockEnderLilly.isEndStoneBlock(world, pos) || block == Blocks.DIRT || block == Blocks.GRASS || block == ModBlocks.endGrass || block == ModBlocks.endObsidian || block == ModBlocks.endMagma;
-	}
+    public static boolean validLocation(World world, BlockPos pos) {
+        Block block = world.getBlockState(pos.down()).getBlock();
+        return BlockEnderLilly.isEndStoneBlock(world, pos) || block == Blocks.DIRT || block == Blocks.GRASS || block == ModBlocks.endGrass || block == ModBlocks.endObsidian || block == ModBlocks.endMagma;
+    }
 }

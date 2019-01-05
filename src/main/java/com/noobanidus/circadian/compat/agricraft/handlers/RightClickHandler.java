@@ -28,7 +28,7 @@ public class RightClickHandler {
         }
     }
 
-    public static void modifyFields () throws ReflectiveOperationException {
+    public static void modifyFields() throws ReflectiveOperationException {
         Field field = ObfuscationReflectionHelper.findField(BlockCrop.class, "ITEM_EXCLUDES");
         field.setAccessible(true);
 

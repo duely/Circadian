@@ -21,6 +21,7 @@ public class Clusters extends ItemMulti {
     public static ItemStack clusterPlatinum;
     public static ItemStack clusterRedstone;
     public static ItemStack clusterStarmetal;
+
     public Clusters() {
         super("circadian");
 

@@ -16,7 +16,7 @@ public class RitualEventHandler {
     public static boolean meteorEnabled = Circadian.CONFIG.get("BloodMagic.Rituals.Meteor", "Platform", true, "Automatically generate a platform for meteor to land on.").getBoolean(true);
 
     @SubscribeEvent
-    public static void onRitual (RitualEvent.RitualActivatedEvent event) {
+    public static void onRitual(RitualEvent.RitualActivatedEvent event) {
         if (event.getRitual() instanceof RitualMeteor && meteorEnabled) {
             IMasterRitualStone mrs = event.getRitualStone();
             World world = mrs.getWorldObj();

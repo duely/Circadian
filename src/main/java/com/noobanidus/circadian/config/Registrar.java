@@ -2,7 +2,6 @@ package com.noobanidus.circadian.config;
 
 import com.noobanidus.circadian.Circadian;
 import com.noobanidus.circadian.compat.astralsorcery.blocks.BlockStarmetal;
-import com.noobanidus.circadian.compat.chisel.blocks.BlockRedScribbles;
 import com.noobanidus.circadian.compat.extrautilities2.blocks.BlockCompressedStoneEntry;
 import com.noobanidus.circadian.compat.oreberries.blocks.BlockBerry;
 import com.noobanidus.circadian.compat.thaumcraft.blocks.BlockCompressedVisBattery;
@@ -70,9 +69,6 @@ public class Registrar {
 
     public static Icons icons;
 
-    public static BlockRedScribbles scribbles;
-    public static ItemBlock ib_scribbles;
-
     public static Item goldenPotato;
     public static Item silveredPotato;
     public static Item silveredApple;
@@ -82,7 +78,7 @@ public class Registrar {
     public static Enchantment manabound;
 
     @SuppressWarnings("unused")
-    public static BlockCompressedStoneEntry[] compressedBlocks = new BlockCompressedStoneEntry[] { new BlockCompressedStoneEntry(((BlockStone) Blocks.STONE).getStateFromMeta(0), "stone", 2), new BlockCompressedStoneEntry(((BlockStone) Blocks.STONE).getStateFromMeta(1), "stone_granite", 2), new BlockCompressedStoneEntry(((BlockStone) Blocks.STONE).getStateFromMeta(3), "stone_diorite", 2), new BlockCompressedStoneEntry(((BlockStone) Blocks.STONE).getStateFromMeta(5), "stone_andesite", 2), new BlockCompressedStoneEntry(Blocks.SANDSTONE, "sandstone_normal", 2), new BlockCompressedStoneEntry(Blocks.RED_SANDSTONE, "red_sandstone_normal", 2)};
+    public static BlockCompressedStoneEntry[] compressedBlocks = new BlockCompressedStoneEntry[]{new BlockCompressedStoneEntry(((BlockStone) Blocks.STONE).getStateFromMeta(0), "stone", 2), new BlockCompressedStoneEntry(((BlockStone) Blocks.STONE).getStateFromMeta(1), "stone_granite", 2), new BlockCompressedStoneEntry(((BlockStone) Blocks.STONE).getStateFromMeta(3), "stone_diorite", 2), new BlockCompressedStoneEntry(((BlockStone) Blocks.STONE).getStateFromMeta(5), "stone_andesite", 2), new BlockCompressedStoneEntry(Blocks.SANDSTONE, "sandstone_normal", 2), new BlockCompressedStoneEntry(Blocks.RED_SANDSTONE, "red_sandstone_normal", 2)};
 
     @SuppressWarnings("ConstantConditions")
     public static void preInit() {
@@ -101,7 +97,6 @@ public class Registrar {
         sticks = new Sticks();
         clusters = new Clusters();
         nuggets = new Nuggets();
-        scribbles = new BlockRedScribbles();
         miniatures = new BlockMiniatures();
         miniatures.setRegistryName("circadian:miniatures");
 
@@ -113,7 +108,7 @@ public class Registrar {
         ib_miniatures = new ItemMultiTexture(miniatures, miniatures, new ItemMultiTexture.Mapper() {
             @Override
             @Nonnull
-            public String apply (@Nonnull ItemStack stack) {
+            public String apply(@Nonnull ItemStack stack) {
                 for (BlockMiniatures.MiniatureVariant var : BlockMiniatures.MiniatureVariant.values()) {
                     if (var.meta == stack.getItemDamage()) {
                         return var.getName();
@@ -125,15 +120,6 @@ public class Registrar {
         });
 
         ib_miniatures.setRegistryName(miniatures.getRegistryName());
-
-        ib_scribbles = new ItemMultiTexture(scribbles, scribbles, new ItemMultiTexture.Mapper() {
-            @Override
-            @Nonnull
-            public String apply(@Nonnull ItemStack var1) {
-                return scribbles.getUnlocalizedName();
-            }
-        });
-        ib_scribbles.setRegistryName(scribbles.getRegistryName());
 
         ib_compressed = new ItemBlock(compressed);
         ib_compressed.setRegistryName(compressed.getRegistryName());
@@ -197,10 +183,6 @@ public class Registrar {
             event.getRegistry().register(compressed);
         }
 
-        if (BlockRedScribbles.enabled) {
-            event.getRegistry().register(scribbles);
-        }
-
         if (BlockStarmetal.enabled) {
             event.getRegistry().register(starmetal);
         }
@@ -218,10 +200,6 @@ public class Registrar {
     public static void registerItems(RegistryEvent.Register<Item> event) {
         if (BlockCompressedStoneEntry.enabled) {
             event.getRegistry().register(ib_compressed);
-        }
-
-        if (BlockRedScribbles.enabled) {
-            event.getRegistry().register(ib_scribbles);
         }
 
         if (BlockStarmetal.enabled) {
@@ -271,13 +249,6 @@ public class Registrar {
         }
 
         miniatures.registerModel();
-
-
-        if (BlockRedScribbles.enabled) {
-            for (int i = 0; i < 16; i++) {
-                ModelLoader.setCustomModelResourceLocation(ib_scribbles, i, new ModelResourceLocation(new ResourceLocation("circadian", String.format("redscribbles", i)), String.format("variant=%d", i)));
-            }
-        }
 
         if (BlockBerry.enabled) {
             // knightmetal
@@ -343,25 +314,6 @@ public class Registrar {
     }
 
     @SideOnly(Side.CLIENT)
-    protected static class StateMapper extends StateMapperBase {
-        public static final StateMapper KNIGHTMETAL = new StateMapper("circadian", "block_knightmetal_bush");
-        public static final StateMapper NAGA = new StateMapper("circadian", "block_nagascale_bush");
-        public static final StateMapper LIVEROOT = new StateMapper("circadian", "block_liveroot_bush");
-
-        protected ResourceLocation texture;
-
-        protected StateMapper(String path, String domain) {
-            this.texture = new ResourceLocation(path, domain);
-        }
-
-        @Override
-        @Nonnull
-        public ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-            return new ModelResourceLocation(texture, this.getPropertyString(state.getProperties()));
-        }
-    }
-
-    @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public static void registerBlockColors(ColorHandlerEvent.Block e) {
         BlockColors blocks = e.getBlockColors();
@@ -378,7 +330,7 @@ public class Registrar {
             return BiomeColorHelper.getGrassColorAtPos(worldIn, pos);
         };
 
-         final IBlockColor leafHandler = (state, worldIn, pos, tintIndex) -> {
+        final IBlockColor leafHandler = (state, worldIn, pos, tintIndex) -> {
             if (tintIndex == 2 && worldIn != null && pos != null && state.getBlock() instanceof BlockMiniatures) {
                 if (Registrar.miniatures.getMetaFromState(state) == 0) {
                     return 6750149;
@@ -416,7 +368,7 @@ public class Registrar {
                 if (stack.getItemDamage() == 0) {
                     return 6750149;
                 } else if (stack.getItemDamage() == 1) {
-                     return ColorizerFoliage.getFoliageColor(0.25, 0.8);
+                    return ColorizerFoliage.getFoliageColor(0.25, 0.8);
                 }
             }
 
@@ -425,5 +377,24 @@ public class Registrar {
 
         items.registerItemColorHandler(grassHandler, Registrar.miniatures);
         items.registerItemColorHandler(leafHandler, Registrar.miniatures);
+    }
+
+    @SideOnly(Side.CLIENT)
+    protected static class StateMapper extends StateMapperBase {
+        public static final StateMapper KNIGHTMETAL = new StateMapper("circadian", "block_knightmetal_bush");
+        public static final StateMapper NAGA = new StateMapper("circadian", "block_nagascale_bush");
+        public static final StateMapper LIVEROOT = new StateMapper("circadian", "block_liveroot_bush");
+
+        protected ResourceLocation texture;
+
+        protected StateMapper(String path, String domain) {
+            this.texture = new ResourceLocation(path, domain);
+        }
+
+        @Override
+        @Nonnull
+        public ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+            return new ModelResourceLocation(texture, this.getPropertyString(state.getProperties()));
+        }
     }
 }

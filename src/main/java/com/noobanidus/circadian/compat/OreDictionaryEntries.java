@@ -10,14 +10,14 @@ import net.minecraftforge.oredict.OreDictionary;
 import thaumcraft.api.blocks.BlocksTC;
 
 public class OreDictionaryEntries {
-    public static void initEntries () {
-         if (Loader.isModLoaded("astralsorcery")) {
+    public static void initEntries() {
+        if (Loader.isModLoaded("astralsorcery")) {
             Item rock = Item.REGISTRY.getObject(new ResourceLocation("astralsorcery:blockcustomore"));
             if (rock == null) {
                 Circadian.LOG.error("Couldn't find Rock Crystal Ore to register in Ore Dictionary!");
             } else {
                 ItemStack ore = new ItemStack(rock, 1, 0);
-                 OreDictionary.registerOre("oreAstralRockCrystal", ore);
+                OreDictionary.registerOre("oreAstralRockCrystal", ore);
             }
         }
 
