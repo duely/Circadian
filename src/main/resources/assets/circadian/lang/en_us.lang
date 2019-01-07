@@ -58,7 +58,6 @@ item.circadian.nugget.nuggetIronwood.name=Ironwood Nugget
 item.circadian.nugget.nuggetKnightmetal.name=Knightmetal Nugget
 item.circadian.nugget.nuggetStarmetal.name=Starmetal Nugget
 item.circadian.nugget.nuggetDemonmetal.name=Demon Nugget
-entity.quark:flat_item_frame.name=Item Frame
 item.golden_potato.name=Golden Potato
 item.silvered_potato.name=Silvered Potato
 item.silvered_carrot.name=Silvered Carrot
