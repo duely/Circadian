@@ -33,6 +33,11 @@
         "textures": {
           "layer0": "circadian:items/quests/vitium"
         }
+      },
+      "logo": {
+        "textures": {
+          "layer0": "circadian:items/quests/logo"
+        }
       }
     }
   }

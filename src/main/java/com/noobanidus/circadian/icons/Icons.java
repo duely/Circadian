@@ -18,6 +18,7 @@ public class Icons extends ItemMulti {
     ItemStack enderLily;
     ItemStack blaze;
     ItemStack vitium;
+    ItemStack logo;
 
     public Icons() {
         super("circadian");
@@ -34,6 +35,7 @@ public class Icons extends ItemMulti {
         enderLily = addItem(2, "ender_lily");
         blaze = addItem(3, "blaze");
         vitium = addItem(4, "vitium");
+        logo = addItem(5, "logo");
 
         return true;
     }

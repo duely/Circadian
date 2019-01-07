@@ -1,23 +1,91 @@
 {
   "forge_marker": 1,
   "variants": {
-    "inventory_nether_portal": [{ "model": "circadian:miniature/nether_portal"}],
-    "inventory_enchanted_forest2": [{ "model": "circadian:miniature/enchanted_forest2"}],
-    "inventory_desert_temple": [{ "model": "circadian:miniature/desert_temple"}],
-    "inventory_desert_temple2": [{ "model": "circadian:miniature/desert_temple2"}],
-    "inventory_astral_temple4": [{ "model": "circadian:miniature/astral_temple4"}],
-    "inventory_mountain": [{ "model": "circadian:miniature/mountain"}],
-    "inventory_desert": [{ "model": "circadian:miniature/desert"}],
-    "inventory_desert2": [{ "model": "circadian:miniature/desert2"}],
-    "inventory_horse_head": [{ "model": "circadian:miniature/horse_head.obj"}],
-    "inventory_end_city": [{ "model": "circadian:miniature/end_city"}],
-    "inventory_end_island_portal": [{ "model": "circadian:miniature/end_island_portal"}],
-    "inventory_demon_metal": [{ "model": "circadian:miniature/demon_metal"}],
-    "inventory_chopping": [{ "model": "circadian:miniature/chopping"}],
-    "inventory_imperfect_ritual": [{ "model": "circadian:miniature/imperfect_ritual"}],
-    "inventory_mining_portal": [{ "model": "circadian:miniature/mining_portal" }],
-    "inventory_soul_multiblock": [{ "model": "circadian:miniature/soul_multiblock" }],
-    "inventory_crusher_ritual": [{ "model": "circadian:miniature/crusher_ritual"}],
+    "inventory_nether_portal": [
+      {
+        "model": "circadian:miniature/nether_portal"
+      }
+    ],
+    "inventory_enchanted_forest2": [
+      {
+        "model": "circadian:miniature/enchanted_forest2"
+      }
+    ],
+    "inventory_desert_temple": [
+      {
+        "model": "circadian:miniature/desert_temple"
+      }
+    ],
+    "inventory_desert_temple2": [
+      {
+        "model": "circadian:miniature/desert_temple2"
+      }
+    ],
+    "inventory_astral_temple4": [
+      {
+        "model": "circadian:miniature/astral_temple4"
+      }
+    ],
+    "inventory_mountain": [
+      {
+        "model": "circadian:miniature/mountain"
+      }
+    ],
+    "inventory_desert": [
+      {
+        "model": "circadian:miniature/desert"
+      }
+    ],
+    "inventory_desert2": [
+      {
+        "model": "circadian:miniature/desert2"
+      }
+    ],
+    "inventory_horse_head": [
+      {
+        "model": "circadian:miniature/horse_head.obj"
+      }
+    ],
+    "inventory_end_city": [
+      {
+        "model": "circadian:miniature/end_city"
+      }
+    ],
+    "inventory_end_island_portal": [
+      {
+        "model": "circadian:miniature/end_island_portal"
+      }
+    ],
+    "inventory_demon_metal": [
+      {
+        "model": "circadian:miniature/demon_metal"
+      }
+    ],
+    "inventory_chopping": [
+      {
+        "model": "circadian:miniature/chopping"
+      }
+    ],
+    "inventory_imperfect_ritual": [
+      {
+        "model": "circadian:miniature/imperfect_ritual"
+      }
+    ],
+    "inventory_mining_portal": [
+      {
+        "model": "circadian:miniature/mining_portal"
+      }
+    ],
+    "inventory_soul_multiblock": [
+      {
+        "model": "circadian:miniature/soul_multiblock"
+      }
+    ],
+    "inventory_crusher_ritual": [
+      {
+        "model": "circadian:miniature/crusher_ritual"
+      }
+    ],
     "variant": {
       "nether_portal": {
         "model": "circadian:miniature/nether_portal"
