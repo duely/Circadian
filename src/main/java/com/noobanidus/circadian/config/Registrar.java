@@ -5,6 +5,7 @@ import com.noobanidus.circadian.advancements.GenericTrigger;
 import com.noobanidus.circadian.compat.astralsorcery.blocks.BlockStarmetal;
 import com.noobanidus.circadian.compat.extrautilities2.blocks.BlockCompressedStoneEntry;
 import com.noobanidus.circadian.compat.oreberries.blocks.BlockBerry;
+import com.noobanidus.circadian.compat.thaumcraft.advancements.ResearchPredicate;
 import com.noobanidus.circadian.compat.thaumcraft.blocks.BlockCompressedVisBattery;
 import com.noobanidus.circadian.compat.vanilla.advancements.BiomePredicate;
 import com.noobanidus.circadian.enchantment.EnchantmentManabound;
@@ -45,6 +46,7 @@ import javax.annotation.Nonnull;
 public class Registrar {
     @SuppressWarnings("unused")
     public static GenericTrigger BIOME_TRIGGER = CriteriaTriggers.register(new GenericTrigger(new ResourceLocation(Circadian.MODID, "biome_type"), BiomePredicate.ANY));
+    public static GenericTrigger THAUMCRAFT_RESEARCH_TRIGGER = CriteriaTriggers.register(new GenericTrigger(new ResourceLocation(Circadian.MODID, "thaumcraft_research"), ResearchPredicate.ANY));
 
     public static BlockCompressedVisBattery compressed;
     public static BlockStarmetal starmetal;
