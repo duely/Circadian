@@ -30,7 +30,7 @@ public class MansionBiomeTypesHandler {
     }
 
     public static void modifyFields() throws ReflectiveOperationException {
-        Field field = ObfuscationReflectionHelper.findField(WoodlandMansion.class, "ALLOWED_BIOMES");
+        Field field = ObfuscationReflectionHelper.findField(WoodlandMansion.class, "field_191072_a");
         field.setAccessible(true);
 
         Field modifiers = Field.class.getDeclaredField("modifiers");
