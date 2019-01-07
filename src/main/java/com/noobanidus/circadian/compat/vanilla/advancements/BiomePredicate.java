@@ -1,21 +1,22 @@
 package com.noobanidus.circadian.compat.vanilla.advancements;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import javax.annotation.Nullable;
 
 import com.noobanidus.circadian.Circadian;
+import com.noobanidus.circadian.advancements.IGenericPlayerPredicate;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.WorldServer;
+import net.minecraft.world.World;
 import net.minecraftforge.common.BiomeDictionary;
 
 import java.util.*;
 
-public class BiomePredicate
+public class BiomePredicate implements IGenericPlayerPredicate
 {
-    private static BiomePredicate ANY = new BiomePredicate(new ArrayList<>());
+    public static BiomePredicate ANY = new BiomePredicate(new ArrayList<>());
 
     private List<BiomeDictionary.Type> biomeTypes;
 
@@ -23,8 +24,12 @@ public class BiomePredicate
         this.biomeTypes = biomeTypes;
     }
 
-    public boolean test (WorldServer world, BlockPos pos)
+    @Override
+    public boolean test (EntityPlayerMP player)
     {
+        World world = player.world;
+        BlockPos pos = player.getPosition();
+
         Set<BiomeDictionary.Type> cur = BiomeDictionary.getTypes(world.provider.getBiomeForCoords(pos));
         for (BiomeDictionary.Type type : biomeTypes) {
             if (!cur.contains(type)) {
@@ -35,7 +40,8 @@ public class BiomePredicate
         return true;
     }
 
-    public static BiomePredicate deserialize(@Nullable JsonElement element)
+    @Override
+    public BiomePredicate deserialize(@Nullable JsonElement element)
     {
         if (element != null && !element.isJsonNull())
         {

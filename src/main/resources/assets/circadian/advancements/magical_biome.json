@@ -4,8 +4,8 @@
       "item": "circadian:miniatures",
       "data": 0
     },
-    "title": "Through the forest have I gone",
-    "description": "Locate a dense forest where magic blossoms and strange creatures about.",
+    "title": "Through the forest go I",
+    "description": "Locate a dense forest where magic blossoms and strange creatures abound.",
     "announce_to_chat": false
   },
   "parent": "circadian:root",

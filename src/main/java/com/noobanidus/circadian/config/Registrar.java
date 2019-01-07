@@ -1,11 +1,12 @@
 package com.noobanidus.circadian.config;
 
 import com.noobanidus.circadian.Circadian;
+import com.noobanidus.circadian.advancements.GenericTrigger;
 import com.noobanidus.circadian.compat.astralsorcery.blocks.BlockStarmetal;
 import com.noobanidus.circadian.compat.extrautilities2.blocks.BlockCompressedStoneEntry;
 import com.noobanidus.circadian.compat.oreberries.blocks.BlockBerry;
 import com.noobanidus.circadian.compat.thaumcraft.blocks.BlockCompressedVisBattery;
-import com.noobanidus.circadian.compat.vanilla.advancements.BiomeTrigger;
+import com.noobanidus.circadian.compat.vanilla.advancements.BiomePredicate;
 import com.noobanidus.circadian.enchantment.EnchantmentManabound;
 import com.noobanidus.circadian.icons.BlockMiniatures;
 import com.noobanidus.circadian.icons.Icons;
@@ -43,7 +44,7 @@ import javax.annotation.Nonnull;
 @Mod.EventBusSubscriber
 public class Registrar {
     @SuppressWarnings("unused")
-    public static BiomeTrigger BIOME_TRIGGER = CriteriaTriggers.register(new BiomeTrigger());
+    public static GenericTrigger BIOME_TRIGGER = CriteriaTriggers.register(new GenericTrigger(new ResourceLocation(Circadian.MODID, "biome_type"), BiomePredicate.ANY));
 
     public static BlockCompressedVisBattery compressed;
     public static BlockStarmetal starmetal;
