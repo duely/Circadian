@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+      "item": "circadian:miniatures",
+      "data": 1
+    },
+    "title": "I remember you...",
+    "description": "Locate a mountainous environment where memories are found and amaranth grows.",
+    "announce_to_chat": false
+  },
+  "parent": "circadian:root",
+  "criteria": {
+    "snowy_biome": {
+      "trigger": "circadian:biome_type",
+      "conditions": {
+        "biome_types": ["MOUNTAIN"]
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+      "item": "circadian:miniatures",
+      "data": 0
+    },
+    "title": "Through the forest have I gone",
+    "description": "Locate a dense forest where magic blossoms and strange creatures about.",
+    "announce_to_chat": false
+  },
+  "parent": "circadian:root",
+  "criteria": {
+    "magical_biome": {
+      "trigger": "circadian:biome_type",
+      "conditions": {
+        "biome_types": ["MAGICAL"]
+      }
+    }
+  }
+}

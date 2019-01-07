@@ -7,10 +7,15 @@ import com.noobanidus.circadian.config.Registrar;
 import com.noobanidus.circadian.enchantment.EnchantmentManabound;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 import vazkii.botania.api.mana.IManaUsingItem;
 import vazkii.botania.api.mana.ManaItemHandler;
 
@@ -42,6 +47,16 @@ public class CircadianEvents {
     public static void onTrampleEvent(BlockEvent.FarmlandTrampleEvent event) {
         if (Circadian.CONFIG.get("Farmland", "Trample", true, "Disable trampling of farmland.").getBoolean(true)) {
             event.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
+    public static void playerTick(TickEvent.PlayerTickEvent event) {
+        EntityPlayer player = event.player;
+        World world = player.world;
+
+        if (!world.isRemote && player.ticksExisted % 20 == 0) {
+            Registrar.BIOME_TRIGGER.trigger((EntityPlayerMP)player);
         }
     }
 }

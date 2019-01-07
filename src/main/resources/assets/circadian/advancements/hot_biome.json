@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+      "item": "circadian:miniatures",
+      "data": 7
+    },
+    "title": "The spice must flow!",
+    "description": "Locate a hot & sandy environment where cactus grow and the rains don't fall.",
+    "announce_to_chat": false
+  },
+  "parent": "circadian:root",
+  "criteria": {
+    "hot_biome": {
+      "trigger": "circadian:biome_type",
+      "conditions": {
+        "biome_types": ["HOT", "SANDY"]
+      }
+    }
+  }
+}

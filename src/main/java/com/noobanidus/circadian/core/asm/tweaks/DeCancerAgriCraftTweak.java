@@ -1,7 +1,9 @@
 package com.noobanidus.circadian.core.asm.tweaks;
 
 import com.google.common.collect.ImmutableList;
-import org.objectweb.asm.tree.*;
+import org.objectweb.asm.tree.ClassNode;
+import org.objectweb.asm.tree.InsnNode;
+import org.objectweb.asm.tree.MethodNode;
 
 import java.util.Collection;
 

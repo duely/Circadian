@@ -5,10 +5,12 @@ import com.noobanidus.circadian.compat.astralsorcery.blocks.BlockStarmetal;
 import com.noobanidus.circadian.compat.extrautilities2.blocks.BlockCompressedStoneEntry;
 import com.noobanidus.circadian.compat.oreberries.blocks.BlockBerry;
 import com.noobanidus.circadian.compat.thaumcraft.blocks.BlockCompressedVisBattery;
+import com.noobanidus.circadian.compat.vanilla.advancements.BiomeTrigger;
 import com.noobanidus.circadian.enchantment.EnchantmentManabound;
 import com.noobanidus.circadian.icons.BlockMiniatures;
 import com.noobanidus.circadian.icons.Icons;
 import com.noobanidus.circadian.items.*;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStone;
 import net.minecraft.block.state.IBlockState;
@@ -40,6 +42,9 @@ import javax.annotation.Nonnull;
 @SuppressWarnings("WeakerAccess")
 @Mod.EventBusSubscriber
 public class Registrar {
+    @SuppressWarnings("unused")
+    public static BiomeTrigger BIOME_TRIGGER = CriteriaTriggers.register(new BiomeTrigger());
+
     public static BlockCompressedVisBattery compressed;
     public static BlockStarmetal starmetal;
     public static BlockMiniatures miniatures;
