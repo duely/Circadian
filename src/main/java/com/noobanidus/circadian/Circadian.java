@@ -9,7 +9,6 @@ import com.noobanidus.circadian.compat.botania.brew.Brews;
 import com.noobanidus.circadian.compat.cofh.thermalexpansion.GuiHandler;
 import com.noobanidus.circadian.compat.extrautilities2.handlers.EnderLilySpawning;
 import com.noobanidus.circadian.compat.oreberries.handlers.BerryHandler;
-import com.noobanidus.circadian.compat.oreberries.world.TwilightWorldGen;
 import com.noobanidus.circadian.compat.thaumcraft.handlers.ClusterHandler;
 import com.noobanidus.circadian.compat.thaumcraft.handlers.LootHandler;
 import com.noobanidus.circadian.compat.top.TOPProvider;
@@ -83,7 +82,6 @@ public class Circadian {
         if (Loader.isModLoaded("theoneprobe")) {
             TOPProvider.init();
         }
-        GameRegistry.registerWorldGenerator(new TwilightWorldGen(), 0);
 
         CropHandler.init();
         BerryHandler.init();

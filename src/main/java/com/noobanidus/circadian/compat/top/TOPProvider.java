@@ -7,7 +7,6 @@ import WayofTime.bloodmagic.ritual.Ritual;
 import WayofTime.bloodmagic.ritual.imperfect.ImperfectRitual;
 import WayofTime.bloodmagic.tile.TileMasterRitualStone;
 import WayofTime.bloodmagic.util.helper.RitualHelper;
-import com.noobanidus.circadian.compat.oreberries.blocks.BlockBerry;
 import com.noobanidus.circadian.compat.thaumcraft.blocks.BlockCompressedVisBattery;
 import com.rwtema.extrautils2.blocks.BlockEnderLilly;
 import josephcsible.oreberries.BlockOreberryBush;
@@ -75,9 +74,6 @@ public class TOPProvider {
                     } else if (blockState.getBlock() instanceof BlockOreberryBush) {
                         int growthState = blockState.getValue(BlockOreberryBush.AGE);
                         probeInfo.text((growthState == 3) ? OK + "Ready to Harvest" : "");
-                    } else if (blockState.getBlock() instanceof BlockBerry) {
-                        int growthState = blockState.getValue(BlockBerry.AGE);
-                        probeInfo.text((growthState == 3) ? OK + "Ready to Harvest" : "");
                     } else if (blockState.getBlock() instanceof BlockCrystal) {
                         int size = blockState.getValue(BlockCrystal.SIZE);
                         String progress = ((size == 0) ? "25%" : ((size == 1)) ? "50%" : ((size == 2)) ? "75%" : "100%");
@@ -86,15 +82,19 @@ public class TOPProvider {
                     } else if (blockState.getBlock() instanceof BlockVoidSiphon) {
                         TileVoidSiphon siphon = (TileVoidSiphon) world.getTileEntity(data.getPos());
 
-                        int progress = (int) ((siphon.progress / 2000.f) * 100.f);
+                        if (siphon != null) {
+                            int progress = (int) ((siphon.progress / 2000.f) * 100.f);
 
-                        probeInfo.text(((progress < 80) ? WARNING : OK) + String.format("Growth: %d%%", progress));
+                            probeInfo.text(((progress < 80) ? WARNING : OK) + String.format("Growth: %d%%", progress));
+                        } else {
+                            probeInfo.text(WARNING + "Invalid tile entity for Siphon.");
+                        }
 
                     } else if (blockState.getBlock() instanceof BlockIncensePlate) {
                         TileIncensePlate plate = (TileIncensePlate) world.getTileEntity(data.getPos());
 
                         if (plate == null) {
-                            probeInfo.text(WARNING + "Invalid tile entity.");
+                            probeInfo.text(WARNING + "Invalid tile entity for Incense Plate.");
                             return;
                         }
 

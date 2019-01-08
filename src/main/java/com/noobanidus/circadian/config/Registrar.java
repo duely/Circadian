@@ -4,7 +4,6 @@ import com.noobanidus.circadian.Circadian;
 import com.noobanidus.circadian.advancements.GenericTrigger;
 import com.noobanidus.circadian.compat.astralsorcery.blocks.BlockStarmetal;
 import com.noobanidus.circadian.compat.extrautilities2.blocks.BlockCompressedStoneEntry;
-import com.noobanidus.circadian.compat.oreberries.blocks.BlockBerry;
 import com.noobanidus.circadian.compat.thaumcraft.advancements.ResearchPredicate;
 import com.noobanidus.circadian.compat.thaumcraft.blocks.BlockCompressedVisBattery;
 import com.noobanidus.circadian.compat.vanilla.advancements.BiomePredicate;
@@ -54,14 +53,7 @@ public class Registrar {
 
     public static ItemBlock ib_compressed;
     public static ItemBlock ib_starmetal;
-    public static ItemBlock ib_knightmetal;
-    public static ItemBlock ib_liveroot;
-    public static ItemBlock ib_naga;
     public static ItemBlock ib_miniatures;
-
-    public static BlockBerry knightmetal_berry;
-    public static BlockBerry liveroot_berry;
-    public static BlockBerry naga_berry;
 
     public static Item fertilizer;
     public static Item fertilizerBag;
@@ -92,9 +84,6 @@ public class Registrar {
     public static void preInit() {
         compressed = new BlockCompressedVisBattery();
         starmetal = new BlockStarmetal();
-        knightmetal_berry = new BlockBerry("knight", BlockBerry.getDefaults("knight"));
-        liveroot_berry = new BlockBerry("liveroot", BlockBerry.getDefaults("liveroot"));
-        naga_berry = new BlockBerry("naga", BlockBerry.getDefaults("naga"));
         manabound = new EnchantmentManabound("circadian:manabound");
 
         fertilizer = new Fertilizer();
@@ -134,15 +123,6 @@ public class Registrar {
 
         ib_starmetal = new ItemBlock(starmetal);
         ib_starmetal.setRegistryName(starmetal.getRegistryName());
-
-        ib_knightmetal = new ItemBlock(knightmetal_berry);
-        ib_knightmetal.setRegistryName(knightmetal_berry.getRegistryName());
-
-        ib_liveroot = new ItemBlock(liveroot_berry);
-        ib_liveroot.setRegistryName(liveroot_berry.getRegistryName());
-
-        ib_naga = new ItemBlock(naga_berry);
-        ib_naga.setRegistryName(naga_berry.getRegistryName());
 
         if (Plate.enabled) {
             plates.init();
@@ -195,12 +175,6 @@ public class Registrar {
             event.getRegistry().register(starmetal);
         }
 
-        if (BlockBerry.enabled) {
-            event.getRegistry().register(knightmetal_berry);
-            event.getRegistry().register(liveroot_berry);
-            event.getRegistry().register(naga_berry);
-        }
-
         event.getRegistry().register(miniatures);
     }
 
@@ -212,11 +186,6 @@ public class Registrar {
 
         if (BlockStarmetal.enabled) {
             event.getRegistry().register(ib_starmetal);
-        }
-        if (BlockBerry.enabled) {
-            event.getRegistry().register(ib_knightmetal);
-            event.getRegistry().register(ib_liveroot);
-            event.getRegistry().register(ib_naga);
         }
 
         if (((Fertilizer) fertilizer).enabled) {
@@ -257,20 +226,6 @@ public class Registrar {
         }
 
         miniatures.registerModel();
-
-        if (BlockBerry.enabled) {
-            // knightmetal
-            ModelLoader.setCustomStateMapper(knightmetal_berry, StateMapper.KNIGHTMETAL);
-            ModelLoader.setCustomModelResourceLocation(ib_knightmetal, 0, new ModelResourceLocation(new ResourceLocation("circadian", "block_knightmetal_bush"), "inventory"));
-
-            // liveroot
-            ModelLoader.setCustomStateMapper(naga_berry, StateMapper.NAGA);
-            ModelLoader.setCustomModelResourceLocation(ib_naga, 0, new ModelResourceLocation(new ResourceLocation("circadian", "block_nagascale_bush"), "inventory"));
-
-            // naga
-            ModelLoader.setCustomStateMapper(liveroot_berry, StateMapper.LIVEROOT);
-            ModelLoader.setCustomModelResourceLocation(ib_liveroot, 0, new ModelResourceLocation(new ResourceLocation("circadian", "block_liveroot_bush"), "inventory"));
-        }
 
         if (((Fertilizer) fertilizer).enabled) {
             ModelLoader.setCustomModelResourceLocation(fertilizer, 0, new ModelResourceLocation(new ResourceLocation("circadian", "fertilizer"), "inventory"));
@@ -385,24 +340,5 @@ public class Registrar {
 
         items.registerItemColorHandler(grassHandler, Registrar.miniatures);
         items.registerItemColorHandler(leafHandler, Registrar.miniatures);
-    }
-
-    @SideOnly(Side.CLIENT)
-    protected static class StateMapper extends StateMapperBase {
-        public static final StateMapper KNIGHTMETAL = new StateMapper("circadian", "block_knightmetal_bush");
-        public static final StateMapper NAGA = new StateMapper("circadian", "block_nagascale_bush");
-        public static final StateMapper LIVEROOT = new StateMapper("circadian", "block_liveroot_bush");
-
-        protected ResourceLocation texture;
-
-        protected StateMapper(String path, String domain) {
-            this.texture = new ResourceLocation(path, domain);
-        }
-
-        @Override
-        @Nonnull
-        public ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-            return new ModelResourceLocation(texture, this.getPropertyString(state.getProperties()));
-        }
     }
 }
