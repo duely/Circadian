@@ -4,7 +4,6 @@ import com.noobanidus.circadian.Circadian;
 import com.noobanidus.circadian.advancements.GenericTrigger;
 import com.noobanidus.circadian.compat.astralsorcery.blocks.BlockStarmetal;
 import com.noobanidus.circadian.compat.extrautilities2.blocks.BlockCompressedStoneEntry;
-import com.noobanidus.circadian.compat.thaumcraft.advancements.ResearchPredicate;
 import com.noobanidus.circadian.compat.thaumcraft.blocks.BlockCompressedVisBattery;
 import com.noobanidus.circadian.compat.vanilla.advancements.BiomePredicate;
 import com.noobanidus.circadian.enchantment.EnchantmentManabound;
@@ -14,9 +13,7 @@ import com.noobanidus.circadian.items.*;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStone;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
@@ -45,7 +42,6 @@ import javax.annotation.Nonnull;
 public class Registrar {
     @SuppressWarnings("unused")
     public static GenericTrigger BIOME_TRIGGER = CriteriaTriggers.register(new GenericTrigger(new ResourceLocation(Circadian.MODID, "biome_type"), BiomePredicate.ANY));
-    public static GenericTrigger THAUMCRAFT_RESEARCH_TRIGGER = CriteriaTriggers.register(new GenericTrigger(new ResourceLocation(Circadian.MODID, "thaumcraft_research"), ResearchPredicate.ANY));
 
     public static BlockCompressedVisBattery compressed;
     public static BlockStarmetal starmetal;

@@ -1,7 +1,6 @@
 package com.noobanidus.circadian.compat.oreberries.handlers;
 
 import com.noobanidus.circadian.Circadian;
-import com.noobanidus.circadian.config.Registrar;
 import josephcsible.oreberries.proxy.CommonProxy;
 import net.minecraft.item.ItemStack;
 import thaumcraft.common.lib.utils.CropUtils;

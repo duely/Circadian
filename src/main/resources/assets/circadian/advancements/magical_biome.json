@@ -13,7 +13,9 @@
     "magical_biome": {
       "trigger": "circadian:biome_type",
       "conditions": {
-        "biome_types": ["MAGICAL"]
+        "biome_types": [
+          "MAGICAL"
+        ]
       }
     }
   }

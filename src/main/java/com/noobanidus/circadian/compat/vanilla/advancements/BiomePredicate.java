@@ -2,8 +2,6 @@ package com.noobanidus.circadian.compat.vanilla.advancements;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import javax.annotation.Nullable;
-
 import com.noobanidus.circadian.Circadian;
 import com.noobanidus.circadian.advancements.IGenericPlayerPredicate;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -12,10 +10,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.BiomeDictionary;
 
+import javax.annotation.Nullable;
 import java.util.*;
 
-public class BiomePredicate implements IGenericPlayerPredicate
-{
+public class BiomePredicate implements IGenericPlayerPredicate {
     public static BiomePredicate ANY = new BiomePredicate(new ArrayList<>());
 
     private List<BiomeDictionary.Type> biomeTypes;
@@ -25,8 +23,7 @@ public class BiomePredicate implements IGenericPlayerPredicate
     }
 
     @Override
-    public boolean test (EntityPlayerMP player)
-    {
+    public boolean test(EntityPlayerMP player) {
         World world = player.world;
         BlockPos pos = player.getPosition();
 
@@ -41,10 +38,8 @@ public class BiomePredicate implements IGenericPlayerPredicate
     }
 
     @Override
-    public BiomePredicate deserialize(@Nullable JsonElement element)
-    {
-        if (element != null && !element.isJsonNull())
-        {
+    public BiomePredicate deserialize(@Nullable JsonElement element) {
+        if (element != null && !element.isJsonNull()) {
             List<BiomeDictionary.Type> biomeTypes = new ArrayList<>();
             Map<String, BiomeDictionary.Type> map = new HashMap<>();
 
@@ -65,9 +60,7 @@ public class BiomePredicate implements IGenericPlayerPredicate
             }
 
             return new BiomePredicate(biomeTypes);
-        }
-        else
-        {
+        } else {
             return ANY;
         }
     }

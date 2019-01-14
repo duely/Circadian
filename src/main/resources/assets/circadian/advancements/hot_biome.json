@@ -13,7 +13,10 @@
     "hot_biome": {
       "trigger": "circadian:biome_type",
       "conditions": {
-        "biome_types": ["HOT", "SANDY"]
+        "biome_types": [
+          "HOT",
+          "SANDY"
+        ]
       }
     }
   }

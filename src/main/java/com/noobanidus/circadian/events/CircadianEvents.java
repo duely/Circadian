@@ -11,9 +11,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import thaumcraft.api.research.ResearchEvent;
@@ -57,16 +55,16 @@ public class CircadianEvents {
         World world = player.world;
 
         if (!world.isRemote && player.ticksExisted % 20 == 0) {
-            Registrar.BIOME_TRIGGER.trigger((EntityPlayerMP)player);
+            Registrar.BIOME_TRIGGER.trigger((EntityPlayerMP) player);
         }
 
         if (!world.isRemote && player.ticksExisted % 160 == 0) {
-            Registrar.THAUMCRAFT_RESEARCH_TRIGGER.trigger((EntityPlayerMP)player);
+            Registrar.THAUMCRAFT_RESEARCH_TRIGGER.trigger((EntityPlayerMP) player);
         }
     }
 
     @SubscribeEvent
-    public static void onResearch (ResearchEvent.Research event) {
+    public static void onResearch(ResearchEvent.Research event) {
         EntityPlayer player = event.getPlayer();
         if (!player.world.isRemote) {
             Registrar.THAUMCRAFT_RESEARCH_TRIGGER.trigger((EntityPlayerMP) player);

@@ -13,7 +13,9 @@
     "snowy_biome": {
       "trigger": "circadian:biome_type",
       "conditions": {
-        "biome_types": ["MOUNTAIN"]
+        "biome_types": [
+          "MOUNTAIN"
+        ]
       }
     }
   }

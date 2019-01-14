@@ -21,11 +21,11 @@ public class GenericTrigger implements ICriterionTrigger<GenericTrigger.Instance
     private final Map<PlayerAdvancements, GenericTrigger.Listeners> listeners = Maps.newHashMap();
     private final IGenericPlayerPredicate predicate;
 
-    public GenericTrigger (String id, IGenericPlayerPredicate predicate) {
+    public GenericTrigger(String id, IGenericPlayerPredicate predicate) {
         this(new ResourceLocation(id), predicate);
     }
 
-    public GenericTrigger (ResourceLocation id, IGenericPlayerPredicate predicate) { //}, IGenericPlayerPredicate basePredicate) {
+    public GenericTrigger(ResourceLocation id, IGenericPlayerPredicate predicate) { //}, IGenericPlayerPredicate basePredicate) {
         this.id = id;
         this.predicate = predicate;
     }

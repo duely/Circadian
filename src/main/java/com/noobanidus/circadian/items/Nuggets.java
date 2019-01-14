@@ -13,10 +13,6 @@ import java.util.Map;
 public class Nuggets extends ItemMulti {
 
     public static boolean enabled = Circadian.CONFIG.get("Items.Nuggets", "Enable", true, "Enable extra nuggets.").getBoolean(true);
-    public static ItemStack nuggetAquamarine;
-    public static ItemStack nuggetIronwood;
-    public static ItemStack nuggetKnightmetal;
-    public static ItemStack nuggetStarmetal;
     public static ItemStack nuggetDemonmetal;
 
     public Nuggets() {
@@ -29,11 +25,7 @@ public class Nuggets extends ItemMulti {
     public boolean init() {
         ForgeRegistries.ITEMS.register(this.setRegistryName("circadian", "nugget"));
 
-        nuggetAquamarine = addOreDictItem(0, "nuggetAquamarine");
-        nuggetIronwood = addOreDictItem(1, "nuggetIronwood");
-        nuggetKnightmetal = addOreDictItem(2, "nuggetKnightmetal");
-        nuggetStarmetal = addOreDictItem(3, "nuggetStarmetal");
-        nuggetDemonmetal = addOreDictItem(4, "nuggetDemonmetal");
+        nuggetDemonmetal = addOreDictItem(0, "nuggetDemonmetal");
 
         return true;
     }
