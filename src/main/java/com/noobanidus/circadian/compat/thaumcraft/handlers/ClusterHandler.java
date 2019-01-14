@@ -7,7 +7,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
+import thaumcraft.api.research.ResearchCategories;
+import thaumcraft.api.research.ResearchEntry;
+import thaumcraft.api.research.ResearchStage;
 import thaumcraft.common.lib.utils.Utils;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class ClusterHandler {
 
@@ -44,5 +50,18 @@ public class ClusterHandler {
                 Utils.addSpecialMiningResult(BlockOre.orePlatinum, Clusters.clusterPlatinum, 1);
             }
         }
+    }
+
+    public static void inject () {
+        ResearchEntry purificiation = ResearchCategories.getResearch("METALPURIFICATION");
+
+        // only one stage
+        ResearchStage stage = purificiation.getStages()[0];
+        List<ResourceLocation> resources = Arrays.asList(stage.getRecipes());
+
+        resources.addAll(Arrays.asList(new ResourceLocation("thaumcraft", "metal_purification_platinum"), new ResourceLocation("thaumcraft", "metal_purification_diamond"), new ResourceLocation("thaumcraft", "metal_purification_emerald"), new ResourceLocation("thaumcraft", "metal_purification_coal"), new ResourceLocation("thaumcraft", "metal_purification_quartz"), new ResourceLocation("thaumcraft", "metal_purification_redstone"), new ResourceLocation("thaumcraft", "metal_purification_amber"), new ResourceLocation("thaumcraft", "metal_purification_redstone"), new ResourceLocation("thaumcraft", "metal_purification_starmetal")));
+
+        stage.setRecipes(resources.toArray(new ResourceLocation[0]));
+        Circadian.LOG.info("Injected new cluster recipes into Thaumonomicon.");
     }
 }

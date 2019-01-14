@@ -1,28 +1,14 @@
 package com.noobanidus.circadian;
 
 import com.google.common.collect.Lists;
-import com.noobanidus.circadian.compat.OreDictionaryEntries;
-import com.noobanidus.circadian.compat.agricraft.handlers.CropHandler;
-import com.noobanidus.circadian.compat.agricraft.handlers.RightClickHandler;
-import com.noobanidus.circadian.compat.bloodmagic.rituals.handler.RitualCostHandler;
-import com.noobanidus.circadian.compat.botania.brew.Brews;
 import com.noobanidus.circadian.compat.cofh.thermalexpansion.GuiHandler;
-import com.noobanidus.circadian.compat.oreberries.handlers.BerryHandler;
-import com.noobanidus.circadian.compat.thaumcraft.handlers.ClusterHandler;
-import com.noobanidus.circadian.compat.thaumcraft.handlers.LootHandler;
-import com.noobanidus.circadian.compat.top.TOPProvider;
-import com.noobanidus.circadian.compat.twilightforest.Mobs;
 import com.noobanidus.circadian.compat.vanilla.handlers.HorseBreedingHandler;
 import com.noobanidus.circadian.compat.vanilla.handlers.HorseMovementHandler;
-import com.noobanidus.circadian.compat.vanilla.handlers.MansionBiomeTypesHandler;
 import com.noobanidus.circadian.compat.vanilla.handlers.VillagerAgingHandler;
 import com.noobanidus.circadian.events.CircadianEvents;
 import com.noobanidus.circadian.events.RitualEventHandler;
 import com.noobanidus.circadian.proxy.ISidedProxy;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -46,12 +32,10 @@ public class Circadian {
 
     @SuppressWarnings("unused")
     public static final String KEY = "ca23084fc26ce53879eea4b7afb0a8d9da9744d7";
-
-    @SidedProxy(modId=MODID, clientSide = "com.noobanidus.circadian.proxy.ClientProxy", serverSide = "com.noobanidus.circadian.proxy.CommonProxy")
-    public static ISidedProxy proxy;
-
     public final static Logger LOG = LogManager.getLogger(MODID);
     public final static Configuration CONFIG = new Configuration(new File("config", "circadian.cfg"), true);
+    @SidedProxy(modId = MODID, clientSide = "com.noobanidus.circadian.proxy.ClientProxy", serverSide = "com.noobanidus.circadian.proxy.CommonProxy")
+    public static ISidedProxy proxy;
     public static GuiHandler GUI_HANDLER;
 
     public static CreativeTabCircadian TAB;

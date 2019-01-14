@@ -57,6 +57,8 @@ public class CommonProxy implements ISidedProxy {
         MansionBiomeTypesHandler.init();
         RitualCostHandler.init();
 
+        ClusterHandler.inject();
+
         Circadian.LOG.info("Circadian: Load Complete.");
         Circadian.CONFIG.save();
     }
