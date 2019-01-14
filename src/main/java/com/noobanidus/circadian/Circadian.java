@@ -7,7 +7,6 @@ import com.noobanidus.circadian.compat.agricraft.handlers.RightClickHandler;
 import com.noobanidus.circadian.compat.bloodmagic.rituals.handler.RitualCostHandler;
 import com.noobanidus.circadian.compat.botania.brew.Brews;
 import com.noobanidus.circadian.compat.cofh.thermalexpansion.GuiHandler;
-import com.noobanidus.circadian.compat.extrautilities2.handlers.EnderLilySpawning;
 import com.noobanidus.circadian.compat.oreberries.handlers.BerryHandler;
 import com.noobanidus.circadian.compat.thaumcraft.handlers.ClusterHandler;
 import com.noobanidus.circadian.compat.thaumcraft.handlers.LootHandler;
@@ -17,24 +16,19 @@ import com.noobanidus.circadian.compat.vanilla.handlers.HorseBreedingHandler;
 import com.noobanidus.circadian.compat.vanilla.handlers.HorseMovementHandler;
 import com.noobanidus.circadian.compat.vanilla.handlers.MansionBiomeTypesHandler;
 import com.noobanidus.circadian.compat.vanilla.handlers.VillagerAgingHandler;
-import com.noobanidus.circadian.config.Registrar;
 import com.noobanidus.circadian.events.CircadianEvents;
 import com.noobanidus.circadian.events.RitualEventHandler;
-import net.minecraft.creativetab.CreativeTabs;
+import com.noobanidus.circadian.proxy.ISidedProxy;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -53,6 +47,9 @@ public class Circadian {
     @SuppressWarnings("unused")
     public static final String KEY = "ca23084fc26ce53879eea4b7afb0a8d9da9744d7";
 
+    @SidedProxy(modId=MODID, clientSide = "com.noobanidus.circadian.proxy.ClientProxy", serverSide = "com.noobanidus.circadian.proxy.CommonProxy")
+    public static ISidedProxy proxy;
+
     public final static Logger LOG = LogManager.getLogger(MODID);
     public final static Configuration CONFIG = new Configuration(new File("config", "circadian.cfg"), true);
     public static GuiHandler GUI_HANDLER;
@@ -62,76 +59,28 @@ public class Circadian {
     @Mod.Instance(Circadian.MODID)
     public static Circadian instance;
 
-    private List<Class> EventClasses = Lists.newArrayList(CircadianEvents.class, RitualEventHandler.class, HorseBreedingHandler.class, VillagerAgingHandler.class, HorseMovementHandler.class);
+    public static List<Class> EventClasses = Lists.newArrayList(CircadianEvents.class, RitualEventHandler.class, HorseBreedingHandler.class, VillagerAgingHandler.class, HorseMovementHandler.class);
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        TAB = new CreativeTabCircadian(CreativeTabs.getNextID(), MODID);
-        Registrar.preInit();
-        EnderLilySpawning.preInit();
-        EventClasses.forEach(MinecraftForge.EVENT_BUS::register);
-        GUI_HANDLER = new GuiHandler();
-        NetworkRegistry.INSTANCE.registerGuiHandler(instance, GUI_HANDLER);
+        proxy.preInit(event);
     }
 
     // TODO: Better config attention
 
     @Mod.EventHandler
-    public void init(FMLInitializationEvent e) {
-        if (Loader.isModLoaded("theoneprobe")) {
-            TOPProvider.init();
-        }
-
-        CropHandler.init();
-        BerryHandler.init();
-        Brews.registerBrews();
+    public void init(FMLInitializationEvent event) {
+        proxy.init(event);
     }
 
     @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent e) {
-        Mobs.registerSpawns();
-        OreDictionaryEntries.initEntries();
-        LootHandler.removeLootEntries();
-        ClusterHandler.init();
+    public void postInit(FMLPostInitializationEvent event) {
+        proxy.postInit(event);
     }
 
     @Mod.EventHandler
     public void loadComplete(FMLLoadCompleteEvent event) {
-        Blocks.END_PORTAL_FRAME.setHardness(50.0F).setResistance(2000.0F).setHarvestLevel("pickaxe", 3);
-
-        int cakeCount = CONFIG.get("Vanilla.Items", "CakeStackSize", 64, "Modify default stack size of cakes.").getInt(64);
-        if (cakeCount <= 64 && cakeCount > 0) {
-            Items.CAKE.setMaxStackSize(cakeCount);
-        }
-        int enderCount = CONFIG.get("Vanilla.Items", "EnderPearlStackSize", 64, "Modify default stack size of ender pearls.").getInt(64);
-        if (enderCount <= 64 && enderCount > 0) {
-            Items.ENDER_PEARL.setMaxStackSize(enderCount);
-        }
-        int snowballCount = CONFIG.get("Vanilla.Items", "SnowballStackSize", 64, "Modify default stack size of snowballs.").getInt(64);
-        if (snowballCount <= 64 && snowballCount > 0) {
-            Items.SNOWBALL.setMaxStackSize(snowballCount);
-        }
-        int signCount = CONFIG.get("Vanilla.Items", "SignStackSize", 64, "Modify default stack size of signs.").getInt(64);
-        if (signCount <= 64 && signCount > 0) {
-            Items.SIGN.setMaxStackSize(signCount);
-        }
-
-        RightClickHandler.init();
-        MansionBiomeTypesHandler.init();
-        RitualCostHandler.init();
-
-        LOG.info("Circadian: Load Complete.");
-        CONFIG.save();
+        proxy.loadComplete(event);
     }
 
-    public final class CreativeTabCircadian extends CreativeTabs {
-        public CreativeTabCircadian(int id, String id2) {
-            super(id, id2);
-        }
-
-        @SideOnly(Side.CLIENT)
-        public ItemStack getTabIconItem() {
-            return new ItemStack(Registrar.fertilizer);
-        }
-    }
 }
