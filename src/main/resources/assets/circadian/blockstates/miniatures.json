@@ -86,6 +86,11 @@
         "model": "circadian:miniature/crusher_ritual"
       }
     ],
+    "inventory_alfheim_portal": [
+      {
+        "model": "circadian:miniature/alfheim_portal"
+      }
+    ],
     "variant": {
       "nether_portal": {
         "model": "circadian:miniature/nether_portal"
@@ -134,6 +139,9 @@
       },
       "crusher_ritual": {
         "model": "circadian:miniature/crusher_ritual"
+      },
+      "alfheim_portal": {
+        "model": "circadian:miniature/alfheim_portal"
       }
     }
   }

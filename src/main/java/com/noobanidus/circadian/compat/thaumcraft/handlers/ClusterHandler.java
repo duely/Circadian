@@ -1,6 +1,7 @@
 package com.noobanidus.circadian.compat.thaumcraft.handlers;
 
 import cofh.thermalfoundation.block.BlockOre;
+import com.google.common.collect.Lists;
 import com.noobanidus.circadian.Circadian;
 import com.noobanidus.circadian.items.Clusters;
 import net.minecraft.item.Item;
@@ -57,7 +58,7 @@ public class ClusterHandler {
 
         // only one stage
         ResearchStage stage = purificiation.getStages()[0];
-        List<ResourceLocation> resources = Arrays.asList(stage.getRecipes());
+        List<ResourceLocation> resources = Lists.newArrayList(stage.getRecipes());
 
         resources.addAll(Arrays.asList(new ResourceLocation("thaumcraft", "metal_purification_platinum"), new ResourceLocation("thaumcraft", "metal_purification_diamond"), new ResourceLocation("thaumcraft", "metal_purification_emerald"), new ResourceLocation("thaumcraft", "metal_purification_coal"), new ResourceLocation("thaumcraft", "metal_purification_quartz"), new ResourceLocation("thaumcraft", "metal_purification_redstone"), new ResourceLocation("thaumcraft", "metal_purification_amber"), new ResourceLocation("thaumcraft", "metal_purification_redstone"), new ResourceLocation("thaumcraft", "metal_purification_starmetal")));
 

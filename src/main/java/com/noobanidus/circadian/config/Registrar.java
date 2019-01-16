@@ -8,6 +8,7 @@ import com.noobanidus.circadian.compat.thaumcraft.blocks.BlockCompressedVisBatte
 import com.noobanidus.circadian.compat.vanilla.advancements.BiomePredicate;
 import com.noobanidus.circadian.enchantment.EnchantmentManabound;
 import com.noobanidus.circadian.icons.BlockMiniatures;
+import com.noobanidus.circadian.icons.BlockMiniatures2;
 import com.noobanidus.circadian.icons.Icons;
 import com.noobanidus.circadian.items.*;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -46,10 +47,12 @@ public class Registrar {
     public static BlockCompressedVisBattery compressed;
     public static BlockStarmetal starmetal;
     public static BlockMiniatures miniatures;
+    public static BlockMiniatures2 miniatures2;
 
     public static ItemBlock ib_compressed;
     public static ItemBlock ib_starmetal;
     public static ItemBlock ib_miniatures;
+    public static ItemBlock ib_miniatures2;
 
     public static Item fertilizer;
     public static Item fertilizerBag;
@@ -92,6 +95,8 @@ public class Registrar {
         nuggets = new Nuggets();
         miniatures = new BlockMiniatures();
         miniatures.setRegistryName("circadian:miniatures");
+        miniatures2 = new BlockMiniatures2();
+        miniatures2.setRegistryName("circadian:miniatures2");
 
         wateringCan = new WateringCan();
         satchels = new Satchels();
@@ -112,7 +117,23 @@ public class Registrar {
             }
         });
 
+        ib_miniatures2 = new ItemMultiTexture(miniatures2, miniatures2, new ItemMultiTexture.Mapper() {
+            @Override
+            @Nonnull
+            public String apply(@Nonnull ItemStack stack) {
+                for (BlockMiniatures2.MiniatureVariant var : BlockMiniatures2.MiniatureVariant.values()) {
+                    if (var.meta == stack.getItemDamage()) {
+                        return var.getName();
+                    }
+                }
+
+                return "invalid";
+            }
+        });
+
         ib_miniatures.setRegistryName(miniatures.getRegistryName());
+
+        ib_miniatures2.setRegistryName(miniatures2.getRegistryName());
 
         ib_compressed = new ItemBlock(compressed);
         ib_compressed.setRegistryName(compressed.getRegistryName());
@@ -172,6 +193,7 @@ public class Registrar {
         }
 
         event.getRegistry().register(miniatures);
+        event.getRegistry().register(miniatures2);
     }
 
     @SubscribeEvent
@@ -190,6 +212,7 @@ public class Registrar {
         }
 
         event.getRegistry().register(ib_miniatures);
+        event.getRegistry().register(ib_miniatures2);
 
         event.getRegistry().register(goldenPotato);
         event.getRegistry().register(silveredPotato);
@@ -222,6 +245,7 @@ public class Registrar {
         }
 
         miniatures.registerModel();
+        miniatures2.registerModel();
 
         if (((Fertilizer) fertilizer).enabled) {
             ModelLoader.setCustomModelResourceLocation(fertilizer, 0, new ModelResourceLocation(new ResourceLocation("circadian", "fertilizer"), "inventory"));

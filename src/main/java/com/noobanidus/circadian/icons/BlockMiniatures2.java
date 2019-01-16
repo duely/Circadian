@@ -25,14 +25,14 @@ import javax.annotation.Nonnull;
 import java.util.Locale;
 
 @SuppressWarnings("WeakerAccess")
-public class BlockMiniatures extends Block {
+public class BlockMiniatures2 extends Block {
 
     public static final IProperty<MiniatureVariant> VARIANT = PropertyEnum.create("variant", MiniatureVariant.class);
 
-    public BlockMiniatures() {
+    public BlockMiniatures2() {
         super(Material.BARRIER);
-        this.setDefaultState(blockState.getBaseState().withProperty(VARIANT, MiniatureVariant.NETHER_PORTAL));
-        this.setUnlocalizedName("circadian.miniature");
+        this.setDefaultState(blockState.getBaseState().withProperty(VARIANT, MiniatureVariant.ALFHEIM_PORTAL));
+        this.setUnlocalizedName("circadian.miniature2");
     }
 
     public int damageDropped(IBlockState state) {
@@ -92,27 +92,12 @@ public class BlockMiniatures extends Block {
     @SideOnly(Side.CLIENT)
     public void registerModel() {
         for (MiniatureVariant variation : MiniatureVariant.values()) {
-            ModelLoader.setCustomModelResourceLocation(Registrar.ib_miniatures, variation.ordinal(), new ModelResourceLocation("circadian:miniatures", "inventory_" + variation.getName()));
+            ModelLoader.setCustomModelResourceLocation(Registrar.ib_miniatures2, variation.ordinal(), new ModelResourceLocation("circadian:miniatures", "inventory_" + variation.getName()));
         }
     }
 
     public enum MiniatureVariant implements IStringSerializable {
-        ENCHANTED_FOREST2(0),
-        MOUNTAIN(1),
-        NETHER_PORTAL(2),
-        DESERT_TEMPLE(3),
-        DESERT_TEMPLE2(4),
-        ASTRAL_TEMPLE4(5),
-        DESERT(6),
-        DESERT2(7),
-        END_CITY(8),
-        END_ISLAND_PORTAL(9),
-        DEMON_METAL(10),
-        CHOPPING(11),
-        IMPERFECT_RITUAL(12),
-        MINING_PORTAL(13),
-        SOUL_MULTIBLOCK(14),
-        CRUSHER_RITUAL(15); // FINAL
+        ALFHEIM_PORTAL(0);
 
         public final int meta;
 
@@ -126,3 +111,4 @@ public class BlockMiniatures extends Block {
         }
     }
 }
+
