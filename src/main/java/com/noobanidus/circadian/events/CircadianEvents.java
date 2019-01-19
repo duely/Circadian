@@ -13,9 +13,11 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
@@ -76,44 +78,63 @@ public class CircadianEvents {
     public static void onDaisyRightClick (PlayerInteractEvent.RightClickBlock event) {
         World world = event.getWorld();
 
-        if (!world.isRemote) return;
-
-        if (event.getHand() != EnumHand.MAIN_HAND) {
+        if (world.isRemote || event.getHand() != EnumHand.MAIN_HAND) {
             event.setCanceled(true);
+            event.setCancellationResult(EnumActionResult.PASS);
             return;
         }
 
         EntityPlayer player = event.getEntityPlayer();
-        ItemStack item = player.getHeldItem(event.getHand());
+        ItemStack item = player.getHeldItem(EnumHand.MAIN_HAND);
         BlockPos pos = event.getPos();
         IBlockState state = world.getBlockState(pos);
+        EnumHand curHand = EnumHand.MAIN_HAND;
+        EnumFacing playerFacing = player.getHorizontalFacing().getOpposite();
+
+        if (item.isEmpty() || !(item.getItem() instanceof ItemBlock)) {
+            item = player.getHeldItem(EnumHand.OFF_HAND);
+            curHand = EnumHand.OFF_HAND;
+        }
 
         if (item.isEmpty()) return;
 
         if (!(item.getItem() instanceof ItemBlock)) return;
 
-        if (state.getBlock() instanceof BlockSpecialFlower) {
+        ItemBlock iblock = (ItemBlock) item.getItem();
+
+        if (world.getTileEntity(pos) instanceof TileSpecialFlower) {
             TileSpecialFlower te = (TileSpecialFlower) world.getTileEntity(pos);
             if (te != null && te.subTileName.equals("puredaisy")) {
+                float hitX = pos.getX();
+                float hitY = pos.getY();
+                float hitZ = pos.getZ();
+
                 Block block = ((ItemBlock) item.getItem()).getBlock();
 
                 BlockPos start = pos.add(1, 0, 1);
                 BlockPos stop = pos.add(-1, 0, -1);
+                int count = 0;
+
                 for (BlockPos potential : BlockPos.getAllInBox(stop, start)) {
                     if (potential.equals(pos)) continue;
-                    if (player.getDistance((double) pos.getX(), (double)pos.getY(), (double)pos.getZ()) < 1.3) continue;
+                    if (player.getDistance((double) pos.getX(), (double)pos.getY(), (double)pos.getZ()) < 1.3 && player.getPosition().getY() == pos.getY()) continue;
 
                     IBlockState stateAt = world.getBlockState(potential);
                     Block blockAt = stateAt.getBlock();
 
-                    if ((blockAt.isReplaceable(world, pos) || blockAt.isAir(stateAt, world, pos)) && block.canPlaceBlockAt(world, potential)) {
-                        IBlockState placingState = block.getStateFromMeta(item.getMetadata());
-                        world.setBlockState(potential, placingState, 1 | 2);
-                        item.shrink(1);
-						ItemBlock.setTileEntityNBT(world, null, potential, item);
-						event.setCanceled(true);
+                    if ((blockAt.isReplaceable(world, potential) || blockAt.isAir(stateAt, world, potential)) && block.canPlaceBlockAt(world, potential)) {
+                        IBlockState placingState = block.getStateForPlacement(world, pos, playerFacing, hitX, hitY, hitZ, item.getMetadata(), player, curHand);
+                        iblock.placeBlockAt(item, player, world, potential, playerFacing, hitX, hitY, hitZ, placingState);
+                        if (!player.capabilities.isCreativeMode) item.shrink(1);
                         break;
+                    } else {
+                        count++;
                     }
+                }
+
+                if (count < 8) {
+                    event.setCanceled(true);
+                    event.setCancellationResult(EnumActionResult.SUCCESS);
                 }
             }
         }
