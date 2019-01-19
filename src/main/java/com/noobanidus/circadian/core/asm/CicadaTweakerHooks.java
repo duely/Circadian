@@ -24,6 +24,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.items.ItemHandlerHelper;
 import thaumcraft.common.lib.utils.CropUtils;
+import vazkii.botania.api.item.IHornHarvestable;
 
 @SuppressWarnings("unused")
 public class CicadaTweakerHooks {
