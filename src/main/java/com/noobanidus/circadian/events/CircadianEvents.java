@@ -87,7 +87,6 @@ public class CircadianEvents {
         EntityPlayer player = event.getEntityPlayer();
         ItemStack item = player.getHeldItem(EnumHand.MAIN_HAND);
         BlockPos pos = event.getPos();
-        IBlockState state = world.getBlockState(pos);
         EnumHand curHand = EnumHand.MAIN_HAND;
         EnumFacing playerFacing = player.getHorizontalFacing().getOpposite();
 
@@ -100,7 +99,7 @@ public class CircadianEvents {
 
         if (!(item.getItem() instanceof ItemBlock)) return;
 
-        ItemBlock iblock = (ItemBlock) item.getItem();
+        ItemBlock iBlock = (ItemBlock) item.getItem();
 
         if (world.getTileEntity(pos) instanceof TileSpecialFlower) {
             TileSpecialFlower te = (TileSpecialFlower) world.getTileEntity(pos);
@@ -109,7 +108,7 @@ public class CircadianEvents {
                 float hitY = pos.getY();
                 float hitZ = pos.getZ();
 
-                Block block = ((ItemBlock) item.getItem()).getBlock();
+                Block block = iBlock.getBlock();
 
                 BlockPos start = pos.add(1, 0, 1);
                 BlockPos stop = pos.add(-1, 0, -1);
@@ -124,7 +123,7 @@ public class CircadianEvents {
 
                     if ((blockAt.isReplaceable(world, potential) || blockAt.isAir(stateAt, world, potential)) && block.canPlaceBlockAt(world, potential)) {
                         IBlockState placingState = block.getStateForPlacement(world, pos, playerFacing, hitX, hitY, hitZ, item.getMetadata(), player, curHand);
-                        iblock.placeBlockAt(item, player, world, potential, playerFacing, hitX, hitY, hitZ, placingState);
+                        iBlock.placeBlockAt(item, player, world, potential, playerFacing, hitX, hitY, hitZ, placingState);
                         if (!player.capabilities.isCreativeMode) item.shrink(1);
                         break;
                     } else {
