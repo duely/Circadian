@@ -67,6 +67,7 @@ public class CircadianEvents {
         }
     }
 
+    @SuppressWarnings("deprecation")
     @SubscribeEvent
     public static void onDaisyRightClick (PlayerInteractEvent.RightClickBlock event) {
         World world = event.getWorld();
@@ -90,7 +91,8 @@ public class CircadianEvents {
                 BlockPos start = pos.add(1, 0, 1);
                 BlockPos stop = pos.add(-1, 0, -1);
                 for (BlockPos potential : BlockPos.getAllInBox(stop, start)) {
-                    if (player.getDistance((double) pos.getX(), (double)pos.getY(), (double)pos.getZ()) < 1.1) continue;
+                    if (potential.equals(pos)) continue;
+                    if (player.getDistance((double) pos.getX(), (double)pos.getY(), (double)pos.getZ()) < 1.3) continue;
 
                     IBlockState stateAt = world.getBlockState(potential);
                     Block blockAt = stateAt.getBlock();
@@ -100,8 +102,7 @@ public class CircadianEvents {
                         world.setBlockState(potential, placingState, 1 | 2);
                         item.shrink(1);
 						ItemBlock.setTileEntityNBT(world, null, potential, item);
-						event.setUseBlock(Event.Result.DENY);
-						event.setUseItem(Event.Result.DENY);
+						event.setCanceled(true);
                         break;
                     }
                 }
