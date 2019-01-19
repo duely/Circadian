@@ -13,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -27,6 +28,9 @@ import vazkii.botania.common.block.BlockSpecialFlower;
 import vazkii.botania.common.block.tile.TileSpecialFlower;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class CircadianEvents {
 
@@ -73,6 +77,11 @@ public class CircadianEvents {
         World world = event.getWorld();
 
         if (!world.isRemote) return;
+
+        if (event.getHand() != EnumHand.MAIN_HAND) {
+            event.setCanceled(true);
+            return;
+        }
 
         EntityPlayer player = event.getEntityPlayer();
         ItemStack item = player.getHeldItem(event.getHand());
